@@ -94,7 +94,7 @@ for epochs in range(num_epochs):
         loss.backward()
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
-    model_save_path = f'L:\\Sonobuoy_faster-rCNN\\trained_model\\WhaleMoanDetector_{epochs}.pth'
+    model_save_path = f'L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_epoch_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     
     
@@ -104,25 +104,25 @@ for epochs in range(num_epochs):
     
     # if I also want to run the validation data but idk how to do that lol
     # Set the model to evaluation mode
-    epoch_val_loss = 0
-    with torch.no_grad():  # No need to track gradients during validation
-        for data in val_d1:
-            imgs = []
-            targets = []
-            for d in data:
-                imgs.append(d[0].to(device))
-                targ = {}
-                targ['boxes'] = d[1]['boxes'].to(device)
-                targ['labels'] = d[1]['labels'].to(device)
-                targets.append(targ)
-                val_loss_dict = model(imgs, targets)
-                val_losses = sum(v for v in val_loss_dict.values())
-                epoch_val_loss += val_losses.cpu().detach().numpy()
-    print(f"Epoch {epochs}, Train Loss: {epoch_train_loss}, Validation Loss: {epoch_val_loss}")
+#     epoch_val_loss = 0
+#     with torch.no_grad():  # No need to track gradients during validation
+#         for data in val_d1:
+#             imgs = []
+#             targets = []
+#             for d in data:
+#                 imgs.append(d[0].to(device))
+#                 targ = {}
+#                 targ['boxes'] = d[1]['boxes'].to(device)
+#                 targ['labels'] = d[1]['labels'].to(device)
+#                 targets.append(targ)
+#                 val_loss_dict = model(imgs, targets)
+#                 val_losses = sum(v for v in val_loss_dict.values())
+#                 epoch_val_loss += val_losses.cpu().detach().numpy()
+#     print(f"Epoch {epochs}, Train Loss: {epoch_train_loss}, Validation Loss: {epoch_val_loss}")
 
 
-final_model_path = 'L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_final.pth'
-torch.save(model.state_dict(), final_model_path)
+# final_model_path = 'L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_final.pth'
+# torch.save(model.state_dict(), final_model_path)
         
         
         
