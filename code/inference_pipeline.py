@@ -34,8 +34,8 @@ from inference_functions import bounding_box_to_time_and_frequency, predictions_
 
 # import all of the needed functions and process one deployment at a time.
 
-wav_directory = 'L:/Sonobuoy_faster-rCNN/labeled_data/wav/HARP/CINMS18B/'
-csv_file_path = 'L:/Sonobuoy_faster-rCNN/predictions/CINMS18B/CINMS18B.csv'
+wav_directory = 'E:/SOCAL26H/'
+csv_file_path = 'L:/Sonobuoy_faster-rCNN/predictions/SOCAL26H/SOCAL26H.csv'
 fieldnames = ['wav_file_path','image_file_path', 'label', 'score', 'start_time', 'end_time', 'min_frequency', 'max_frequency', 'xmin', 'ymin', 'xmax', 'ymax']
 images_base_dir = os.path.dirname(csv_file_path)
 

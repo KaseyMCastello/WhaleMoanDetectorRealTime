@@ -1,0 +1,18 @@
+audio_file,annotation,high_f,low_f,start_time,end_time
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111017_181445.wav,40Hz,84,59,48.162,49.582
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111017_181445.wav,40Hz,97,55,383.847,385.149
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111018_001619.wav,A NE Pacific,89,77,303.852,317.103
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111018_001619.wav,20Hz,30,17,568.407,570.3
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111018_001619.wav,20Hz,29,17,597.158,598.874
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111018_001619.wav,20Hz,30,17,625.977,628.225
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111018_001619.wav,20Hz,29,17,692.544,694.2
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111021_165909.wav,B NE Pacific,53,11,243.556,256.689
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111023_012213.wav,D,58,34,197.162,199.233
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111024_195110.wav,20Hz,32,17,138.168,140.061
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111024_195110.wav,20Hz,31,17,306.75,308.821
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_000344.wav,40Hz,81,60,410.296,411.538
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_000344.wav,40Hz,71,46,925.204,926.328
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_005827.wav,40Hz,61,43,336.512,337.872
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_005827.wav,D,59,29,606.746,609.172
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_011642.wav,D,47,23,37.75,39.347
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\DIFAR20111025_011642.wav,40Hz,70,54,488.821,489.708

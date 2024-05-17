@@ -31,10 +31,10 @@ import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 import sys
 sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
-from AudioDetectionDataset_MNA_grayscale import AudioDetectionData
+from AudioDetectionDataset import AudioDetectionData
 
         
-def custom_collate(data):
+def custom_collate(data): # modify to generate confidence map and append and then train faster-rCNN
     return data # 
 # this just allows you to return the datasets as is. 
 # because we won't always have the same number of bounding boxes..

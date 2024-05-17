@@ -17,17 +17,17 @@ from datetime import datetime
 import os
 import glob
 import sys
-from opensoundscape import Audio, Spectrogram
-sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
+#from opensoundscape import Audio, Spectrogram
+sys.path.append(r"L:\Sonobuoy_faster-rCNN_MNA_PCA\code\PYTHON")
 from AudioStreamDescriptor import WAVhdr
 import random
 import pandas as pd
 import numpy as np
 
-directory_path = "L:\Sonobuoy_faster-rCNN\labeled_data\logs\parse_time_stamp_broken" # point to original logger files
+directory_path = "L:\\Sonobuoy_faster-rCNN_MNA_PCA\\labeled_data\\logs\\HARP" # point to original logger files
 all_files = glob.glob(os.path.join(directory_path,'*.xls')) # path for all files
 
-new_base_path = 'L:\\Sonobuoy_faster-rCNN\\labeled_data\\wav\\CalCOFI-Sonobuoy' # path to change to 
+new_base_path = 'L:\\Sonobuoy_faster-rCNN_MNA_PCA\\labeled_data\\wav' # path to change to 
 
 # hepler function uses WAVhdr to read wav file header info and extract wav file start time as a datetime object
 def extract_wav_start(path):

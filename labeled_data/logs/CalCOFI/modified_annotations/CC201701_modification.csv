@@ -1,0 +1,7 @@
+audio_file,annotation,high_f,low_f,start_time,end_time
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB18_170110_190000.wav,40Hz,67,50,767.311,768.533
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB56_170119_183405.wav,40Hz,71,53,99.893,101.054
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB56_170119_183405.wav,40Hz,70,50,644.476,645.76
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB56_170119_183405.wav,40Hz,68,50,677.418,678.58
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB40_170116_020000.wav,40Hz,69,50,3045.149,3046.371
+L:\Sonobuoy_faster-rCNN_MNA_PCA\labeled_data\wav\CC1701RL_CO_SB28_170112_200000.wav,B NE Pacific,60,16,34.523,50.535
