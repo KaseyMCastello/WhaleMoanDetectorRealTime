@@ -75,5 +75,5 @@ WhaleMoanDetector/
 
 4. Run WhaleMoanDetector on wav files
 
- 	 ```python code/intference_pipeline.py
+ 	 ```python code/intference_pipeline.py```
 
