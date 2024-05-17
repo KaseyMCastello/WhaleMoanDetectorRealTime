@@ -27,7 +27,7 @@ import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 import sys
 sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
-from AudioDetectionDataset_MNA_grayscale import AudioDetectionData
+from AudioDetectionDataset import AudioDetectionData
 import sklearn
 import torchmetrics
 import pycocotools
@@ -199,7 +199,10 @@ plt.legend()
 plt.grid(True)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
+plt.savefig('L:/Sonobuoy_faster-rCNN/figures/precision_recall_curve.svg', format='svg')  # Save as SVG
 plt.show()
+plt.savefig('L:/Sonobuoy_faster-rCNN/figures/precision_recall_curve.svg', format='svg')  # Save as SVG
+
 
 # calculate AUC-PR (Area Under Precison-Recall Curve )
 from sklearn.metrics import auc

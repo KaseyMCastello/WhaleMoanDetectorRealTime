@@ -3,6 +3,8 @@
 Created on Thu Mar 28 16:41:34 2024
 
 @author: Michaela Alksne
+
+All of the functions needed to run inference data processing pipeline...
 """
 
 import librosa
@@ -98,7 +100,7 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
             labels = prediction[0]['labels']
             
             # Apply Non-Maximum Suppression (NMS) for cleaner visualization
-            keep_indices = ops.nms(boxes, scores, 0.1)
+            keep_indices = ops.nms(boxes, scores, 0.2)
             boxes = boxes[keep_indices]
             scores = scores[keep_indices]
             labels = labels[keep_indices]
@@ -121,7 +123,6 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
     return predictions
         
 
-      
 # filter predictions based on defined parameters 
 
 def apply_filters_to_predictions(predictions, nms_threshold=0.1, D_threshold=0.4, fortyHz_threshold=0.2, 
@@ -171,15 +172,28 @@ def apply_filters_to_predictions(predictions, nms_threshold=0.1, D_threshold=0.4
 
         for box, score, label in zip(boxes, scores, labels):
             if score < thresholds[label.item()]:
-                continue
+                continue # skip this prediction
             
-            if label.item() == label_mapping['D']:
+           # if label.item() == label_mapping['D']: # convert D calls to 40 Hz if they are less than 1.5 seconds in duration... 
                 # Calculate duration of the D call
-                duration_seconds = (box[2] - box[0]).item() * time_per_pixel
-                if duration_seconds < 1.5:
+            #    duration_seconds = (box[2] - box[0]).item() * time_per_pixel
+             #   if duration_seconds < 1.5:
                     # Convert to 40Hz call
-                    label = torch.tensor(label_mapping['40Hz'])
-
+               #     label = torch.tensor(label_mapping['40Hz'])
+                    
+         #   if label.item() == label_mapping['20Hz']: # High scoring 20 Hz that are within the bounds of 40 Hz should be converted to 40 Hz. 
+          #     if  box[1] > 40 and box[3] < 100: 
+               #    label = torch.tensor(label_mapping['40Hz']) # convert to 40 Hz.
+          #     elif box[1] > 40 and box[3] > 100:  
+          #         continue
+                   
+         #   if label.item() == label_mapping['A']:
+          #     if box[1] < 50 : # remove false positive A calls with ymin less than 60 Hz
+          #         continue #skip this prediction. 
+         #   if label.item() == label_mapping['B']:
+          #      if box[3] > 60: # remove false positive B calls with ymax greater than 70 Hz
+           #         continue # skip this prediction
+               
             final_boxes.append(box)
             final_scores.append(score)
             final_labels.append(label)
@@ -227,35 +241,79 @@ def visualize_filtered_predictions_on_spectrograms(spectrograms, filtered_predic
         
         # Display the spectrogram with drawn predictions
         display(S_dB_img)
+        
 
-# where we execute these functions. 
+def save_filtered_predictions_on_spectrograms(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size):
+    # Use the base directory of the CSV file path to place the "images" directory
+    csv_base_dir = os.path.dirname(csv_file_path)
+    
+    saved_image_paths = []
+
+    for index, prediction_list in enumerate(filtered_predictions):
+        prediction = prediction_list[0]
+       
+
+        # Proceed with plotting and saving only if there are detections that passed filtering
+        if len(prediction['boxes']) > 0:
+            S_dB = spectrograms[index]
+            normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB))
+            S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
+            S_dB_img = ImageOps.flip(S_dB_img)
+
+            draw = ImageDraw.Draw(S_dB_img)
+            try:
+                font = ImageFont.truetype("arial.ttf", 16)
+            except IOError:
+                font = ImageFont.load_default()
+            for prediction in prediction_list:
+                for box, score, label in zip(prediction['boxes'], prediction['scores'], prediction['labels']):
+                    score_formatted = round(score.item(), 2)
+                    box = box.tolist()
+                    draw.rectangle(box, outline="black")
+                    label_str = f"Label: {label.item()}, Score: {score_formatted}"
+                    draw.text((box[0], box[1] - 20), label_str, fill="black", font=font)
+
+                    chunk_start_time = chunk_start_times[index]
+                    chunk_end_time = chunk_start_time + window_size - overlap_size
+            
+                    # The image filename now includes the audio basename
+                    image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_end_time)}_filtered_prediction_{index}.png"
+                    image_path = os.path.join(csv_base_dir, image_filename)
+                    S_dB_img.save(image_path)
+                    saved_image_paths.append(image_path)
+                
+    return saved_image_paths
 
 # convert bounding box x and y coordinates to timestamp and frequency within the wav file
-def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution=1, start_freq=10):
+def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution=1, start_freq=10, max_freq=150):
     # Calculate start and end times from the x-coordinates of the bounding box
     box_x1, box_x2 = box[0].item(), box[2].item()
     start_time = box_x1 * time_per_pixel + chunk_start_times[chunk_index]
     end_time = box_x2 * time_per_pixel + chunk_start_times[chunk_index]
     
     # Calculate the lower and upper frequencies from the y-coordinates
-    # Assuming y-coordinates are inverted (higher value for lower frequency)
+    # Assuming y-coordinates are not inverted (higher value for higher frequency)
     box_y1, box_y2 = box[3].item(), box[1].item()
-    lower_freq = start_freq + box_y2 * freq_resolution
-    upper_freq = start_freq + box_y1 * freq_resolution
+    
+    total_freq_span = max_freq - start_freq
+    
+    # Invert the y-axis to correctly map the frequencies
+    lower_freq = start_freq + (total_freq_span - box_y1 * freq_resolution)
+    upper_freq = start_freq + (total_freq_span - box_y2 * freq_resolution)
   
-    lower_freq = round(lower_freq) # the model can predict fractional pixel values so we have to round to whole numbers when we convert to frequency bounds. 
+    lower_freq = round(lower_freq)
     upper_freq = round(upper_freq)
     
-    return start_time, end_time, lower_freq, upper_freq
+    return start_time, end_time, lower_freq, upper_freq, box_x1, box_y1, box_x2, box_y2
 
 def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime, freq_resolution=1, start_freq=10):
     results = []
-    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
+    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5} # why did I not call this by the logger conventions? because I wanted to make it even more difficult for myself. sick one. 
     inverse_label_mapping = {v: k for k, v in label_mapping.items()}
 
     for chunk_index, prediction in enumerate(filtered_predictions):
         for box, label, score in zip(prediction[0]['boxes'], prediction[0]['labels'], prediction[0]['scores']):
-            start_time, end_time, lower_freq, upper_freq = bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq)
+            start_time, end_time, lower_freq, upper_freq, box_x1, box_y1, box_x2, box_y2 = bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq)
             start_datetime = wav_start_datetime + timedelta(seconds=start_time)
             end_datetime = wav_start_datetime + timedelta(seconds=end_time)
             textual_label = inverse_label_mapping[label.item()]
@@ -266,127 +324,13 @@ def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_
                 'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],  # Format as a string
                 'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],
                 'min_frequency': round(lower_freq),  # Round frequency to the nearest integer
-                'max_frequency': round(upper_freq)
+                'max_frequency': round(upper_freq), 
+                'xmin': box_x1, 
+                'ymin': box_y1,
+                'xmax': box_x2, 
+                'ymax': box_y2
             })
     return results
-
-window_size = 60
-overlap_size = 5
-
-# Load your trained Faster R-CNN model
-model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
-num_classes = 6 # 5 classes plus background
-in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
-
-model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_epoch_14.pth'))
-model.eval()
-
-# File path
-file_path = 'L:/Sonobuoy_faster-rCNN/labeled_data/wav/CalCOFI-Sonobuoy/CalCOFI-2019/CC1907BH_DF_SB03_190712-190000.wav'
-wav_start_datetime = extract_wav_start(file_path)  # Assuming extract_wav_start returns a datetime object
-
-
-chunks = chunk_audio(file_path, window_size= window_size, overlap_size= overlap_size)
-spectrograms = audio_to_spectrogram(chunks, sr=librosa.get_samplerate(file_path))
-predictions = predict_and_plot_on_spectrograms(spectrograms, model, visualize=True)
-# Visualize the predictions on the spectrograms
-
-filtered_predictions = apply_filters_to_predictions(predictions) # apply nms and score threshold filters to my predictions. 
-
-visualize_filtered_predictions_on_spectrograms(spectrograms, filtered_predictions) # in case I want to visualize my filtered predictions/check them! (maybe this is what I can send to Joe?)
-
-
-time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 second per pixel
-
-chunk_start_times = [i * (window_size - overlap_size) for i in range(len(chunks))]
-
-# Convert predictions to detailed event information for this wav file. 
-detailed_event_info = predictions_to_datetimes_frequencies_and_labels(
-    filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime)
-
-
-# Define the path for the CSV file you want to write to
-csv_file_path = 'L:/Sonobuoy_faster-rCNN/detailed_event_info.csv'
-
-# Specify the fieldnames (column headers) based on the keys in your dictionaries
-fieldnames = ['file_path','label','score','start_time', 'end_time', 'min_frequency', 'max_frequency']
-
-# Open the file for writing
-with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
-    # Create a DictWriter object, passing it the file object and fieldnames
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    
-    # Write the header (column names)
-    writer.writeheader()
-    
-    # Iterate over your list of dictionaries and write each one as a row in the CSV
-    for event in detailed_event_info:
-        event['file_path'] = file_path
-        writer.writerow(event)
-        
-        
-        
-        
-        
-        
-        
-# If I were to do this in one big swoop! 
-
-
-wav_directory = 'O:/CC1601RL/Recordings/Sonobuoy recordings/DF/'
-csv_file_path = 'L:/Sonobuoy_faster-rCNN/predictions/CalCOFI_2016_01.csv'
-fieldnames = ['file_path', 'label', 'score', 'start_time', 'end_time', 'min_frequency', 'max_frequency']
-
-# define variables 
-
-window_size = 60
-overlap_size = 5
-
-# Load your trained Faster R-CNN model
-model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
-num_classes = 6 # 5 classes plus background
-in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
-
-model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_epoch_14.pth'))
-model.eval()
-
-
-# Open the CSV file just once, and write headers
-with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-
-# Loop over each file in the directory
-    for filename in os.listdir(wav_directory):
-        if filename.endswith('.wav'):
-            # Full path to the WAV file
-            file_path = os.path.join(wav_directory, filename)
-
-            # Extract the start datetime from the WAV file
-            wav_start_datetime = extract_wav_start(file_path)  # Ensure this returns a datetime object
-
-            # Process each WAV file as you have in your original code
-            chunks = chunk_audio(file_path, window_size=window_size, overlap_size=overlap_size)
-            spectrograms = audio_to_spectrogram(chunks, sr=librosa.get_samplerate(file_path))
-            predictions = predict_and_plot_on_spectrograms(spectrograms, model, visualize=True)  # Turn off visualization for batch processing
-
-            filtered_predictions = apply_filters_to_predictions(predictions)  # apply filters to predictions
-
-            chunk_start_times = [i * (window_size - overlap_size) for i in range(len(chunks))]
-            detailed_event_info = predictions_to_datetimes_frequencies_and_labels(
-                filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime)
-
-            # Write each event to the CSV file
-            for event in detailed_event_info:
-                event['file_path'] = file_path
-                writer.writerow(event)
-
-print(f"Detailed event information for all files saved to {csv_file_path}")
-
-
-
 
 
 
