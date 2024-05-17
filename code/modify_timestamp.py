@@ -17,38 +17,17 @@ from datetime import datetime
 import os
 import glob
 import sys
-#from opensoundscape import Audio, Spectrogram
-sys.path.append(r"L:\Sonobuoy_faster-rCNN_MNA_PCA\code\PYTHON")
 from AudioStreamDescriptor import WAVhdr
+from modify_timestamp_function import modify_annotations
 import random
 import pandas as pd
 import numpy as np
 
-directory_path = "L:\\Sonobuoy_faster-rCNN_MNA_PCA\\labeled_data\\logs\\HARP" # point to original logger files
+directory_path = "../labeled_data/logs/HARP" # point to original logger files
 all_files = glob.glob(os.path.join(directory_path,'*.xls')) # path for all files
 
-new_base_path = 'L:\\Sonobuoy_faster-rCNN_MNA_PCA\\labeled_data\\wav' # path to change to 
+new_base_path = '../labeled_data/wav' # path to change to 
 
-# hepler function uses WAVhdr to read wav file header info and extract wav file start time as a datetime object
-def extract_wav_start(path):
-    wav_hdr = WAVhdr(path)
-    wav_start_time = wav_hdr.start
-    return wav_start_time
-
-# helper function to modify the original logger files
-def modify_annotations(df):
-    
-    df['audio_file'] = [in_file.replace(os.path.split(in_file)[0], new_base_path) for in_file in df['Input file']] # uses list comprehension to replace old wav path with new one
-    df['file_datetime']=df['audio_file'].apply(extract_wav_start) # uses .apply to apply extract_wav_start time from each wav file in the list
-    df['start_time'] = (df['Start time'] - df['file_datetime']).dt.total_seconds() # convert start time difference to total seconds
-    df['end_time'] = (df['End time'] - df['file_datetime']).dt.total_seconds() # convert end time difference to total seconds
-    df['annotation']= df['Call']
-    df['high_f'] = df['Parameter 1']
-    df['low_f'] = df['Parameter 2']
-    df = df.loc[:, ['audio_file','annotation','high_f','low_f','start_time','end_time']] # subset all rows by certain column name
-    
-    return df
-    
 # make a subfolder for saving modified logs 
 subfolder_name = "modified_annotations"
 # Create the subfolder if it doesn't exist
@@ -59,7 +38,7 @@ os.makedirs(subfolder_path, exist_ok=True)
 
 for file in all_files:
     data = pd.read_excel(file)
-    subset_df = modify_annotations(data)
+    subset_df = modify_annotations(data, new_base_path)
     filename = os.path.basename(file)
     new_filename = filename.replace('.xls', '_modification.csv')
      # Construct the path to save the modified DataFrame as a CSV file
