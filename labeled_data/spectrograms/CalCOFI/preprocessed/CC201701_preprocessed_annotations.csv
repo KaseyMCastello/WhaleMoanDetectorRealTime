@@ -1,0 +1,13 @@
+spectrogram_path,label,xmin,ymin,xmax,ymax
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB18_170110_190000_second_720_to_780.png,40Hz,473,84,487,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB18_170110_190000_second_750_to_810.png,40Hz,173,84,186,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB28_170112_200000_second_0_to_60.png,B NE Pacific,345,91,507,135
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB28_170112_200000_second_30_to_90.png,B NE Pacific,45,91,206,135
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB40_170116_020000_second_3000_to_3060.png,40Hz,452,82,465,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB40_170116_020000_second_3030_to_3090.png,40Hz,151,82,164,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_60_to_120.png,40Hz,399,80,412,98
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_90_to_150.png,40Hz,99,80,111,98
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_600_to_660.png,40Hz,445,81,459,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_630_to_690.png,40Hz,145,81,158,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_630_to_690.png,40Hz,474,83,487,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB56_170119_183405_second_660_to_720.png,40Hz,174,83,187,101

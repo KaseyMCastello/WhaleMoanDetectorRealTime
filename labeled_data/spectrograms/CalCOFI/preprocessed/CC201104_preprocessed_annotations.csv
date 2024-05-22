@@ -1,0 +1,9 @@
+spectrogram_path,label,xmin,ymin,xmax,ymax
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB17_20110414_180439_second_120_to_180.png,D,414,74,440,119
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB17_20110414_180439_second_150_to_210.png,D,113,74,139,119
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB17_20110414_180439_second_570_to_630.png,D,536,59,563,109
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB17_20110414_180439_second_600_to_660.png,D,235,59,262,109
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB60_20110427_014707_second_270_to_330.png,40Hz,548,84,564,102
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB60_20110427_014707_second_300_to_360.png,40Hz,248,84,263,102
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB60_20110427_014707_second_300_to_360.png,40Hz,448,95,462,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB60_20110427_014707_second_330_to_390.png,40Hz,148,95,162,120

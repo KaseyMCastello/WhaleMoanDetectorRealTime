@@ -5,6 +5,7 @@ Created on Mon Apr  1 14:35:17 2024
 @author: Michaela Alksne
 
 plot bounding box annotations generated in Python for faster-rCNN 
+runs in spyder
 """
 
 
@@ -14,17 +15,23 @@ import matplotlib.patches as patches
 from PIL import Image, ImageDraw, ImageFont
 from IPython.display import display  # Import the display function
 import os
-# Assuming annotations.csv is located in the proper path
+
+base_dir = 'L:\\WhaleMoanDetector'
+
 # Load annotations
-annotations = pd.read_csv('L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\train.csv')
+annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')
+annotations = pd.read_csv(annotations_path)
 
 # Function to plot bounding boxes and labels on the spectrograms
-def plot_annotated_spectrograms(annotations):
+def plot_annotated_spectrograms(annotations,base_dir):
     grouped_annotations = annotations.groupby('spectrogram_path')
     
     for spectrogram_path, group in grouped_annotations:
+        print(base_dir)
+        print(spectrogram_path)
+        full_spectrogram_path = os.path.join(base_dir,"WhaleMoanDetector",spectrogram_path)
         # Load the spectrogram image
-        image = Image.open(spectrogram_path)
+        image = Image.open(full_spectrogram_path)
         draw = ImageDraw.Draw(image)  # Create a drawing context
         font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
 
@@ -45,7 +52,7 @@ def plot_annotated_spectrograms(annotations):
         display(image)
 
 # Call the function with the annotations dataframe
-plot_annotated_spectrograms(annotations)
+plot_annotated_spectrograms(annotations,base_dir)
 
 annotations.label.value_counts()
 

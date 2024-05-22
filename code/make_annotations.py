@@ -14,6 +14,7 @@ Make spectrograms and bounding box annotations for each spectrogram in a given w
 - loops through whatever files you point it to
 
 - puts it on the GPU (5/9/24)
+- Add Justin Kim noise reduction (5/21/24)
     
 """
 
@@ -25,19 +26,20 @@ import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 from pathlib import Path
-from make_spectrograms import generate_spectrogram_and_annotations
+from make_spectrograms import generate_spectrogram_and_annotations, generate_spectrogram_and_annotations_PCA
 
 directory_path = "../labeled_data/logs/HARP/modified_annotations" # point to modified annotation files
-all_files = glob.glob(os.path.join(directory_path,'*.csv')) # path for all files
+all_files = glob.glob(os.path.join(directory_path,'*SOCAL26H_modification.csv')) # path for all files
 
 output_directory = "../labeled_data/spectrograms/HARP"
+preprocessed_directory = "../labeled_data/spectrograms/HARP/preprocessed"
 
 for file in all_files:
     # Parse the unique part of the filename you want to use for naming
     unique_name_part = Path(file).stem.split('_')[0]  # Adjust index as needed
     annotations_df = pd.read_csv(file)
     # Call your function to process the annotations and generate spectrograms
-    generate_spectrogram_and_annotations(unique_name_part,annotations_df, output_directory, window_size=60, overlap_size=30)
+    generate_spectrogram_and_annotations_PCA(unique_name_part,annotations_df, output_directory, preprocessed_directory, window_size=60, overlap_size=30)
 
 
 

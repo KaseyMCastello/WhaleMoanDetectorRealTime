@@ -29,8 +29,6 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-import sys
-sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
 from AudioDetectionDataset import AudioDetectionData
 
         
@@ -40,15 +38,13 @@ def custom_collate(data): # modify to generate confidence map and append and the
 # because we won't always have the same number of bounding boxes..
 
 
-train_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\train.csv'),
+train_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
                       batch_size=16,
                       shuffle = True,
                       collate_fn = custom_collate, 
                       pin_memory = True if torch.cuda.is_available() else False)
 
-
                      
-
 #val_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\validation.csv'),
 #                      batch_size=1,
 #                      shuffle = False,
@@ -66,13 +62,11 @@ model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
         
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-
+print(device)
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9, weight_decay= 0.0005) #SDG = stochastic gradient desent with these hyperparameters
-num_epochs = 15
-
+num_epochs = 20
 
 # model training loop.
-
 model.to(device)
 for epochs in range(num_epochs):
     model.train() # Set the model to training mode
@@ -94,35 +88,12 @@ for epochs in range(num_epochs):
         loss.backward()
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
-    model_save_path = f'L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_epoch_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     
     
     
     
-    
-    
-    # if I also want to run the validation data but idk how to do that lol
-    # Set the model to evaluation mode
-#     epoch_val_loss = 0
-#     with torch.no_grad():  # No need to track gradients during validation
-#         for data in val_d1:
-#             imgs = []
-#             targets = []
-#             for d in data:
-#                 imgs.append(d[0].to(device))
-#                 targ = {}
-#                 targ['boxes'] = d[1]['boxes'].to(device)
-#                 targ['labels'] = d[1]['labels'].to(device)
-#                 targets.append(targ)
-#                 val_loss_dict = model(imgs, targets)
-#                 val_losses = sum(v for v in val_loss_dict.values())
-#                 epoch_val_loss += val_losses.cpu().detach().numpy()
-#     print(f"Epoch {epochs}, Train Loss: {epoch_train_loss}, Validation Loss: {epoch_val_loss}")
-
-
-# final_model_path = 'L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_final.pth'
-# torch.save(model.state_dict(), final_model_path)
         
         
         

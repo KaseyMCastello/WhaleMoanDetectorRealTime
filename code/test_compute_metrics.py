@@ -6,7 +6,7 @@ Created on Sun Feb 11 18:01:09 2024
 
 testing trained model on the test dataeset and computing IoU
 
- for SONOBOI
+for SONOBOI
 """
 
 import pandas as pd
@@ -25,37 +25,20 @@ from torch import tensor
 from collections import defaultdict
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-import sys
-sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
 from AudioDetectionDataset import AudioDetectionData
 import sklearn
-import torchmetrics
-import pycocotools
 from pprint import pprint
 from IPython.display import display
 
 def custom_collate(data):# returns the data as is 
     return data 
 
-
-val_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\validation.csv'),
+test_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/test.csv'),
                       batch_size=1,
                       shuffle = True,
                       collate_fn = custom_collate,
                       pin_memory = True if torch.cuda.is_available() else False)
 
-test_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\test.csv'),
-                      batch_size=1,
-                      shuffle = True,
-                      collate_fn = custom_collate,
-                      pin_memory = True if torch.cuda.is_available() else False)
-        
-        
-train_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\train.csv'),
-                      batch_size=1,
-                      shuffle = True,
-                      collate_fn = custom_collate,
-                      pin_memory = True if torch.cuda.is_available() else False)
 
 
 # and then to load the model :    
@@ -64,9 +47,10 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # three classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('L:\\Sonobuoy_faster-rCNN\\trained_model\\Sonobuoy_model_epoch_14.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_7.pth'))
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 model.eval()
+model.to(device)
 
 iou_values = []
 iou_threshold = 0.1
@@ -138,12 +122,12 @@ def calculate_ap(recalls, precisions):
 
 # Iterate over the test dataset
 for data in test_d1:
-    img = data[0][0]
-    boxes = data[0][1]["boxes"]
-    labels = data[0][1]["labels"]
+    img = data[0][0].to(device)  # Move the image to the device
+    boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
+    labels = data[0][1]["labels"].to(device)  # Move the labels to the device
     
     # Run inference on the image
-    output = model([img.to(device)])
+    output = model([img])
     
     # Get predicted bounding boxes, scores, and labels
     out_bbox = output[0]["boxes"]
@@ -151,7 +135,7 @@ for data in test_d1:
     out_labels = output[0]["labels"]
     
     # Apply Non-Maximum Suppression
-    keep = torchvision.ops.nms(out_bbox, out_scores, 0.1) # I think if we make this lower it will do better? idk. 
+    keep = torchvision.ops.nms(out_bbox, out_scores, 0.1)
     out_bbox = out_bbox[keep]
     out_scores = out_scores[keep]
     out_labels = out_labels[keep]
@@ -168,6 +152,10 @@ for data in test_d1:
 
         # Loop over each category and calculate metrics
         for category_name, category_id in categories.items():
+            # Ensure ground truth labels and boxes are on the same device as the predictions
+            gt_boxes = boxes[labels == category_id].to(device)
+            pred_boxes = predictions_threshold['boxes'][predictions_threshold['labels'] == category_id].to(device)
+
             tp, fp, fn = calculate_detection_metrics(predictions_threshold, labels, category_id, iou_threshold)
             all_metrics[score_threshold][category_name]['tp'] += tp
             all_metrics[score_threshold][category_name]['fp'] += fp
@@ -199,10 +187,9 @@ plt.legend()
 plt.grid(True)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
-plt.savefig('L:/Sonobuoy_faster-rCNN/figures/precision_recall_curve.svg', format='svg')  # Save as SVG
+plt.savefig('../figures/precision_recall_curve_epoch_7.jpeg', format='jpeg')  # Save as SVG
 plt.show()
-plt.savefig('L:/Sonobuoy_faster-rCNN/figures/precision_recall_curve.svg', format='svg')  # Save as SVG
-
+plt.savefig('../figures/precision_recall_curve_epoch_7.jpeg', format='jpeg')  # Save as SVG
 
 # calculate AUC-PR (Area Under Precison-Recall Curve )
 from sklearn.metrics import auc

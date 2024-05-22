@@ -241,7 +241,7 @@ class WAVhdr:
             if m is None:
                 self.start = datetime(2000, 1, 1, 0, 0, 0)
                 #raise ValueError("Could not derive timestamp from file") 
-                # MNA edit for CalCOFI 2008 with wonky timestamps! 
+                # MNA edit for CalCOFI 2008 with weirdly formatted timestamps! 
             else:
                 year = int(m.group('year'))
                 if year < 100:
