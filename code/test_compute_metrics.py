@@ -29,9 +29,8 @@ from AudioDetectionDataset import AudioDetectionData
 import sklearn
 from pprint import pprint
 from IPython.display import display
-
-def custom_collate(data):# returns the data as is 
-    return data 
+from custom_collate import custom_collate
+from performance_metrics_functions import calculate_detection_metrics, calculate_precision_recall, calculate_ap
 
 test_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/test.csv'),
                       batch_size=1,
@@ -47,7 +46,7 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # three classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('../models/WhaleMoanDetector_7.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_preprocessed_epoch_7.pth'))
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 model.eval()
 model.to(device)
@@ -69,56 +68,6 @@ all_metrics = {thr: {cat: {'tp': 0, 'fp': 0, 'fn': 0} for cat in categories} for
 tp_dict = {'D': 0, '40Hz': 0, '20Hz':0, 'A':0, 'B':0}
 fp_dict = {'D': 0, '40Hz': 0, '20Hz':0, 'A':0, 'B':0}
 fn_dict = {'D': 0, '40Hz': 0, '20Hz':0, 'A':0, 'B':0}
-
-def calculate_detection_metrics(predictions, ground_truths, category, iou_threshold):
-    gt_indices = torch.where(ground_truths == category)
-    gt_boxes = boxes[gt_indices]
-
-    pred_boxes = predictions['boxes']
-    pred_labels = predictions['labels']
-    pred_scores = predictions['scores']
-
-    num_gt = len(gt_indices[0])
-
-    if pred_boxes.shape[0] == 0 or num_gt == 0:
-        return (0, 0, num_gt)
-
-    iou_matrix = torchvision.ops.box_iou(pred_boxes, gt_boxes)
-
-    true_pos = torch.sum(iou_matrix.max(1).values > iou_threshold).item()
-    false_pos = pred_boxes.shape[0] - true_pos
-    false_neg = num_gt - true_pos
-
-    return (true_pos, false_pos, false_neg)
-
-
-def calculate_precision_recall(tp, fp, fn):
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    return precision, recall
-
-
-def calculate_ap(recalls, precisions):
-    """Calculate the Average Precision (AP) for a single category."""
-    # Append sentinel values at the beginning and end
-    recalls = [0] + list(recalls) + [1]
-    precisions = [0] + list(precisions) + [0]
-    
-    # For each recall level, take the maximum precision found
-    # to the right of that recall level. This ensures the precision
-    # curve is monotonically decreasing.
-    for i in range(len(precisions) - 1, 0, -1):
-        precisions[i-1] = max(precisions[i-1], precisions[i])
-    
-    # Calculate the differences in recall
-    recall_diff = [recalls[i+1] - recalls[i] for i in range(len(recalls)-1)]
-    
-    # Calculate AP using the recall differences and precision
-    ap = sum(precision * diff for precision, diff in zip(precisions[:-1], recall_diff))
-    
-    return ap
-
-
 
 # Iterate over the test dataset
 for data in test_d1:
@@ -156,14 +105,12 @@ for data in test_d1:
             gt_boxes = boxes[labels == category_id].to(device)
             pred_boxes = predictions_threshold['boxes'][predictions_threshold['labels'] == category_id].to(device)
 
-            tp, fp, fn = calculate_detection_metrics(predictions_threshold, labels, category_id, iou_threshold)
+            tp, fp, fn = calculate_detection_metrics(predictions_threshold, labels, category_id, iou_threshold, boxes)
             all_metrics[score_threshold][category_name]['tp'] += tp
             all_metrics[score_threshold][category_name]['fp'] += fp
             all_metrics[score_threshold][category_name]['fn'] += fn
 
 # Now `all_metrics` contains all the metrics for each category at each score threshold
-print(all_metrics)
-
 
 # now plot precision and recall after computing all metrics
 
@@ -187,9 +134,8 @@ plt.legend()
 plt.grid(True)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
-plt.savefig('../figures/precision_recall_curve_epoch_7.jpeg', format='jpeg')  # Save as SVG
+plt.savefig('../figures/precision_recall_curve_preprocessed__less_overlap_epoch_7.jpeg', format='jpeg')  # Save as SVG
 plt.show()
-plt.savefig('../figures/precision_recall_curve_epoch_7.jpeg', format='jpeg')  # Save as SVG
 
 # calculate AUC-PR (Area Under Precison-Recall Curve )
 from sklearn.metrics import auc

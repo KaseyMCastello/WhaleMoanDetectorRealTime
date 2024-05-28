@@ -1,9 +1,0 @@
-spectrogram_path,label,xmin,ymin,xmax,ymax
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_120_to_180.png,B NE Pacific,180,99,365,140
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_150_to_210.png,D,424,59,472,122
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_180_to_240.png,D,123,59,172,122
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_210_to_270.png,D,291,79,326,107
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_210_to_270.png,B NE Pacific,288,104,481,140
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_240_to_300.png,D,269,69,302,111
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_330_to_390.png,D,381,71,417,110
-..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_360_to_420.png,D,80,71,116,110

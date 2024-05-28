@@ -1,0 +1,671 @@
+spectrogram_path,label,xmin,ymin,xmax,ymax
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0407-SB10-040717-222225_second_260_to_320.png,D,206,83,247,123
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0407-SB26-040724-135000_second_190_to_250.png,D,205,59,256,122
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0407-SB9-040717-174000_second_20_to_80.png,D,115,70,143,124
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0407-SB9-040717-180000_second_70_to_130.png,D,373,75,410,127
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB7-060207-165000_second_110_to_170.png,20Hz,119,126,150,138
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB9-060208-181048_second_240_to_300.png,20Hz,328,96,343,123
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB9-060208-182000_second_40_to_100.png,20Hz,114,83,130,122
+..\labeled_data\spectrograms\CalCOFI\preprocessed\SB9-060208-191000_second_410_to_470.png,20Hz,210,88,224,130
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0707-SB01-070629-170000_second_0_to_60.png,40Hz,183,71,202,112
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0707-SB01-070629-170000_second_10_to_70.png,40Hz,83,71,102,112
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0707-SB02-070629-211522_second_180_to_240.png,D,81,58,110,112
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0707-SB03-070630-014000_second_40_to_100.png,40Hz,543,87,557,115
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0707-SB08-070702-170000_second_210_to_270.png,D,287,43,311,103
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_30_to_90.png,20Hz,171,104,188,127
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_30_to_90.png,20Hz,203,102,218,121
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_30_to_90.png,20Hz,414,100,428,124
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_60_to_120.png,20Hz,113,100,127,124
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_60_to_120.png,20Hz,340,119,363,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB09-071108-191000_second_380_to_440.png,20Hz,190,121,209,133
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB10-071109-000000_second_50_to_110.png,20Hz,555,121,573,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB10-071109-001000_second_40_to_100.png,20Hz,335,119,358,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB10-071109-001000_second_450_to_510.png,20Hz,361,90,382,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB10-071109-001000_second_480_to_540.png,20Hz,60,90,82,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_30_to_90.png,20Hz,280,80,302,133
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_30_to_90.png,20Hz,332,100,353,131
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_30_to_90.png,20Hz,435,102,455,128
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_30_to_90.png,20Hz,489,88,501,126
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_30_to_90.png,20Hz,539,98,558,124
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_120_to_180.png,20Hz,85,109,102,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_120_to_180.png,20Hz,261,110,280,132
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_120_to_180.png,20Hz,483,110,500,129
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_150_to_210.png,20Hz,183,110,199,129
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_150_to_210.png,20Hz,350,116,367,132
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_380_to_440.png,20Hz,454,105,472,126
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-200000_second_520_to_580.png,20Hz,86,100,101,123
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,29,108,48,130
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,135,102,155,131
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,287,97,304,125
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,320,96,337,126
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,377,94,394,127
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,376,93,393,125
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB13-071110-201000_second_120_to_180.png,20Hz,434,102,452,124
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC0711-SB17-071112-234000_second_80_to_140.png,D,409,91,447,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_100_to_160.png,B NE Pacific,380,99,565,140
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_200_to_260.png,D,391,79,426,107
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1108_SB08_110728-204000_second_200_to_260.png,B NE Pacific,388,104,581,140
+..\labeled_data\spectrograms\CalCOFI\preprocessed\DIFAR20111018_001619_second_290_to_350.png,A NE Pacific,138,62,272,74
+..\labeled_data\spectrograms\CalCOFI\preprocessed\DIFAR20111018_001619_second_680_to_740.png,20Hz,125,122,143,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\DIFAR20111024_195110_second_250_to_310.png,20Hz,568,120,590,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\DIFAR20111025_005827_second_560_to_620.png,D,468,92,493,122
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_90_to_150.png,20Hz,302,128,314,137
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_90_to_150.png,20Hz,490,121,504,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_130_to_190.png,20Hz,90,121,103,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_130_to_190.png,20Hz,504,122,519,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_130_to_190.png,20Hz,567,122,578,132
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150122-232930_second_190_to_250.png,20Hz,323,122,337,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150125-180039_second_270_to_330.png,20Hz,358,118,372,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150125-180039_second_280_to_340.png,20Hz,258,118,272,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150125-211008_second_880_to_940.png,20Hz,170,112,186,128
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-010621_second_950_to_1010.png,40Hz,489,94,497,110
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_120_to_180.png,20Hz,566,122,582,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_560_to_620.png,20Hz,235,113,246,131
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_560_to_620.png,20Hz,249,114,262,130
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_560_to_620.png,20Hz,334,112,350,130
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_560_to_620.png,20Hz,352,115,361,128
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150131-014253_second_560_to_620.png,20Hz,497,122,507,133
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150203-151135_second_60_to_120.png,20Hz,558,114,576,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150203-205936_second_680_to_740.png,20Hz,289,121,303,135
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150203-205936_second_680_to_740.png,20Hz,458,122,471,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150203-205936_second_720_to_780.png,20Hz,58,122,71,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150203-221230_second_260_to_320.png,20Hz,105,122,119,135
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CO20150204-205241_second_870_to_930.png,40Hz,486,92,502,116
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1701RL_CO_SB18_170110_190000_second_730_to_790.png,40Hz,373,84,386,101
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1708SR_CO_SB04_170802_222031_second_1390_to_1450.png,B NE Pacific,72,93,197,119
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1708SR_CO_SB04_170802_230000_second_2820_to_2880.png,B NE Pacific,297,94,416,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1708SR_CO_SB04_170802_230000_second_2950_to_3010.png,B NE Pacific,107,94,216,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-190000_second_800_to_860.png,B NE Pacific,197,92,338,121
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-190000_second_1100_to_1160.png,B NE Pacific,27,91,196,120
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-190000_second_1140_to_1200.png,A NE Pacific,459,65,583,75
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-200000_second_960_to_1020.png,D,566,81,589,119
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-200000_second_1590_to_1650.png,B NE Pacific,81,94,258,140
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_20_to_80.png,A NE Pacific,283,65,435,78
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_180_to_240.png,B NE Pacific,412,93,588,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_390_to_450.png,A NE Pacific,425,66,597,77
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_450_to_510.png,B NE Pacific,303,93,475,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_480_to_540.png,B NE Pacific,3,93,174,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_590_to_650.png,A NE Pacific,215,65,384,78
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_1750_to_1810.png,A NE Pacific,208,62,348,80
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_1800_to_1860.png,B NE Pacific,154,94,315,136
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_1990_to_2050.png,B NE Pacific,233,93,402,139
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB03_190712-210000_second_2560_to_2620.png,D,338,73,354,118
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB05_190713-180000_second_860_to_920.png,B NE Pacific,22,93,132,134
+..\labeled_data\spectrograms\CalCOFI\preprocessed\CC1907BH_DF_SB05_190713-190000_second_2170_to_2230.png,B NE Pacific,355,103,517,136
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_29670_to_29730.png,D,95,80,122,116
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_29670_to_29730.png,D,416,83,441,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_31650_to_31710.png,D,435,76,471,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_67110_to_67170.png,D,76,73,103,104
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_71070_to_71130.png,D,432,58,460,113
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_81150_to_81210.png,A NE Pacific,36,61,203,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_81840_to_81900.png,D,470,71,514,108
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_91770_to_91830.png,A NE Pacific,60,59,225,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_99240_to_99300.png,A NE Pacific,242,59,413,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_110190_to_110250.png,A NE Pacific,329,62,489,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_110700_to_110760.png,A NE Pacific,136,61,271,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_111210_to_111270.png,D,505,67,547,121
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_111240_to_111300.png,D,204,67,246,121
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_112080_to_112140.png,A NE Pacific,321,58,479,81
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_112080_to_112140.png,D,260,26,297,123
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_112770_to_112830.png,D,563,63,596,119
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_112890_to_112950.png,B NE Pacific,393,85,526,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_113580_to_113640.png,D,454,60,480,109
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_114960_to_115020.png,D,562,78,584,132
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115440_to_115500.png,D,176,69,217,122
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115440_to_115500.png,D,537,91,564,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115470_to_115530.png,D,236,91,264,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115950_to_116010.png,D,76,80,112,130
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115950_to_116010.png,D,129,78,154,131
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_115950_to_116010.png,D,169,92,188,132
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_117690_to_117750.png,A NE Pacific,137,55,313,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_118440_to_118500.png,A NE Pacific,110,59,293,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_119580_to_119640.png,A NE Pacific,89,62,272,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_119580_to_119640.png,D,126,43,169,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_119910_to_119970.png,A NE Pacific,14,60,214,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_121380_to_121440.png,D,305,80,332,122
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_124350_to_124410.png,A NE Pacific,348,60,519,76
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_128280_to_128340.png,D,407,51,435,134
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_135570_to_135630.png,A NE Pacific,326,60,477,73
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_135810_to_135870.png,A NE Pacific,448,62,598,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_144360_to_144420.png,D,249,74,271,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_144360_to_144420.png,D,313,72,337,123
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_144870_to_144930.png,A NE Pacific,120,61,296,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_145590_to_145650.png,A NE Pacific,171,56,349,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_148590_to_148650.png,A NE Pacific,52,60,247,76
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_148860_to_148920.png,A NE Pacific,192,61,392,81
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_151140_to_151200.png,A NE Pacific,306,58,490,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_152670_to_152730.png,D,308,59,330,103
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_153840_to_153900.png,B NE Pacific,368,85,493,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_154530_to_154590.png,B NE Pacific,151,87,277,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_160830_to_160890.png,A NE Pacific,267,60,436,84
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_163470_to_163530.png,A NE Pacific,364,61,539,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_166260_to_166320.png,A NE Pacific,274,61,441,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_170010_to_170070.png,A NE Pacific,2,60,155,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_176010_to_176070.png,B NE Pacific,88,99,216,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_176250_to_176310.png,B NE Pacific,417,84,545,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_178170_to_178230.png,B NE Pacific,319,85,440,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_178170_to_178230.png,B NE Pacific,450,87,526,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_179700_to_179760.png,A NE Pacific,329,58,523,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_180930_to_180990.png,A NE Pacific,199,61,367,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_181080_to_181140.png,A NE Pacific,360,58,526,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_184890_to_184950.png,A NE Pacific,276,61,455,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_184890_to_184950.png,B NE Pacific,328,87,452,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_188190_to_188250.png,A NE Pacific,310,58,462,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_197370_to_197430.png,D,464,64,510,120
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_198630_to_198690.png,A NE Pacific,302,59,477,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_200460_to_200520.png,B NE Pacific,425,84,516,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201270_to_201330.png,B NE Pacific,269,84,427,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201480_to_201540.png,A NE Pacific,147,58,281,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201600_to_201660.png,A NE Pacific,343,59,518,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201990_to_202050.png,A NE Pacific,176,59,361,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201990_to_202050.png,B NE Pacific,247,97,414,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_201990_to_202050.png,D,211,84,251,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_202920_to_202980.png,B NE Pacific,328,84,422,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_202950_to_203010.png,B NE Pacific,28,84,121,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_202950_to_203010.png,D,518,79,569,114
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_204180_to_204240.png,D,15,78,52,115
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_204600_to_204660.png,A NE Pacific,176,57,360,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_209370_to_209430.png,B NE Pacific,248,82,418,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_209910_to_209970.png,A NE Pacific,217,49,398,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_211260_to_211320.png,A NE Pacific,69,54,268,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_212730_to_212790.png,A NE Pacific,152,59,336,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_213300_to_213360.png,B NE Pacific,345,84,506,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_213810_to_213870.png,A NE Pacific,162,58,331,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_213990_to_214050.png,A NE Pacific,23,58,195,81
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_213990_to_214050.png,A NE Pacific,212,56,406,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_214140_to_214200.png,A NE Pacific,7,57,209,74
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_214140_to_214200.png,B NE Pacific,492,84,592,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_215430_to_215490.png,A NE Pacific,24,55,190,97
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_215430_to_215490.png,A NE Pacific,365,57,552,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_222660_to_222720.png,A NE Pacific,132,58,310,74
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_222660_to_222720.png,B NE Pacific,271,84,440,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_226320_to_226380.png,D,341,59,369,111
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_226320_to_226380.png,D,548,45,583,108
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_226650_to_226710.png,D,224,64,265,108
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_227040_to_227100.png,D,310,77,340,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121109_191242.d100.x_second_233310_to_233370.png,A NE Pacific,166,58,344,81
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_2670_to_2730.png,B NE Pacific,83,83,246,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_3810_to_3870.png,A NE Pacific,185,60,361,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_3870_to_3930.png,B NE Pacific,76,84,249,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_4590_to_4650.png,B NE Pacific,129,86,235,139
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_5370_to_5430.png,B NE Pacific,421,86,520,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_5970_to_6030.png,B NE Pacific,86,84,188,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_6660_to_6720.png,B NE Pacific,320,85,421,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_8400_to_8460.png,A NE Pacific,377,58,563,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9120_to_9180.png,A NE Pacific,315,57,492,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9450_to_9510.png,B NE Pacific,112,84,215,125
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9600_to_9660.png,B NE Pacific,189,84,287,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9600_to_9660.png,B NE Pacific,287,99,362,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9600_to_9660.png,D,128,71,168,112
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_9720_to_9780.png,B NE Pacific,232,84,335,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_11760_to_11820.png,B NE Pacific,217,84,390,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_15030_to_15090.png,B NE Pacific,435,83,534,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_15990_to_16050.png,B NE Pacific,192,86,357,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_21270_to_21330.png,D,75,73,110,114
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_21270_to_21330.png,D,389,74,437,110
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_21840_to_21900.png,D,192,66,231,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_23280_to_23340.png,D,483,71,522,107
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_23370_to_23430.png,D,69,73,118,117
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_23370_to_23430.png,D,222,82,269,124
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_23370_to_23430.png,D,552,75,590,119
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_25890_to_25950.png,D,280,73,328,111
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_27690_to_27750.png,D,60,74,92,111
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_27690_to_27750.png,D,290,74,329,116
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_27690_to_27750.png,D,449,76,485,112
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_28290_to_28350.png,D,156,66,203,111
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_28290_to_28350.png,D,531,64,575,115
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_29400_to_29460.png,B NE Pacific,14,83,121,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_29400_to_29460.png,B NE Pacific,123,88,198,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_30000_to_30060.png,A NE Pacific,45,56,248,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_30000_to_30060.png,D,501,74,538,107
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_30150_to_30210.png,B NE Pacific,265,84,368,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_30150_to_30210.png,B NE Pacific,369,89,447,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_30150_to_30210.png,D,361,61,393,101
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_31380_to_31440.png,B NE Pacific,159,82,260,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_31380_to_31440.png,B NE Pacific,258,85,337,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_31890_to_31950.png,A NE Pacific,164,53,357,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_33870_to_33930.png,D,249,77,294,124
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_34680_to_34740.png,A NE Pacific,288,59,450,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_36960_to_37020.png,A NE Pacific,104,58,280,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_38880_to_38940.png,A NE Pacific,184,55,362,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_40170_to_40230.png,D,341,77,380,112
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_45000_to_45060.png,D,301,78,330,105
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_51930_to_51990.png,B NE Pacific,345,83,445,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_54120_to_54180.png,B NE Pacific,61,88,135,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_54480_to_54540.png,A NE Pacific,200,59,384,76
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_57300_to_57360.png,B NE Pacific,313,85,409,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_57990_to_58050.png,B NE Pacific,168,85,272,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_75330_to_75390.png,D,207,87,247,132
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_77940_to_78000.png,A NE Pacific,458,58,569,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_85980_to_86040.png,A NE Pacific,308,56,495,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_87600_to_87660.png,D,155,79,195,125
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_90270_to_90330.png,A NE Pacific,293,55,489,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_90330_to_90390.png,B NE Pacific,176,83,354,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_95190_to_95250.png,B NE Pacific,271,83,369,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_104970_to_105030.png,B NE Pacific,126,88,198,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_116430_to_116490.png,B NE Pacific,234,82,359,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_116790_to_116850.png,B NE Pacific,0,82,121,126
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_116790_to_116850.png,B NE Pacific,130,88,204,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_120510_to_120570.png,B NE Pacific,336,83,459,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_121440_to_121500.png,A NE Pacific,87,62,272,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122040_to_122100.png,B NE Pacific,188,83,316,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122040_to_122100.png,B NE Pacific,328,87,413,129
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122340_to_122400.png,B NE Pacific,92,89,174,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122340_to_122400.png,B NE Pacific,453,83,579,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122430_to_122490.png,A NE Pacific,355,55,533,85
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122550_to_122610.png,B NE Pacific,135,82,262,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122550_to_122610.png,B NE Pacific,269,87,345,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_122940_to_123000.png,A NE Pacific,371,60,559,84
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_123540_to_123600.png,B NE Pacific,54,87,129,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_123540_to_123600.png,B NE Pacific,421,82,545,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_124050_to_124110.png,B NE Pacific,331,83,472,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_127740_to_127800.png,A NE Pacific,411,58,588,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_127830_to_127890.png,A NE Pacific,11,57,164,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_138210_to_138270.png,D,294,64,340,120
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_146730_to_146790.png,A NE Pacific,51,57,235,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_146730_to_146790.png,D,252,72,287,121
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_148080_to_148140.png,A NE Pacific,415,58,601,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_148080_to_148140.png,D,492,79,533,118
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_153420_to_153480.png,A NE Pacific,260,61,483,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_153420_to_153480.png,B NE Pacific,108,85,250,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_154260_to_154320.png,A NE Pacific,196,59,368,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_155100_to_155160.png,A NE Pacific,44,60,216,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_164970_to_165030.png,A NE Pacific,404,57,589,80
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_168030_to_168090.png,D,67,76,106,123
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_169740_to_169800.png,A NE Pacific,2,57,189,76
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_169740_to_169800.png,D,396,93,443,125
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_182130_to_182190.png,D,323,72,359,109
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_182160_to_182220.png,D,23,72,58,109
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_186600_to_186660.png,D,380,72,415,112
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_187080_to_187140.png,D,449,70,488,116
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_188640_to_188700.png,D,548,80,581,122
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_197610_to_197670.png,D,34,68,77,111
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_197940_to_198000.png,D,441,38,474,120
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_198630_to_198690.png,D,316,64,375,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_198630_to_198690.png,D,550,75,583,112
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_206640_to_206700.png,A NE Pacific,284,56,460,78
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_213120_to_213180.png,A NE Pacific,45,53,216,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_220230_to_220290.png,A NE Pacific,388,58,562,77
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_222420_to_222480.png,A NE Pacific,47,56,232,83
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_224910_to_224970.png,B NE Pacific,154,84,345,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_224910_to_224970.png,D,105,63,132,113
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_224910_to_224970.png,D,527,64,551,102
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_226800_to_226860.png,A NE Pacific,402,56,580,82
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_228600_to_228660.png,B NE Pacific,466,87,544,128
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_230940_to_231000.png,B NE Pacific,30,86,111,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_230940_to_231000.png,B NE Pacific,424,82,543,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_231810_to_231870.png,B NE Pacific,362,83,500,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_231960_to_232020.png,B NE Pacific,41,84,146,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_231960_to_232020.png,B NE Pacific,150,88,242,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_232560_to_232620.png,B NE Pacific,325,83,459,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_233220_to_233280.png,B NE Pacific,202,83,305,140
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_233220_to_233280.png,B NE Pacific,308,86,380,129
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_234390_to_234450.png,A NE Pacific,18,53,197,86
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_234390_to_234450.png,B NE Pacific,342,86,421,127
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121112_122652.d100.x_second_234810_to_234870.png,A NE Pacific,158,58,341,74
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121115_054102.d100.x_second_59940_to_60000.png,D,424,75,478,124
+..\labeled_data\spectrograms\HARP\preprocessed\DCPP01A_d01_121115_054102.d100.x_second_99660_to_99720.png,D,495,83,545,130
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS17B_d03_111202_012730.d100.x_second_362820_to_362880.png,40Hz,230,80,249,111
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS17B_d03_111202_012730.d100.x_second_364170_to_364230.png,40Hz,470,82,483,105
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS17B_d03_111202_012730.d100.x_second_365070_to_365130.png,40Hz,46,92,63,107
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS17B_d03_111202_012730.d100.x_second_365070_to_365130.png,40Hz,430,84,455,105
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS17B_d03_111202_012730.d100.x_second_365160_to_365220.png,40Hz,525,87,541,104
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_74670_to_74730.png,D,537,89,570,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_75720_to_75780.png,D,61,88,103,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_75720_to_75780.png,D,343,96,376,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_93750_to_93810.png,D,137,75,163,108
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_93750_to_93810.png,D,261,69,301,117
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_105330_to_105390.png,D,324,92,382,128
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_105420_to_105480.png,D,283,86,341,125
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_106320_to_106380.png,D,251,95,290,126
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_106320_to_106380.png,D,307,94,339,125
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_106320_to_106380.png,D,394,90,418,118
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_106320_to_106380.png,D,446,89,474,125
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107250_to_107310.png,D,66,81,120,124
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107460_to_107520.png,D,9,98,42,131
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107460_to_107520.png,D,58,85,86,118
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107460_to_107520.png,D,96,81,164,131
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107460_to_107520.png,D,184,91,211,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_107460_to_107520.png,D,297,79,349,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_108030_to_108090.png,D,358,71,407,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_109440_to_109500.png,D,306,62,331,112
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_109800_to_109860.png,D,46,81,75,102
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_110730_to_110790.png,D,157,80,216,115
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_110730_to_110790.png,D,350,86,392,129
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_111060_to_111120.png,D,38,92,73,126
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_111630_to_111690.png,D,311,91,352,121
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_112110_to_112170.png,D,467,77,511,114
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_112230_to_112290.png,D,444,81,492,123
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_114480_to_114540.png,D,63,77,107,117
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_114480_to_114540.png,D,267,84,314,113
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_116250_to_116310.png,D,365,96,397,123
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_124140_to_124200.png,D,417,87,472,123
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_126930_to_126990.png,40Hz,184,79,200,100
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_127860_to_127920.png,D,47,81,68,121
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_132150_to_132210.png,D,407,81,433,109
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_148980_to_149040.png,D,557,93,592,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149040_to_149100.png,D,72,77,96,111
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149040_to_149100.png,D,114,79,150,114
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149040_to_149100.png,D,344,82,374,112
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149070_to_149130.png,D,43,82,73,112
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149190_to_149250.png,D,132,85,166,114
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149190_to_149250.png,D,190,80,216,115
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_149190_to_149250.png,D,203,78,230,116
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_151050_to_151110.png,D,488,78,524,115
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_152520_to_152580.png,D,564,77,589,116
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_154800_to_154860.png,D,356,86,385,124
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_155310_to_155370.png,D,324,81,360,120
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_155730_to_155790.png,D,390,84,421,115
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_160170_to_160230.png,D,99,80,145,116
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_163920_to_163980.png,40Hz,13,101,31,126
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_163920_to_163980.png,40Hz,272,93,291,109
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_164670_to_164730.png,40Hz,32,104,47,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_165330_to_165390.png,D,35,96,62,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_166530_to_166590.png,D,113,66,151,120
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_166530_to_166590.png,D,205,70,232,109
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_167490_to_167550.png,40Hz,393,93,411,112
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_169770_to_169830.png,D,85,82,135,120
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_169980_to_170040.png,D,145,75,179,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_169980_to_170040.png,D,493,76,541,123
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_175410_to_175470.png,40Hz,320,74,333,113
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_206700_to_206760.png,40Hz,320,81,335,99
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_253890_to_253950.png,40Hz,494,67,508,99
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_253890_to_253950.png,40Hz,540,80,551,103
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_275040_to_275100.png,D,217,80,262,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_275310_to_275370.png,D,103,89,149,117
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_339180_to_339240.png,40Hz,403,78,421,101
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_341610_to_341670.png,D,425,88,453,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_349530_to_349590.png,D,470,84,493,116
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_354480_to_354540.png,D,354,82,393,124
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_355770_to_355830.png,D,410,77,442,122
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_358080_to_358140.png,D,33,81,77,128
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_362760_to_362820.png,D,502,95,547,123
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_385170_to_385230.png,40Hz,518,82,531,104
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_385590_to_385650.png,D,145,74,166,109
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120622_055731.d100.x_second_389730_to_389790.png,D,201,75,216,102
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_11670_to_11730.png,40Hz,118,84,135,108
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_95040_to_95100.png,B NE Pacific,97,88,237,139
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_95040_to_95100.png,B NE Pacific,235,88,335,127
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_95100_to_95160.png,D,452,80,470,118
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_95100_to_95160.png,B NE Pacific,43,86,166,124
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_95100_to_95160.png,B NE Pacific,183,88,274,127
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_98520_to_98580.png,B NE Pacific,91,87,223,140
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_98520_to_98580.png,B NE Pacific,231,90,322,140
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_101160_to_101220.png,D,74,92,116,119
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_104610_to_104670.png,B NE Pacific,449,100,569,139
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_110130_to_110190.png,D,59,90,94,127
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS18B_d06_120626_214731.d100.x_second_266370_to_266430.png,40Hz,180,76,192,101
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121030_215730.d100.x_second_273660_to_273720.png,40Hz,18,90,39,108
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121030_215730.d100.x_second_292620_to_292680.png,D,25,80,70,113
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121030_215730.d100.x_second_292620_to_292680.png,40Hz,216,97,235,114
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121030_215730.d100.x_second_292620_to_292680.png,D,350,80,395,112
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121104_134730.d100.x_second_49200_to_49260.png,D,350,87,383,116
+..\labeled_data\spectrograms\HARP\preprocessed\CINMS19B_d06_121104_134730.d100.x_second_335700_to_335760.png,D,352,67,394,117
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_8700_to_8760.png,40Hz,106,85,114,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_9390_to_9450.png,40Hz,364,75,371,94
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_12630_to_12690.png,40Hz,267,83,275,106
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_12630_to_12690.png,40Hz,423,75,432,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_16020_to_16080.png,40Hz,7,76,16,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_17010_to_17070.png,40Hz,295,91,301,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_59610_to_59670.png,40Hz,124,75,135,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_60300_to_60360.png,40Hz,62,86,69,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_60300_to_60360.png,40Hz,234,85,240,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_61410_to_61470.png,40Hz,110,93,118,114
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_70170_to_70230.png,D,203,64,232,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_75690_to_75750.png,40Hz,92,65,99,81
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_75690_to_75750.png,40Hz,241,67,247,80
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76560_to_76620.png,40Hz,373,59,382,82
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76560_to_76620.png,40Hz,459,67,467,85
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76560_to_76620.png,40Hz,590,69,598,90
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76800_to_76860.png,40Hz,92,70,101,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76800_to_76860.png,40Hz,180,65,188,80
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76800_to_76860.png,40Hz,363,69,371,87
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76800_to_76860.png,40Hz,448,61,456,79
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76800_to_76860.png,40Hz,540,61,548,83
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76890_to_76950.png,40Hz,32,100,41,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76890_to_76950.png,40Hz,187,65,196,81
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76890_to_76950.png,40Hz,360,65,369,88
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_76890_to_76950.png,40Hz,536,73,545,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_90570_to_90630.png,20Hz,233,125,251,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_90570_to_90630.png,20Hz,366,117,386,135
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_90570_to_90630.png,20Hz,232,125,251,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_90570_to_90630.png,20Hz,365,117,392,134
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91140_to_91200.png,20Hz,57,127,73,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91140_to_91200.png,20Hz,57,126,84,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91140_to_91200.png,20Hz,180,115,214,134
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91140_to_91200.png,20Hz,393,130,418,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91140_to_91200.png,40Hz,325,91,334,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91470_to_91530.png,20Hz,54,117,73,134
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91470_to_91530.png,20Hz,476,125,490,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91470_to_91530.png,20Hz,53,117,85,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91470_to_91530.png,20Hz,474,124,505,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91530_to_91590.png,20Hz,8,120,25,134
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91530_to_91590.png,20Hz,242,125,260,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91530_to_91590.png,20Hz,380,120,396,134
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_91530_to_91590.png,20Hz,243,123,275,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_92100_to_92160.png,20Hz,355,123,375,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_92100_to_92160.png,20Hz,353,123,387,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_93000_to_93060.png,20Hz,45,117,78,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_93000_to_93060.png,20Hz,242,122,272,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_94380_to_94440.png,20Hz,24,123,45,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_94380_to_94440.png,20Hz,451,125,469,136
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_99390_to_99450.png,40Hz,179,82,189,106
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_99720_to_99780.png,40Hz,354,96,362,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_100380_to_100440.png,40Hz,509,68,518,86
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_100950_to_101010.png,20Hz,519,125,540,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_100950_to_101010.png,40Hz,132,86,140,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_100950_to_101010.png,40Hz,575,82,583,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_102900_to_102960.png,20Hz,404,116,438,135
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_102900_to_102960.png,20Hz,576,124,599,138
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_103290_to_103350.png,40Hz,274,91,282,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_109380_to_109440.png,40Hz,80,95,89,114
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_109380_to_109440.png,40Hz,412,80,421,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_110730_to_110790.png,20Hz,182,125,199,137
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_111000_to_111060.png,40Hz,373,101,381,120
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_111120_to_111180.png,20Hz,435,118,452,132
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_114780_to_114840.png,40Hz,41,78,49,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_114780_to_114840.png,40Hz,261,82,269,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_128040_to_128100.png,40Hz,322,85,329,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_142920_to_142980.png,40Hz,551,90,562,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_155100_to_155160.png,40Hz,473,86,481,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_155910_to_155970.png,40Hz,286,78,296,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_161490_to_161550.png,40Hz,479,71,487,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_161490_to_161550.png,40Hz,557,66,564,87
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_167100_to_167160.png,40Hz,394,92,404,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_167220_to_167280.png,40Hz,28,94,36,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_167220_to_167280.png,40Hz,180,95,187,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_167220_to_167280.png,40Hz,448,96,455,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_167220_to_167280.png,40Hz,542,95,550,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_172440_to_172500.png,40Hz,196,83,208,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_172440_to_172500.png,40Hz,331,91,340,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_175890_to_175950.png,40Hz,210,70,218,97
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_182460_to_182520.png,40Hz,69,79,74,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_182460_to_182520.png,40Hz,128,63,135,83
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183000_to_183060.png,40Hz,344,62,351,88
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183000_to_183060.png,40Hz,439,63,445,85
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183000_to_183060.png,40Hz,544,63,549,82
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183030_to_183090.png,40Hz,44,62,51,88
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183030_to_183090.png,40Hz,139,63,145,85
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183030_to_183090.png,40Hz,243,63,249,82
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_183030_to_183090.png,40Hz,352,66,359,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_184320_to_184380.png,40Hz,105,67,112,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_184320_to_184380.png,40Hz,229,64,236,87
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_184320_to_184380.png,40Hz,372,58,378,82
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_184320_to_184380.png,40Hz,473,63,480,83
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_185910_to_185970.png,40Hz,309,88,317,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_185910_to_185970.png,40Hz,424,75,430,92
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_185910_to_185970.png,40Hz,555,84,561,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_187440_to_187500.png,40Hz,46,81,54,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_189330_to_189390.png,40Hz,78,87,84,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_189450_to_189510.png,40Hz,173,85,179,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_190260_to_190320.png,D,79,67,102,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_190260_to_190320.png,D,282,80,297,93
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_190650_to_190710.png,40Hz,157,95,162,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_190650_to_190710.png,40Hz,499,92,504,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_190740_to_190800.png,40Hz,307,79,314,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_191040_to_191100.png,40Hz,22,80,29,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_191250_to_191310.png,40Hz,91,85,97,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_191250_to_191310.png,40Hz,203,81,210,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_191250_to_191310.png,40Hz,406,85,413,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_192420_to_192480.png,40Hz,192,83,201,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_192420_to_192480.png,40Hz,573,92,580,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_193590_to_193650.png,40Hz,339,81,345,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_193590_to_193650.png,40Hz,588,83,595,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_195870_to_195930.png,40Hz,63,70,69,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_196410_to_196470.png,40Hz,481,92,488,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_196860_to_196920.png,40Hz,520,79,528,97
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_197610_to_197670.png,D,53,71,89,118
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_197610_to_197670.png,D,118,82,159,120
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_197610_to_197670.png,D,397,84,420,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_197610_to_197670.png,D,538,77,571,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_198420_to_198480.png,40Hz,59,95,69,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_198450_to_198510.png,40Hz,471,93,478,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_198750_to_198810.png,40Hz,10,97,20,115
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_198750_to_198810.png,40Hz,100,86,107,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_202020_to_202080.png,40Hz,114,82,121,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_202020_to_202080.png,40Hz,257,86,263,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_202020_to_202080.png,D,393,79,418,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_203550_to_203610.png,D,154,84,173,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_203550_to_203610.png,40Hz,501,92,510,106
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_205410_to_205470.png,40Hz,36,95,45,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_207240_to_207300.png,D,105,87,124,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_209490_to_209550.png,D,158,77,189,118
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_210900_to_210960.png,D,381,71,408,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_211500_to_211560.png,D,28,78,63,114
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_211500_to_211560.png,40Hz,252,75,262,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_211500_to_211560.png,D,315,81,338,112
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_211800_to_211860.png,40Hz,57,71,68,112
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216090_to_216150.png,D,34,86,61,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216090_to_216150.png,D,393,77,434,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216090_to_216150.png,D,478,59,504,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216120_to_216180.png,D,93,77,134,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216120_to_216180.png,D,177,59,204,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_216120_to_216180.png,D,284,78,314,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_218130_to_218190.png,D,0,78,30,120
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_218130_to_218190.png,D,239,92,289,124
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_218130_to_218190.png,D,327,73,363,121
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_218130_to_218190.png,D,404,74,439,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_219960_to_220020.png,40Hz,49,57,56,81
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_220320_to_220380.png,40Hz,34,44,42,77
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_220320_to_220380.png,40Hz,526,66,534,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_235020_to_235080.png,40Hz,411,90,417,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_249690_to_249750.png,40Hz,64,81,72,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_259140_to_259200.png,40Hz,32,97,39,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_259140_to_259200.png,40Hz,393,79,398,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_266070_to_266130.png,40Hz,32,73,37,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_273390_to_273450.png,40Hz,571,87,577,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_273660_to_273720.png,40Hz,396,52,404,93
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_274440_to_274500.png,40Hz,23,93,29,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_274440_to_274500.png,40Hz,90,99,97,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_274920_to_274980.png,40Hz,55,98,65,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_274920_to_274980.png,40Hz,208,100,221,117
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_275220_to_275280.png,40Hz,368,87,374,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d01_080604_173900.d100.x_second_277770_to_277830.png,40Hz,74,46,80,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_3540_to_3600.png,40Hz,30,80,36,96
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_4350_to_4410.png,40Hz,168,64,177,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_4650_to_4710.png,40Hz,459,81,466,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_5370_to_5430.png,40Hz,46,85,57,112
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_5370_to_5430.png,40Hz,131,81,136,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_5370_to_5430.png,40Hz,243,79,249,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_5370_to_5430.png,40Hz,409,82,416,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_5370_to_5430.png,40Hz,494,82,500,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_6480_to_6540.png,40Hz,415,64,426,96
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_9210_to_9270.png,40Hz,60,73,66,93
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_18270_to_18330.png,40Hz,381,74,388,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_18270_to_18330.png,40Hz,417,76,425,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_18690_to_18750.png,40Hz,357,87,364,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_20760_to_20820.png,40Hz,271,97,278,120
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_20760_to_20820.png,40Hz,554,99,561,117
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_25500_to_25560.png,40Hz,439,101,447,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_25530_to_25590.png,40Hz,139,101,146,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_27060_to_27120.png,40Hz,19,97,28,125
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_28410_to_28470.png,40Hz,48,91,56,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_31470_to_31530.png,40Hz,401,57,408,85
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_34740_to_34800.png,40Hz,258,82,264,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_35550_to_35610.png,40Hz,261,86,267,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_44610_to_44670.png,40Hz,68,85,76,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_44610_to_44670.png,40Hz,405,78,414,115
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_47760_to_47820.png,40Hz,424,93,431,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_48930_to_48990.png,40Hz,94,68,101,92
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_50280_to_50340.png,40Hz,239,87,248,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_60840_to_60900.png,40Hz,117,85,124,111
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_71550_to_71610.png,40Hz,370,95,380,115
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_71550_to_71610.png,40Hz,503,83,510,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_75150_to_75210.png,40Hz,61,57,70,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_75840_to_75900.png,40Hz,44,86,54,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_76260_to_76320.png,40Hz,367,71,375,96
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_94530_to_94590.png,40Hz,13,74,24,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_102840_to_102900.png,40Hz,49,80,59,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_107040_to_107100.png,40Hz,480,92,489,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_108810_to_108870.png,40Hz,547,86,553,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_114090_to_114150.png,40Hz,170,89,177,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_115830_to_115890.png,40Hz,208,82,219,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_117570_to_117630.png,40Hz,401,69,408,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_120480_to_120540.png,D,161,76,199,118
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_123330_to_123390.png,40Hz,275,80,282,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_130800_to_130860.png,40Hz,79,79,86,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_162690_to_162750.png,40Hz,78,83,86,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_162690_to_162750.png,40Hz,253,83,260,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_167310_to_167370.png,40Hz,333,73,343,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_167310_to_167370.png,40Hz,435,73,443,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_167310_to_167370.png,40Hz,523,76,532,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_168900_to_168960.png,40Hz,367,82,376,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_168900_to_168960.png,40Hz,439,81,447,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_168900_to_168960.png,40Hz,495,79,502,105
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_172350_to_172410.png,40Hz,468,89,475,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_175590_to_175650.png,40Hz,74,81,80,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_175590_to_175650.png,40Hz,196,85,203,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_175590_to_175650.png,40Hz,265,89,273,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_175980_to_176040.png,40Hz,185,84,193,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176010_to_176070.png,40Hz,413,85,422,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176790_to_176850.png,40Hz,13,84,22,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176790_to_176850.png,40Hz,424,79,433,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176880_to_176940.png,40Hz,18,80,26,106
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176910_to_176970.png,40Hz,403,79,412,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176910_to_176970.png,40Hz,550,79,556,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176940_to_177000.png,40Hz,103,79,112,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_176940_to_177000.png,40Hz,249,79,256,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_186330_to_186390.png,40Hz,512,73,518,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_190410_to_190470.png,D,357,77,392,113
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_193680_to_193740.png,D,124,79,158,114
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_193680_to_193740.png,D,466,82,496,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_194610_to_194670.png,D,302,95,324,112
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_216450_to_216510.png,40Hz,515,64,521,82
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_224220_to_224280.png,40Hz,106,85,112,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_230190_to_230250.png,D,141,77,177,119
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_230190_to_230250.png,D,344,85,404,120
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_232770_to_232830.png,D,346,77,406,130
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_238860_to_238920.png,40Hz,330,77,337,96
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_238860_to_238920.png,40Hz,487,65,495,97
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_242790_to_242850.png,40Hz,141,73,147,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_245250_to_245310.png,40Hz,345,92,352,109
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_245250_to_245310.png,40Hz,376,73,385,91
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_245490_to_245550.png,40Hz,11,57,19,78
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_246810_to_246870.png,40Hz,286,86,294,107
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_249750_to_249810.png,40Hz,397,92,404,110
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_250680_to_250740.png,40Hz,22,76,28,96
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_250680_to_250740.png,40Hz,281,69,289,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_253920_to_253980.png,40Hz,535,81,542,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_254970_to_255030.png,D,369,101,390,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_255120_to_255180.png,D,58,91,86,124
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_255150_to_255210.png,D,480,92,514,124
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_261570_to_261630.png,40Hz,193,75,203,114
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_261570_to_261630.png,40Hz,234,100,243,122
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_261570_to_261630.png,40Hz,354,95,362,116
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_261570_to_261630.png,40Hz,390,90,397,108
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_264660_to_264720.png,40Hz,288,80,294,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_266250_to_266310.png,40Hz,339,86,346,104
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_268320_to_268380.png,40Hz,256,80,264,100
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_270180_to_270240.png,40Hz,386,83,393,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_270210_to_270270.png,40Hz,86,83,93,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_271560_to_271620.png,40Hz,447,82,454,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_275160_to_275220.png,40Hz,270,80,277,97
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_276090_to_276150.png,40Hz,434,70,441,89
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_276090_to_276150.png,40Hz,477,77,485,95
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_276450_to_276510.png,40Hz,107,86,114,101
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_280260_to_280320.png,D,492,97,528,127
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_280710_to_280770.png,40Hz,53,82,58,98
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d02_080608_092230.d100.x_second_287280_to_287340.png,40Hz,70,83,78,102
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d03_080611_184615.d100.x_second_6480_to_6540.png,40Hz,219,79,227,99
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d03_080611_184615.d100.x_second_7320_to_7380.png,40Hz,7,86,13,103
+..\labeled_data\spectrograms\HARP\preprocessed\SOCAL26H_d03_080611_184615.d100.x_second_7320_to_7380.png,D,184,95,219,123

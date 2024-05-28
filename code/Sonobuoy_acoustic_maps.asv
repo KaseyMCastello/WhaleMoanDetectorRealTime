@@ -1,0 +1,31 @@
+
+detections = readtable('L:\CalCOFI\Sonobuoy\data\WhaleMoanDetector_predictions\CC201907.csv');
+
+[uniqueRows, ~, idx] = unique(detections(:, {'Deployment',  'Call'}), 'rows');
+
+% Count occurrences
+callCounts = accumarray(idx, 1);
+
+% Add call counts to unique combinations
+% Convert uniqueComb to a table
+uniqueRows = table(uniqueComb.Deployment, uniqueComb.Call, callCounts, 'VariableNames', {'Deployment', 'Call', 'CallCount'});
+
+% Find corresponding latitudes and longitudes for each unique combination
+uniqueComb.Latitude = zeros(height(uniqueComb), 1);
+uniqueComb.Longitude = zeros(height(uniqueComb), 1);
+for i = 1:height(uniqueComb)
+    % Find the first occurrence of the deployment to get the corresponding latitude and longitude
+    deploymentIdx = find(strcmp(data.Deployment, uniqueComb.Deployment{i}) & strcmp(data.Call, uniqueComb.Call{i}), 1);
+    uniqueComb.Latitude(i) = data.CalCOFI_Latitude(deploymentIdx);
+    uniqueComb.Longitude(i) = data.CalCOFI_Longitude(deploymentIdx);
+end
+
+% Create a table for geobubble
+bubbleData = uniqueComb(:, {'Latitude', 'Longitude', 'Call', 'CallCount'});
+
+% Create geobubble plot
+figure;
+geobubble(bubbleData, 'Latitude', 'Longitude', 'SizeVariable', 'CallCount', 'ColorVariable', 'Call');
+
+% Add title
+title('Acoustic Detections by Call Type at CalCOFI Stations');

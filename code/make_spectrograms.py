@@ -70,21 +70,21 @@ def generate_spectrogram_and_annotations(unique_name_part,annotations_df, output
                 # Perform column-wise background subtraction
                 for j in range(spectrogram_data.shape[1]):
                     column = spectrogram_data[:, j]
-                    percentile_value = np.percentile(column, 60)
+                    percentile_value = np.percentile(column,60)
                     # Subtract the percentile value from each column and clip to ensure no negative values
                     spectrogram_data[:, j] = np.clip(column - percentile_value, 0, None)
-
-                # Raise the modified spectrogram data to the power of 6 to enhance contrast
-                enhanced_image = np.power(spectrogram_data,3)
                 
-                # Normalize the results to make sure they fit in the 0-255 range for image conversion
-                enhanced_image = 255 * (enhanced_image / enhanced_image.max())
+                normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data)) # normalize spectrogram 
+                enhanced_image = np.power(normalized_S_dB,3)
+                S_dB_img = Image.fromarray((enhanced_image * 255).astype(np.uint8), 'L') # apply grayscale colormap
+                # Raise the modified spectrogram data to the power of 3 to enhance contrast
+               # enhanced_image = np.power(S_dB_img,3)
 
                 # Convert the processed data back to an image
-                final_image = Image.fromarray(enhanced_image.astype(np.uint8), 'L')
+                #final_image = Image.fromarray(S_dB_img.astype(np.uint8), 'L')
     
                 # Flip the image vertically
-                final_image = ImageOps.flip(final_image)
+                final_image = ImageOps.flip(S_dB_img)
 
                 final_image.save(output_dir / spectrogram_filename)
               

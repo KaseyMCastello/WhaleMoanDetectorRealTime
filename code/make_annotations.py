@@ -28,18 +28,18 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from make_spectrograms import generate_spectrogram_and_annotations, generate_spectrogram_and_annotations_PCA
 
-directory_path = "../labeled_data/logs/HARP/modified_annotations" # point to modified annotation files
-all_files = glob.glob(os.path.join(directory_path,'*SOCAL26H_modification.csv')) # path for all files
+directory_path = "../labeled_data/logs/CalCOFI/modified_annotations" # point to modified annotation files
+all_files = glob.glob(os.path.join(directory_path,'*CC200808_modification.csv')) # path for all files
 
-output_directory = "../labeled_data/spectrograms/HARP"
-preprocessed_directory = "../labeled_data/spectrograms/HARP/preprocessed"
+output_directory = "../labeled_data/spectrograms/CalCOFI"
+preprocessed_directory = "../labeled_data/spectrograms/CalCOFI/preprocessed"
 
 for file in all_files:
     # Parse the unique part of the filename you want to use for naming
     unique_name_part = Path(file).stem.split('_')[0]  # Adjust index as needed
     annotations_df = pd.read_csv(file)
     # Call your function to process the annotations and generate spectrograms
-    generate_spectrogram_and_annotations_PCA(unique_name_part,annotations_df, output_directory, preprocessed_directory, window_size=60, overlap_size=30)
+    generate_spectrogram_and_annotations(unique_name_part,annotations_df,preprocessed_directory, window_size=60, overlap_size=0)
 
 
 

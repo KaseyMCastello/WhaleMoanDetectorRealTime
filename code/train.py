@@ -30,12 +30,9 @@ from torch.utils.data import DataLoader
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from AudioDetectionDataset import AudioDetectionData
+from custom_collate import custom_collate
+from validation import validation
 
-        
-def custom_collate(data): # modify to generate confidence map and append and then train faster-rCNN
-    return data # 
-# this just allows you to return the datasets as is. 
-# because we won't always have the same number of bounding boxes..
 
 
 train_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
@@ -44,12 +41,12 @@ train_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_tes
                       collate_fn = custom_collate, 
                       pin_memory = True if torch.cuda.is_available() else False)
 
-                     
-#val_d1 = DataLoader(AudioDetectionData(csv_file='L:\\Sonobuoy_faster-rCNN\\labeled_data\\train_val_test_annotations\\validation.csv'),
-#                      batch_size=1,
-#                      shuffle = False,
-#                      collate_fn = custom_collate,
-#                      pin_memory = True if torch.cuda.is_available() else False)
+                    
+val_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/val.csv'),
+                      batch_size=1,
+                      shuffle = False,
+                      collate_fn = custom_collate,
+                      pin_memory = True if torch.cuda.is_available() else False)
         
         
 # load our model
@@ -88,9 +85,18 @@ for epochs in range(num_epochs):
         loss.backward()
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
-    model_save_path = f'../models/WhaleMoanDetector_{epochs}.pth'
-    torch.save(model.state_dict(), model_save_path)
     
+    model_save_path = f'../models/WhaleMoanDetector_preprocessed_epoch_{epochs}.pth'
+    torch.save(model.state_dict(), model_save_path)
+    #validation
+    
+    model.eval()
+    
+    with torch.no_grad():
+        map_value = validation(val_d1, device, model)
+        print(f'Validation epoch {epochs} mAP: {map_value}')
+
+ 
     
     
     
