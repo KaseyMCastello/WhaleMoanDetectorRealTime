@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![Fin whale](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/blue_whale.JPG)
+![Fin whale](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/blue_whale.jpeg)
 Blue whales off the coast of San Diego.
 Photo credit: Manuel Mendieta
 
