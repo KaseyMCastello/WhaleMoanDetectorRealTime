@@ -38,7 +38,7 @@ from inference_functions import bounding_box_to_time_and_frequency, predictions_
 wav_directory = 'L:/WhaleMoanDetector/labeled_data/wav/CC200808'
 csv_file_path = 'L:/WhaleMoanDetector_predictions/CalCOFI_2008/CC_2008_08/CalCOFI_2008_08_raw_detections.csv'
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 'box_x1', 'box_x2', 'box_y1', 'box_y2']
-model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector_7_29_24_10.pth'
+model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector_7_29_24_39.pth'
 model_name = os.path.basename(model_path)
 visualize_tf = False
 # define variables 

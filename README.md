@@ -70,7 +70,7 @@ WhaleMoanDetector/
 
 3. Install Dependencies
 
-        ```pip install -r requirements.txt``` 
+        ```pip install -r requirements.txt```
 
 4. Run WhaleMoanDetector on wav files
 
