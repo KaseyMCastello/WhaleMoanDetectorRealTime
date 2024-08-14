@@ -58,21 +58,26 @@ WhaleMoanDetector/
 
 1. Clone the Repository:
 
-	```git clone  https://github.com/m1alksne/WhaleMoanDetector.git```
-
-	```cd WhaleMoanDetector```
+    ```bash
+    git clone https://github.com/m1alksne/WhaleMoanDetector.git
+    cd WhaleMoanDetector
+    ```
 
 2. Create a Virtual Environment:
 
-	```conda create -n whalemoandetector python=3.9```
+    ```bash
+    conda create -n whalemoandetector python=3.9
+    conda activate whalemoandetector
+    ```
 
-	```conda activate whalemoandetector```
+3. Install Dependencies:
 
-3. Install Dependencies
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-        ```pip install -r requirements.txt```
+4. Run WhaleMoanDetector on wav files:
 
-4. Run WhaleMoanDetector on wav files
-
- 	 ```python code/intference_pipeline.py```
-
+    ```bash
+    python code/intference_pipeline.py
+    ```
