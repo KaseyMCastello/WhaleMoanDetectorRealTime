@@ -26,7 +26,7 @@ from torch import tensor
 from collections import defaultdict
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-from AudioDetectionDataset import AudioDetectionData
+from AudioDetectionDataset import AudioDetectionData, AudioDetectionData_with_hard_negatives
 import sklearn
 from pprint import pprint
 from IPython.display import display
@@ -36,7 +36,7 @@ from collections import OrderedDict
 def custom_collate(data):# returns the data as is 
     return data 
 
-csv_file_name = '../labeled_data/train_val_test_annotations/test.csv'
+csv_file_name = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_test.csv'
 
 df = pd.read_csv(csv_file_name)
 
@@ -45,7 +45,7 @@ unique_filenames = list(OrderedDict.fromkeys(file_names))
 
 
 
-test_d1 = DataLoader(AudioDetectionData(csv_file=csv_file_name),
+test_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file=csv_file_name),
                       batch_size=1,
                       shuffle = False,
                       collate_fn = custom_collate,
@@ -59,7 +59,7 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features # classificati
 
 # I might need to change in features.. tbd..
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('../models/WhaleMoanDetector_preprocessed_epoch_11.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_7_29_24_6.pth'))
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print(device)
@@ -71,9 +71,14 @@ font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
 # Iterate over the validation dataset in the dataloader
 for i, data in enumerate(test_d1):
     img = data[0][0].to(device)  # Move the image to the device
-    boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
-    labels = data[0][1]["labels"].to(device)  # Move the labels to the device
-
+    # Check if ground truth boxes or labels are None (NaN images)
+    if data[0][1] is None or data[0][1]["boxes"] is None or data[0][1]["labels"] is None:
+        boxes = torch.empty((0, 4), device=device)  # Create an empty tensor for boxes
+        labels = torch.empty((0,), dtype=torch.int64, device=device)  # Create an empty tensor for NaN spectrograms
+    else:
+        boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
+        labels = data[0][1]["labels"].to(device)  # Move the labels to the device
+        
     filename = unique_filenames[i]
 
     

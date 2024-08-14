@@ -1,0 +1,4 @@
+audio_file,annotation,high_f,low_f,start_time,end_time
+./audio/CC1701RL_CO_SB56_170119_183405.wav,40Hz,71,53,99.893,101.054
+./audio/CC1701RL_CO_SB56_170119_183405.wav,40Hz,70,50,644.476,645.76
+./audio/CC1701RL_CO_SB56_170119_183405.wav,40Hz,68,50,677.418,678.58

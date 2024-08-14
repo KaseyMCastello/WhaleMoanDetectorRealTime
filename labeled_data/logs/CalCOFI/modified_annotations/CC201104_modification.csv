@@ -1,5 +1,0 @@
-audio_file,annotation,high_f,low_f,start_time,end_time
-../labeled_data/wav\SB17_20110414_180439.wav,D,77,32,161.363,163.847
-../labeled_data/wav\SB17_20110414_180439.wav,D,92,42,623.552,626.155
-../labeled_data/wav\SB60_20110427_014707.wav,40Hz,67,49,324.798,326.218
-../labeled_data/wav\SB60_20110427_014707.wav,40Hz,56,31,344.794,346.095

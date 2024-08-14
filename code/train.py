@@ -29,20 +29,20 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-from AudioDetectionDataset import AudioDetectionData
+from AudioDetectionDataset import AudioDetectionData, AudioDetectionData_with_hard_negatives
 from custom_collate import custom_collate
 from validation import validation
 
 
 
-train_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
+train_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
                       batch_size=16,
                       shuffle = True,
                       collate_fn = custom_collate, 
                       pin_memory = True if torch.cuda.is_available() else False)
 
                     
-val_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/val.csv'),
+val_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_data/train_val_test_annotations/val.csv'),
                       batch_size=1,
                       shuffle = False,
                       collate_fn = custom_collate,
@@ -61,7 +61,7 @@ model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print(device)
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9, weight_decay= 0.0005) #SDG = stochastic gradient desent with these hyperparameters
-num_epochs = 20
+num_epochs = 40
 
 # model training loop.
 model.to(device)
@@ -73,9 +73,22 @@ for epochs in range(num_epochs):
         targets = []
         for d in data:
             imgs.append(d[0].to(device)) #we have to send each image from the dataloader to our cpu..
-            targ = {}
-            targ['boxes'] = d[1]['boxes'].to(device)
-            targ['labels'] = d[1]['labels'].to(device)
+            #targ = {}
+            
+            if d[1] is None:  # Check if the target is None (hard negative example)
+                # Create a dummy target for hard negatives with label 0
+                targ = {
+                    'boxes': torch.zeros((0, 4), dtype=torch.float32).to(device),
+                    'labels': torch.tensor([0], dtype=torch.int64).to(device)
+                }
+            else:
+                targ = {
+                    'boxes': d[1]['boxes'].to(device),
+                    'labels': d[1]['labels'].to(device)
+                }
+                
+            #targ['boxes'] = d[1]['boxes'].to(device)
+            #targ['labels'] = d[1]['labels'].to(device)
             targets.append(targ)
             
         loss_dict = model(imgs,targets)
@@ -86,15 +99,15 @@ for epochs in range(num_epochs):
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_preprocessed_epoch_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_7_29_24_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     
-    model.eval()
+  #  model.eval()
     
-    with torch.no_grad():
-        map_value = validation(val_d1, device, model)
-        print(f'Validation epoch {epochs} mAP: {map_value}')
+  #  with torch.no_grad():
+   #     map_value = validation(val_d1, device, model)
+    #    print(f'Validation epoch {epochs} mAP: {map_value}')
 
  
     

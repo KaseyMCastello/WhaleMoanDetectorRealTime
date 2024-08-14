@@ -29,6 +29,28 @@ def calculate_detection_metrics(predictions, ground_truths, category, iou_thresh
 
     return (true_pos, false_pos, false_neg)
 
+def calculate_detection_metrics_JZ(predictions, ground_truths, category, iou_threshold, boxes):
+    gt_indices = torch.where(ground_truths == category)
+    gt_boxes = boxes[gt_indices]
+
+    pred_indices = torch.where(predictions['labels'] == category)
+    pred_boxes = predictions['boxes'][pred_indices]
+
+    num_gt = len(gt_indices[0])
+
+    if pred_boxes.shape[0] == 0:
+        return (0, 0, num_gt)
+    if num_gt == 0:
+        return (0, pred_boxes.shape[0], 0)
+
+    iou_matrix = torchvision.ops.box_iou(pred_boxes, gt_boxes)
+
+    true_pos = torch.sum(iou_matrix.max(0).values > iou_threshold).item()
+    false_pos = pred_boxes.shape[0] - true_pos
+    false_neg = num_gt - true_pos
+
+    return (true_pos, false_pos, false_neg)
+
 
 def calculate_precision_recall(tp, fp, fn):
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0

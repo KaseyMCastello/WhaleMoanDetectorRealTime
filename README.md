@@ -40,7 +40,6 @@ WhaleMoanDetector/
 │
 ├── figures               <- Graphics and figures to be used in reporting
 ├── labeled_data
-│   ├── logs           <- Original annotation files
 │   │	└── CalCOFI
 │   │	    └── modified_annotations <- Modified start and end time .csv files 
 │   │	└── HARP

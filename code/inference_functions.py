@@ -25,6 +25,7 @@ from PIL import ImageOps
 from datetime import datetime, timedelta
 from IPython.display import display
 import sys
+import torchaudio
 sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
 from AudioStreamDescriptor import WAVhdr
 import csv
@@ -34,55 +35,62 @@ def extract_wav_start(path):
     wav_hdr = WAVhdr(path)
     wav_start_time = wav_hdr.start
     return wav_start_time
-
 # Function to load audio file and chunk it into overlapping windows
-def chunk_audio(file_path, window_size=60, overlap_size=5):
+
+def chunk_audio(audio_file_path, window_size=60, overlap_size=5):
     # Load audio file
-    y, sr = librosa.load(file_path, sr=None)
-    # Calculate the number of samples per window
+    waveform, sr = torchaudio.load(audio_file_path)
+    waveform = waveform.to('cuda')  # Move waveform to GPU for efficient processing
     samples_per_window = window_size * sr
     samples_overlap = overlap_size * sr
+
     # Calculate the number of chunks
     chunks = []
-    for start in range(0, len(y), samples_per_window - samples_overlap):
+    for start in range(0, waveform.shape[1], samples_per_window - samples_overlap):
         end = start + samples_per_window
         # If the last chunk is smaller than the window size, pad it with zeros
-        if end > len(y):
-            y_pad = np.pad(y[start:], (0, end - len(y)), mode='constant')
+        if end > waveform.shape[1]:
+            y_pad = torch.nn.functional.pad(waveform[:, start:], (0, end - waveform.shape[1]), mode='constant')
             chunks.append(y_pad)
         else:
-            chunks.append(y[start:end])
-    return chunks
+            chunks.append(waveform[:, start:end])
+    
+    return chunks, sr
 
 # Function to convert audio chunks to spectrograms
-def audio_to_spectrogram(chunks, sr, n_fft=48000, hop_length=4800): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
+def audio_to_spectrogram(chunks, sr): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
     spectrograms = []
+   
     for chunk in chunks:
         # Use librosa to compute the spectrogram
-        S = librosa.stft(chunk, n_fft=sr, hop_length=int(sr/10))
+        S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to('cuda'), return_complex=True)
+        S_dB_all = torchaudio.transforms.AmplitudeToDB()(torch.abs(S))
         # Convert to dB
-        S_dB = librosa.amplitude_to_db(np.abs(S), ref=np.max)
-        S_dB_restricted = S_dB[10:151, :]  # 151 is exclusive, so it includes up to 150 Hz
-        spectrograms.append(S_dB_restricted)
+        S_dB = S_dB_all[10:151, :]  # 151 is exclusive, so it includes up to 150 Hz
+        spectrograms.append(S_dB.cpu().numpy())
     return spectrograms
 
         
 def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
     predictions = []
     font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
-
-    for S_dB in spectrograms:
-        # Preprocess the spectrogram
+    
+    for spectrogram_data  in spectrograms:
         
-        normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB))
-        # Apply colormap (using matplotlib's viridis)
+        # Perform column-wise background subtraction
+        #for j in range(spectrogram_data.shape[1]):
+         #   column = spectrogram_data[:, j]
+          #  percentile_value = np.percentile(column,60)
+            # Subtract the percentile value from each column and clip to ensure no negative values
+           # spectrogram_data[:, j] = np.clip(column - percentile_value, 0, None)
+        
+        normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data)) # normalize spectrogram 
+        #enhanced_image = np.power(normalized_S_dB,3)
         S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L') # apply grayscale colormap
         # Flip the image vertically
-        S_dB_img = ImageOps.flip(S_dB_img)        
-        
-        S_dB_tensor = F.to_tensor(S_dB_img).unsqueeze(0)  # Add batch dimension
-        #S_dB_tensor = torch.tensor(S_dB_img).permute(2, 0, 1).unsqueeze(0).float()  # Rearrange dimensions to CxHxW and add batch dimension
-
+        final_image = ImageOps.flip(S_dB_img)
+        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0)  # Add batch dimension
+        S_dB_tensor=S_dB_tensor.to('cuda')
         
         # Run prediction
         model.eval()
@@ -92,7 +100,7 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
         
         
         if visualize: 
-            draw = ImageDraw.Draw(S_dB_img)
+            draw = ImageDraw.Draw(final_image)
             
             # Assuming `prediction` contains `boxes`, `labels`, and `scores`
             boxes = prediction[0]['boxes']
@@ -110,12 +118,12 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
                 score_formatted = round(score.item(), 2)
                 # Convert box coordinates (considering the flip if necessary)
                 box = box.tolist()
-                draw.rectangle(box, outline="black")
-                draw.text((box[0], box[1]-20), f"Label: {label}, Score: {score_formatted}", fill="black", font=font)
+                draw.rectangle(box, outline="white")
+                draw.text((box[0], box[1]-20), f"Label: {label}, Score: {score_formatted}", fill="white", font=font)
             
             # Display the spectrogram with drawn predictions
            #S_dB_img.show()
-            display(S_dB_img)
+            display(final_image)
         else:
            
             pass
@@ -125,14 +133,12 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
 
 # filter predictions based on defined parameters 
 
-def apply_filters_to_predictions(predictions, nms_threshold=0.1, D_threshold=0.4, fortyHz_threshold=0.2, 
-                                      twentyHz_threshold=0.2, A_threshold=0.4, B_threshold=0.4):
+def apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, fortyHz_threshold=0, 
+                                      twentyHz_threshold=0, A_threshold=0, B_threshold=0):
                                     
     """
     Apply NMS on the predictions to filter out overlapping bounding boxes, then filter
-    each category by specific score thresholds. Special handling for D calls to convert
-    them to 40 Hz if they are less than 1.5 seconds in duration.
-    
+    each category by specific score thresholds. 
     Args:
         predictions (list): A list of predictions where each prediction is a dict
             containing 'boxes', 'labels', and 'scores'.
@@ -207,43 +213,7 @@ def apply_filters_to_predictions(predictions, nms_threshold=0.1, D_threshold=0.4
     return filtered_predictions
 
 
-def visualize_filtered_predictions_on_spectrograms(spectrograms, filtered_predictions):
-    """
-    Visualize filtered predictions on spectrograms.
-
-    Args:
-        spectrograms (list): A list of spectrogram data.
-        filtered_predictions (list): A list of filtered predictions, where each element
-            is a list containing a dict with keys 'boxes', 'scores', 'labels'.
-        sr (int): Sample rate of the audio.
-        n_fft (int): The FFT size used for generating the spectrograms.
-        hop_length (int): The hop length used for generating the spectrograms.
-    """
-    # Assuming the spectrogram transformation settings (n_fft and hop_length) are same as before
-    for S_dB, prediction_list in zip(spectrograms, filtered_predictions):
-        prediction = prediction_list[0]  # Extract the first (and expectedly only) prediction dict
-
-        # Convert spectrogram to image for visualization
-        normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB))
-        S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
-        S_dB_img = ImageOps.flip(S_dB_img)  # Flip image vertically
-        
-        draw = ImageDraw.Draw(S_dB_img)
-        font = ImageFont.truetype("arial.ttf", 16)  # Adjust font size as needed
-
-        # Draw bounding boxes and labels on the spectrogram
-        for box, score, label in zip(prediction['boxes'], prediction['scores'], prediction['labels']):
-            score_formatted = round(score.item(), 2)
-            box = box.tolist()
-            draw.rectangle(box, outline="black")
-            label_str = f"Label: {label.item()}, Score: {score_formatted}"
-            draw.text((box[0], box[1]-20), label_str, fill="black", font=font)
-        
-        # Display the spectrogram with drawn predictions
-        display(S_dB_img)
-        
-
-def save_filtered_predictions_on_spectrograms(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size):
+def save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size):
     # Use the base directory of the CSV file path to place the "images" directory
     csv_base_dir = os.path.dirname(csv_file_path)
     
@@ -251,38 +221,34 @@ def save_filtered_predictions_on_spectrograms(spectrograms, filtered_predictions
 
     for index, prediction_list in enumerate(filtered_predictions):
         prediction = prediction_list[0]
-       
 
         # Proceed with plotting and saving only if there are detections that passed filtering
         if len(prediction['boxes']) > 0:
             S_dB = spectrograms[index]
-            normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB))
-            S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
-            S_dB_img = ImageOps.flip(S_dB_img)
-
-            draw = ImageDraw.Draw(S_dB_img)
-            try:
-                font = ImageFont.truetype("arial.ttf", 16)
-            except IOError:
-                font = ImageFont.load_default()
-            for prediction in prediction_list:
-                for box, score, label in zip(prediction['boxes'], prediction['scores'], prediction['labels']):
-                    score_formatted = round(score.item(), 2)
-                    box = box.tolist()
-                    draw.rectangle(box, outline="black")
-                    label_str = f"Label: {label.item()}, Score: {score_formatted}"
-                    draw.text((box[0], box[1] - 20), label_str, fill="black", font=font)
-
-                    chunk_start_time = chunk_start_times[index]
-                    chunk_end_time = chunk_start_time + window_size - overlap_size
+                
+            # Perform column-wise background subtraction
+            #for j in range(S_dB.shape[1]):
+               # column = S_dB[:, j]
+                #percentile_value = np.percentile(column,60)
+                # Subtract the percentile value from each column and clip to ensure no negative values
+               # S_dB[:, j] = np.clip(column - percentile_value, 0, None)
+            normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB)) # normalize spectrogram 
+           # enhanced_image = np.power(normalized_S_dB,3)
+            S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L') # apply grayscale colormap
+            # Flip the image vertically
+            final_image = ImageOps.flip(S_dB_img)
             
-                    # The image filename now includes the audio basename
-                    image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_end_time)}_filtered_prediction_{index}.png"
-                    image_path = os.path.join(csv_base_dir, image_filename)
-                    S_dB_img.save(image_path)
-                    saved_image_paths.append(image_path)
+            chunk_start_time = chunk_start_times[index]
+            chunk_end_time = chunk_start_time + window_size
+            
+            # The image filename now includes the audio basename
+            image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_end_time)}.png"
+            image_path = os.path.join(csv_base_dir, image_filename)
+            final_image.save(image_path)
+            saved_image_paths.append(image_path) #save the image
                 
     return saved_image_paths
+
 
 # convert bounding box x and y coordinates to timestamp and frequency within the wav file
 def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution=1, start_freq=10, max_freq=150):
@@ -293,18 +259,16 @@ def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time
     
     # Calculate the lower and upper frequencies from the y-coordinates
     # Assuming y-coordinates are not inverted (higher value for higher frequency)
-    box_y1, box_y2 = box[3].item(), box[1].item()
-    
-    total_freq_span = max_freq - start_freq
-    
+    box_y1, box_y2 = box[1].item(), box[3].item()
+        
     # Invert the y-axis to correctly map the frequencies
-    lower_freq = start_freq + (total_freq_span - box_y1 * freq_resolution)
-    upper_freq = start_freq + (total_freq_span - box_y2 * freq_resolution)
+    lower_freq = (max_freq - box_y2 * freq_resolution) 
+    upper_freq = (max_freq - box_y1 * freq_resolution)
   
     lower_freq = round(lower_freq)
     upper_freq = round(upper_freq)
     
-    return start_time, end_time, lower_freq, upper_freq, box_x1, box_y1, box_x2, box_y2
+    return start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2
 
 def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime, freq_resolution=1, start_freq=10):
     results = []
@@ -313,7 +277,7 @@ def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_
 
     for chunk_index, prediction in enumerate(filtered_predictions):
         for box, label, score in zip(prediction[0]['boxes'], prediction[0]['labels'], prediction[0]['scores']):
-            start_time, end_time, lower_freq, upper_freq, box_x1, box_y1, box_x2, box_y2 = bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq)
+            start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2 = bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq)
             start_datetime = wav_start_datetime + timedelta(seconds=start_time)
             end_datetime = wav_start_datetime + timedelta(seconds=end_time)
             textual_label = inverse_label_mapping[label.item()]
@@ -322,24 +286,51 @@ def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_
                 'label': textual_label,
                 'score': round(score.item(), 2),  # Round the score for readability if desired
                 'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],  # Format as a string
+                'start_time_sec': start_time,
                 'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],
+                'end_time_sec': end_time,
                 'min_frequency': round(lower_freq),  # Round frequency to the nearest integer
                 'max_frequency': round(upper_freq), 
-                'xmin': box_x1, 
-                'ymin': box_y1,
-                'xmax': box_x2, 
-                'ymax': box_y2
+                'box_x1': box_x1, 
+                'box_x2': box_x2,
+                'box_y1': box_y1, 
+                'box_y2': box_y2
+            
             })
     return results
 
 
+def compute_snr(event):
 
+    # Read in the spectrogram image
+    image = Image.open(event['image_file_path']).convert('L')
+    
+    # Extract bounding box coordinates
+    box_x1 = int(event['box_x1'])
+    box_x2 = int(event['box_x2'])
+    box_y1 = int(event['box_y1'])
+    box_y2 = int(event['box_y2'])
+    
+    # Crop the image to the bounding box
+    cropped_image = image.crop((box_x1, box_y1, box_x2, box_y2))
+    
+    # Convert the cropped image to a numpy array
+    cropped_array = np.array(cropped_image)
+    
+    # Calculate the 75th percentile for the signal values (upper 25th %)
+    signal_75th_percentile = np.percentile(cropped_array, 75)
+    # Calculate the 25th percentile for the noise values (lower 25th %)
+    noise_25th_percentile = np.percentile(cropped_image, 25)
+    
+    # Check if the noise percentile is zero, and set it to 1
+    # doing this because when we divide by 1, it doesnt change affect the snr value and we just get back the relationship bt difference in signal and noise... i suppose
+    if noise_25th_percentile == 0:
+        noise_25th_percentile = 1
 
+    # Compute SNR
+    snr = signal_75th_percentile / noise_25th_percentile
 
-
-
-
-
+    return snr
 
 
 

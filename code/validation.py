@@ -33,10 +33,15 @@ def validation(vald1, device, model):
     
     # Iterate over the test dataset
     for data in vald1:
-        img = data[0][0].to(device)  # Move the image to the device
-        boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
-        labels = data[0][1]["labels"].to(device)  # Move the labels to the device
         
+        img = data[0][0]
+        detection_dict = data[1][0]  # Access the first dictionary in the list, which contains detection data
+
+        # Now access the 'boxes' and 'labels' from the detection dictionary
+        boxes = detection_dict['boxes']
+        labels = detection_dict['labels']
+        
+
         # Run inference on the image
         output = model([img])
         
@@ -93,11 +98,10 @@ def validation(vald1, device, model):
         # Calculate AP
         ap = calculate_ap(recalls, precisions)
         ap_values.append(ap)
-        print(f"Category: {category}, AP: {ap}")
+        print(f"Validation Category: {category}, AP: {ap}")
 
     # Calculate mean AP (mAP)
     map_value = sum(ap_values) / len(ap_values)
-    print(f"mAP: {map_value}")
     
     
     return map_value

@@ -25,14 +25,14 @@ from torch import tensor
 from collections import defaultdict
 import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-from AudioDetectionDataset import AudioDetectionData
+from AudioDetectionDataset import AudioDetectionData, AudioDetectionData_with_hard_negatives
 import sklearn
 from pprint import pprint
 from IPython.display import display
 from custom_collate import custom_collate
-from performance_metrics_functions import calculate_detection_metrics, calculate_precision_recall, calculate_ap
+from performance_metrics_functions import calculate_detection_metrics_JZ,calculate_detection_metrics, calculate_precision_recall, calculate_ap
 
-test_d1 = DataLoader(AudioDetectionData(csv_file='../labeled_data/train_val_test_annotations/test.csv'),
+test_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_test.csv'),
                       batch_size=1,
                       shuffle = True,
                       collate_fn = custom_collate,
@@ -46,7 +46,7 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # three classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('../models/WhaleMoanDetector_preprocessed_epoch_7.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_7_29_24_39.pth'))
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 model.eval()
 model.to(device)
@@ -72,8 +72,13 @@ fn_dict = {'D': 0, '40Hz': 0, '20Hz':0, 'A':0, 'B':0}
 # Iterate over the test dataset
 for data in test_d1:
     img = data[0][0].to(device)  # Move the image to the device
-    boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
-    labels = data[0][1]["labels"].to(device)  # Move the labels to the device
+    # Check if ground truth boxes or labels are None (NaN images)
+    if data[0][1] is None or data[0][1]["boxes"] is None or data[0][1]["labels"] is None:
+        boxes = torch.empty((0, 4), device=device)  # Create an empty tensor for boxes
+        labels = torch.empty((0,), dtype=torch.int64, device=device)  # Create an empty tensor for NaN spectrograms
+    else:
+        boxes = data[0][1]["boxes"].to(device)  # Move the boxes to the device
+        labels = data[0][1]["labels"].to(device)  # Move the labels to the device
     
     # Run inference on the image
     output = model([img])
@@ -105,7 +110,7 @@ for data in test_d1:
             gt_boxes = boxes[labels == category_id].to(device)
             pred_boxes = predictions_threshold['boxes'][predictions_threshold['labels'] == category_id].to(device)
 
-            tp, fp, fn = calculate_detection_metrics(predictions_threshold, labels, category_id, iou_threshold, boxes)
+            tp, fp, fn = calculate_detection_metrics_JZ(predictions_threshold, labels, category_id, iou_threshold, boxes)
             all_metrics[score_threshold][category_name]['tp'] += tp
             all_metrics[score_threshold][category_name]['fp'] += fp
             all_metrics[score_threshold][category_name]['fn'] += fn
@@ -134,7 +139,7 @@ plt.legend()
 plt.grid(True)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
-plt.savefig('../figures/precision_recall_curve_preprocessed__less_overlap_epoch_7.jpeg', format='jpeg')  # Save as SVG
+plt.savefig('../figures/WhaleMoanDetector_7_29_24_39_CalCOFI_2008_08.jpeg', format='jpeg')  # Save as SVG
 plt.show()
 
 # calculate AUC-PR (Area Under Precison-Recall Curve )

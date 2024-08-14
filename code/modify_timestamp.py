@@ -23,10 +23,10 @@ import random
 import pandas as pd
 import numpy as np
 
-directory_path = "../labeled_data/logs/HARP" # point to original logger files
-all_files = glob.glob(os.path.join(directory_path,'*.xls')) # path for all files
+directory_path = "L:/WhaleMoanDetector/labeled_data/pseudo_logs" # point to original logger files
+all_files = glob.glob(os.path.join(directory_path,'CalCOFI_2011_11_pseudo_logs.xls')) # path for all files
 
-new_base_path = '../labeled_data/wav' # path to change to 
+new_base_path = 'L:/ifrcnn_for_michaela-CalCOFI/audio' # path to change to 
 
 # make a subfolder for saving modified logs 
 subfolder_name = "modified_annotations"
@@ -39,35 +39,35 @@ os.makedirs(subfolder_path, exist_ok=True)
 for file in all_files:
     data = pd.read_excel(file)
     
-    if any(data['Input file'].str.contains('DCPP01A_d01_121106_083945.d100.x.wav')):
+    # if any(data['Input file'].str.contains('DCPP01A_d01_121106_083945.d100.x.wav')):
         
-        # 'DCPP01A_d01_121106_083945.d100.x.wav' is missing a chunk of data between these bounds:
-        date1 = datetime(2012, 11, 6, 8, 41, 11)
-        date2 = datetime(2012, 11, 7, 2, 0, 0)
-        # Calculate the difference in seconds
-        seconds_difference = (date2 - date1).total_seconds()
+    #     # 'DCPP01A_d01_121106_083945.d100.x.wav' is missing a chunk of data between these bounds:
+    #     date1 = datetime(2012, 11, 6, 8, 41, 11)
+    #     date2 = datetime(2012, 11, 7, 2, 0, 0)
+    #     # Calculate the difference in seconds
+    #     seconds_difference = (date2 - date1).total_seconds()
 
-        mask = data['Input file'].str.contains('DCPP01A_d01_121106_083945.d100.x.wav')
-        subset_df = modify_annotations(data, new_base_path)
-        subset_df.loc[mask, 'start_time'] -= seconds_difference
-        subset_df.loc[mask, 'end_time'] -= seconds_difference
-        subset_df.reset_index(drop=True)
+    #     mask = data['Input file'].str.contains('DCPP01A_d01_121106_083945.d100.x.wav')
+    #     subset_df = modify_annotations(data, new_base_path)
+    #     subset_df.loc[mask, 'start_time'] -= seconds_difference
+    #     subset_df.loc[mask, 'end_time'] -= seconds_difference
+    #     subset_df.reset_index(drop=True)
         
-    elif any(data['Input file'].str.contains('SOCAL26H_d01_080604_173900.d100.x.wav')):
+    # elif any(data['Input file'].str.contains('SOCAL26H_d01_080604_173900.d100.x.wav')):
         
-        # 'SOCAL26H_d01_080604_173900.d100.x.wav' is missing a chunk of data between these bounds:
-        date1 = datetime(2008, 6, 4, 17, 40, 15)
-        date2 = datetime(2008, 6, 5, 0, 0, 0)
-        # Calculate the difference in seconds
-        seconds_difference = (date2 - date1).total_seconds()
+    #     # 'SOCAL26H_d01_080604_173900.d100.x.wav' is missing a chunk of data between these bounds:
+    #     date1 = datetime(2008, 6, 4, 17, 40, 15)
+    #     date2 = datetime(2008, 6, 5, 0, 0, 0)
+    #     # Calculate the difference in seconds
+    #     seconds_difference = (date2 - date1).total_seconds()
 
-        mask = data['Input file'].str.contains('SOCAL26H_d01_080604_173900.d100.x.wav')
-        subset_df = modify_annotations(data, new_base_path)
-        subset_df.loc[mask, 'start_time'] -= seconds_difference
-        subset_df.loc[mask, 'end_time'] -= seconds_difference
-        subset_df.reset_index(drop=True)
-    else:
-        subset_df = modify_annotations(data, new_base_path)
+    #     mask = data['Input file'].str.contains('SOCAL26H_d01_080604_173900.d100.x.wav')
+    #     subset_df = modify_annotations(data, new_base_path)
+    #     subset_df.loc[mask, 'start_time'] -= seconds_difference
+    #     subset_df.loc[mask, 'end_time'] -= seconds_difference
+    #     subset_df.reset_index(drop=True)
+    # else:
+    subset_df = modify_annotations(data, new_base_path)
         
     filename = os.path.basename(file)
     new_filename = filename.replace('.xls', '_modification.csv')

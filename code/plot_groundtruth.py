@@ -16,11 +16,11 @@ from PIL import Image, ImageDraw, ImageFont
 from IPython.display import display  # Import the display function
 import os
 
-base_dir = 'L:\\WhaleMoanDetector'
+base_dir = 'L:\\WhaleMoanDetector\\labeled_data\\train_val_test_annotations\\CC200808_test.csv'
 
 # Load annotations
-annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')
-annotations = pd.read_csv(annotations_path)
+#annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')
+annotations = pd.read_csv(base_dir)
 
 # Function to plot bounding boxes and labels on the spectrograms
 def plot_annotated_spectrograms(annotations,base_dir):
@@ -42,7 +42,7 @@ def plot_annotated_spectrograms(annotations,base_dir):
             # Draw rectangle on the image
             draw.rectangle(((xmin, ymin), (xmax, ymax)), outline='black', width=3)
             # Place a label near the top-left corner of the bounding box, adjust positioning as needed
-            draw.text((xmin, ymin-17), label, fill='black', font = font)
+            #draw.text((xmin, ymin-17), label, fill='black', font = font)
         
         file_name = os.path.basename(spectrogram_path)
 
