@@ -1,4 +1,4 @@
-# WhaleMoanDetector: A fine-tuned faster-rCNN for detecting blue and fin whale moans in audio data
+# WhaleMoanDetector: A fine-tuned faster-rCNN for detecting and classifying blue and fin whale moans in audio data
 
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -23,22 +23,27 @@ WhaleMoanDetector/
 ├── LICENSE
 ├── README.md          <- The top-level README for users.
 ├── code               <- All code required to run detector
-│   ├── AudioDetectionDataset.py     
-│   ├── AudioStreamDescriptor.py
-│   ├── extract_wav_header.py
-│   ├── freq_bbox.py
-│   ├── inference_functions.py
-│   ├── inference_pipeline.py
-│   ├── make_annotations.py
-│   ├── make_spectrograms.py
-│   ├── modify_timestamp.py
-│   ├── modify_timestamp_function.py
-│   ├── plot_groundtruth.py
-│   ├── test_compute_metrics.py
-│   ├── test_plot_predictions.py
-│   ├── time_bbox.py
-│   ├── train.py
-│
+│   ├── AudioDetectionDataset.py     <- Dataset class.
+│   ├── AudioStreamDescriptor.py     <- Parses xwav and wav headers.
+│   ├── custom_collate.py            <- Collate function.
+│   ├── extract_wav_header.py	     <- Function to extract xwav and wav headers.
+│   ├── freq_bbox.py		     <- Converts bounding boxes to frequency (Hz).
+│   ├── inference_functions.py       <- Necessary functions to make audio file chunks and spectrograms, run inference,
+│   │						and save out prediction spreadsheet and images
+│   ├── inference_pipeline.py	     <- Wrapper to run inference_functions and modify file paths.
+│   ├── make_annotations.py          <- Wrapper to make_spectrograms.py for training/validation/testing examples
+│   ├── make_spectrograms.py         <- Necessary functions to make audio file chunks, spectrograms, and labels for
+│   │						training, testing, and validation.
+│   ├── modify_timestamp.py  	     <- Convert Triton LoggerPro files to "modified annotation" format with 
+│   │						start and end times as # of seconds into start of wav file.
+│   ├── modify_timestamp_function.py <- Necessary function for modify_timestamp.py.
+│   ├── plot_groundtruth.py          <- Plots groundtruth annotations in Spyder software.
+│   ├── test_compute_metrics.py      <- Generates PR curve.
+│   ├── test_plot_predictions.py     <- Visualize predictions and groundtruth labels in Spyder.
+│   ├── time_bbox.py                 <- Converts bounding boxes to time (sec into file).
+│   ├── train.py                     <- Train WhaleMoanDetector
+│   ├── train_val_test_split_all.py  <- Make train/val/test splits using outputs of make_annotations.py
+│   
 ├── figures               <- Graphics and figures to be used in reporting
 ├── labeled_data
 │   │	└── CalCOFI
@@ -46,12 +51,12 @@ WhaleMoanDetector/
 │   │	└── HARP
 │   │	    └── modified_annotations <-Modified start and end time .csv files 
 │   │
-│   ├── spectrograms   <- The final spectrogram images used for model training and testing (not uploaded)
+│   ├── spectrograms   <- The final spectrogram images used for model training and testing (not uploaded to GitHub)
 │   │	└── CalCOFI 
 │   │	└── HARP
 │   └── wav           <- The original wav files (not uploaded to GitHub)
 │
-├── models             <- Trained models
+├── models             <- Trained models (not uploaded to GitHub)
    
 ```
 
