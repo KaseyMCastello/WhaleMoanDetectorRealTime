@@ -4,7 +4,7 @@ Created on Thu Mar 28 16:41:34 2024
 
 @author: Michaela Alksne
 
-script to run the required functions in the correct order to make inference predictions using trained model
+script to run the required functions in the correct order to make predictions using trained model
 """
 
 import librosa
@@ -33,11 +33,13 @@ from inference_functions import extract_wav_start, chunk_audio, audio_to_spectro
 from inference_functions import bounding_box_to_time_and_frequency, predictions_to_datetimes_frequencies_and_labels, save_filtered_images
 
 
-# import all of the needed functions and process one deployment at a tipythme.
+# import all of the needed functions and process one deployment at a time.
 
-wav_directory = 'L:/WhaleMoanDetector/labeled_data/wav/CC200808'
-csv_file_path = 'L:/WhaleMoanDetector_predictions/CalCOFI_2008/CC_2008_08/CalCOFI_2008_08_raw_detections.csv'
-fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 'box_x1', 'box_x2', 'box_y1', 'box_y2']
+wav_directory = 'J:/2018-10/Recordings/Sonobuoys/Difar'
+csv_file_path = 'L:/WhaleMoanDetector_predictions/CalCOFI_2018/CalCOFI_2018_10/CalCOFI_2018_10_raw_detections.csv'
+fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 
+              'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 
+              'box_x1', 'box_x2', 'box_y1', 'box_y2']
 model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector_7_29_24_39.pth'
 model_name = os.path.basename(model_path)
 visualize_tf = False
@@ -79,6 +81,7 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
                 else:
                     # if no subfolder exists, use wav file name
                     audio_basename = os.path.splitext(os.path.basename(file_path))[0]
+                    print(audio_basename)
                 # Extract the start datetime from the WAV file
                 wav_start_datetime = extract_wav_start(file_path)  # Ensure this returns a datetime object
 
