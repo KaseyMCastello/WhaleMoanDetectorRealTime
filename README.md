@@ -38,11 +38,11 @@ WhaleMoanDetector/
 │   │						start and end times as # of seconds into start of wav file.
 │   ├── modify_timestamp_function.py <- Necessary function for modify_timestamp.py.
 │   ├── plot_groundtruth.py          <- Plots groundtruth annotations in Spyder software.
-│   ├── test_compute_metrics.py      <- Generates PR curve.
+│   ├── test_compute_metrics.py      <- Generates PR curve for test data.
 │   ├── test_plot_predictions.py     <- Visualize predictions and groundtruth labels in Spyder.
 │   ├── time_bbox.py                 <- Converts bounding boxes to time (sec into file).
-│   ├── train.py                     <- Train WhaleMoanDetector
-│   ├── train_val_test_split_all.py  <- Make train/val/test splits using outputs of make_annotations.py
+│   ├── train.py                     <- Train WhaleMoanDetector.
+│   ├── train_val_test_split_all.py  <- Make train/val/test splits using outputs of make_annotations.py.
 │   
 ├── figures               <- Graphics and figures to be used in reporting
 ├── labeled_data
