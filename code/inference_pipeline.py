@@ -40,7 +40,7 @@ csv_file_path = 'L:/WhaleMoanDetector_predictions/CalCOFI_2018/CalCOFI_2018_10/C
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 
               'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 
               'box_x1', 'box_x2', 'box_y1', 'box_y2']
-model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector_7_29_24_39.pth'
+model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector.pth'
 model_name = os.path.basename(model_path)
 visualize_tf = False
 # define variables 
@@ -56,7 +56,9 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features # classificati
 
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
 model.load_state_dict(torch.load(model_path))
-model.to('cuda')
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+
+model.to(device)
 model.eval()
 
 
@@ -86,11 +88,11 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
                 wav_start_datetime = extract_wav_start(file_path)  # Ensure this returns a datetime object
 
                 # Process each WAV file as you have in your folder
-                chunks, sr = chunk_audio(file_path, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
+                chunks, sr = chunk_audio(file_path, device, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
                 spectrograms = audio_to_spectrogram(chunks, sr) # make spectrograms
                 predictions = predict_and_plot_on_spectrograms(spectrograms, model, visualize=visualize_tf)  # convert spectrograms to grayscale images and turn off visualization for batch processing
-                filtered_predictions = apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0.2, fortyHz_threshold=0.9, 
-                                                  twentyHz_threshold=0.2, A_threshold=0.2, B_threshold=0.2)  # apply filters to predictions. All must have score above X
+                filtered_predictions = apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, fortyHz_threshold=0, 
+                                                  twentyHz_threshold=0, A_threshold=0, B_threshold=0)  # apply filters to predictions. All must have score above X
 
                 chunk_start_times = [i * (window_size - overlap_size) for i in range(len(chunks))] # get start time of each spectrogram
                 image_paths = save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size)

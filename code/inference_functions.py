@@ -24,9 +24,7 @@ import torchvision.ops as ops
 from PIL import ImageOps
 from datetime import datetime, timedelta
 from IPython.display import display
-import sys
 import torchaudio
-sys.path.append(r"L:\Sonobuoy_faster-rCNN\code\PYTHON")
 from AudioStreamDescriptor import WAVhdr
 import csv
 
@@ -37,10 +35,10 @@ def extract_wav_start(path):
     return wav_start_time
 # Function to load audio file and chunk it into overlapping windows
 
-def chunk_audio(audio_file_path, window_size=60, overlap_size=5):
+def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
     # Load audio file
     waveform, sr = torchaudio.load(audio_file_path)
-    waveform = waveform.to('cuda')  # Move waveform to GPU for efficient processing
+    waveform = waveform.to(device)  # Move waveform to GPU for efficient processing
     samples_per_window = window_size * sr
     samples_overlap = overlap_size * sr
 
@@ -76,13 +74,6 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
     font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
     
     for spectrogram_data  in spectrograms:
-        
-        # Perform column-wise background subtraction
-        #for j in range(spectrogram_data.shape[1]):
-         #   column = spectrogram_data[:, j]
-          #  percentile_value = np.percentile(column,60)
-            # Subtract the percentile value from each column and clip to ensure no negative values
-           # spectrogram_data[:, j] = np.clip(column - percentile_value, 0, None)
         
         normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data)) # normalize spectrogram 
         #enhanced_image = np.power(normalized_S_dB,3)
@@ -226,12 +217,7 @@ def save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audi
         if len(prediction['boxes']) > 0:
             S_dB = spectrograms[index]
                 
-            # Perform column-wise background subtraction
-            #for j in range(S_dB.shape[1]):
-               # column = S_dB[:, j]
-                #percentile_value = np.percentile(column,60)
-                # Subtract the percentile value from each column and clip to ensure no negative values
-               # S_dB[:, j] = np.clip(column - percentile_value, 0, None)
+            
             normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB)) # normalize spectrogram 
            # enhanced_image = np.power(normalized_S_dB,3)
             S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L') # apply grayscale colormap
