@@ -27,7 +27,7 @@ from datetime import datetime, timedelta
 from IPython.display import display
 import csv
 import sys
-sys.path.append(r"L:\WhaleMoanDetector\code")
+#sys.path.append(r"L:\WhaleMoanDetector\code")
 from AudioStreamDescriptor import WAVhdr
 from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_plot_on_spectrograms, apply_filters_to_predictions
 from inference_functions import bounding_box_to_time_and_frequency, predictions_to_datetimes_frequencies_and_labels, save_filtered_images
@@ -54,9 +54,10 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # 5 classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(device)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load(model_path))
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+model.load_state_dict(torch.load(model_path, map_location=device))
 
 model.to(device)
 model.eval()
