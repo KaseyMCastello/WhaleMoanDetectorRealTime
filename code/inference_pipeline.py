@@ -27,7 +27,6 @@ from datetime import datetime, timedelta
 from IPython.display import display
 import csv
 import sys
-#sys.path.append(r"L:\WhaleMoanDetector\code")
 from AudioStreamDescriptor import WAVhdr
 from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_plot_on_spectrograms, apply_filters_to_predictions
 from inference_functions import bounding_box_to_time_and_frequency, predictions_to_datetimes_frequencies_and_labels, save_filtered_images
@@ -35,8 +34,8 @@ from inference_functions import bounding_box_to_time_and_frequency, predictions_
 
 # import all of the needed functions and process one deployment at a time.
 
-wav_directory = 'J:/2018-10/Recordings/Sonobuoys/Difar'
-csv_file_path = 'L:/WhaleMoanDetector_predictions/CalCOFI_2018/CalCOFI_2018_10/CalCOFI_2018_10_raw_detections.csv'
+wav_directory = 'X:/CHNMS/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
+csv_file_path = 'F:/CHNMS/Mysticetes/CHNMS_raw_detections.csv'
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 
               'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 
               'box_x1', 'box_x2', 'box_y1', 'box_y2']
@@ -90,8 +89,8 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
 
                 # Process each WAV file as you have in your folder
                 chunks, sr = chunk_audio(file_path, device, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
-                spectrograms = audio_to_spectrogram(chunks, sr) # make spectrograms
-                predictions = predict_and_plot_on_spectrograms(spectrograms, model, visualize=visualize_tf)  # convert spectrograms to grayscale images and turn off visualization for batch processing
+                spectrograms = audio_to_spectrogram(chunks, sr,device) # make spectrograms
+                predictions = predict_and_plot_on_spectrograms(spectrograms, model, device, visualize=visualize_tf)  # convert spectrograms to grayscale images and turn off visualization for batch processing
                 filtered_predictions = apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, fortyHz_threshold=0, 
                                                   twentyHz_threshold=0, A_threshold=0, B_threshold=0)  # apply filters to predictions. All must have score above X
 

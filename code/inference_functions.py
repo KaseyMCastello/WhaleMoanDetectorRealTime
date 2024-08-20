@@ -56,12 +56,12 @@ def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
     return chunks, sr
 
 # Function to convert audio chunks to spectrograms
-def audio_to_spectrogram(chunks, sr): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
+def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
     spectrograms = []
    
     for chunk in chunks:
         # Use librosa to compute the spectrogram
-        S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to('cuda'), return_complex=True)
+        S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to(device), return_complex=True)
         S_dB_all = torchaudio.transforms.AmplitudeToDB()(torch.abs(S))
         # Convert to dB
         S_dB = S_dB_all[10:151, :]  # 151 is exclusive, so it includes up to 150 Hz
@@ -69,7 +69,7 @@ def audio_to_spectrogram(chunks, sr): # these are default fft and hop_length, th
     return spectrograms
 
         
-def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
+def predict_and_plot_on_spectrograms(spectrograms, model, device, visualize = True):
     predictions = []
     font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
     
@@ -81,7 +81,7 @@ def predict_and_plot_on_spectrograms(spectrograms, model, visualize = True):
         # Flip the image vertically
         final_image = ImageOps.flip(S_dB_img)
         S_dB_tensor = F.to_tensor(final_image).unsqueeze(0)  # Add batch dimension
-        S_dB_tensor=S_dB_tensor.to('cuda')
+        S_dB_tensor=S_dB_tensor.to(device)
         
         # Run prediction
         model.eval()
