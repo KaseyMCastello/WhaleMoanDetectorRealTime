@@ -278,7 +278,7 @@ def generate_spectrogram_and_annotations_PCA(unique_name_part,annotations_df, ou
         image.save(Path(preprocessed_directory) / Path(filenames[i]))
 
 
-def generate_ALL_spectrogram_and_annotations_PCA(unique_name_part,annotations_df, output_dir, preprocessed_directory, window_size=60, overlap_size=30):
+def generate_ALL_spectrogram_and_annotations_NO_PCA(unique_name_part,annotations_df, output_dir, window_size=60, overlap_size=30):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     annotations_list = []  # To collect annotations for each deployment
@@ -330,21 +330,35 @@ def generate_ALL_spectrogram_and_annotations_PCA(unique_name_part,annotations_df
             final_image.save(output_dir / spectrogram_filename)
 
             # Filter and adjust annotations for this chunk
-            relevant_annotations = group[(group['start_time'] >= chunk_start_time) & (group['end_time'] <= chunk_end_time)]
+            #relevant_annotations = group[(group['start_time'] >= chunk_start_time) & (group['end_time'] <= chunk_end_time)]
+            #more inclusive
+            relevant_annotations = group[(group['end_time'] > chunk_start_time) & (group['start_time'] < chunk_end_time)]
+            # anything within the chunk.
 
             # Adjust annotation times relative to the start of the chunk
             for _, row in relevant_annotations.iterrows():
-                adjusted_start_time = row['start_time'] - chunk_start_time
-                adjusted_end_time = row['end_time'] - chunk_start_time
+                
+                # Calculate the overlap start and end times within the chunk
+                adjusted_start_time = max(row['start_time'], chunk_start_time) - chunk_start_time
+                adjusted_end_time = min(row['end_time'], chunk_end_time) - chunk_start_time
+                
+                # Calculate the duration of the annotation
+                duration = adjusted_end_time - adjusted_start_time
+                
+                # Check if the annotation is at least 5 sec for A and B, 2 sec for D and 1 sec for 2 Hz and 40hz. 
+                if (row['annotation'] in ['A', 'B'] and duration >= 5) or (row['annotation'] in ['D'] and duration >= 2) or (duration >= 1):
+                
+                #adjusted_start_time = row['start_time'] - chunk_start_time
+                #adjusted_end_time = row['end_time'] - chunk_start_time
                 
 
-                xmin, xmax = time_to_pixels(adjusted_start_time, adjusted_end_time, S_dB.shape[1], window_size)
-                ymin, ymax = freq_to_pixels(row['low_f'], row['high_f'], S_dB.shape[0], sr, sr)
+                    xmin, xmax = time_to_pixels(adjusted_start_time, adjusted_end_time, S_dB.shape[1], window_size)
+                    ymin, ymax = freq_to_pixels(row['low_f'], row['high_f'], S_dB.shape[0], sr, sr)
 
-                annotations_list.append({
-                    "spectrogram_path": f"{output_dir}/{spectrogram_filename}",
-                    "label": row['annotation'],
-                    "xmin": xmin, "ymin": ymin, "xmax": xmax, "ymax": ymax})
+                    annotations_list.append({
+                        "spectrogram_path": f"{output_dir}/{spectrogram_filename}",
+                        "label": row['annotation'],
+                        "xmin": xmin, "ymin": ymin, "xmax": xmax, "ymax": ymax})
                 
             # If there are no relevant annotations, add an entry with no label and bounding box
             if relevant_annotations.empty:
@@ -361,96 +375,4 @@ def generate_ALL_spectrogram_and_annotations_PCA(unique_name_part,annotations_df
     df_annotations = pd.DataFrame(annotations_list)
     df_annotations.to_csv(f"{output_dir}/{unique_name_part}_annotations.csv", index=False)
 
-    # Read the annotations CSV
-    # annotations = pd.read_csv(f'{output_dir}/{unique_name_part}_annotations.csv')
-    # unique_annotation = annotations.drop_duplicates(subset=['spectrogram_path'])
-    # base_folder_name = os.path.basename(os.path.normpath(preprocessed_directory))
-    # annotations_modded = annotations.copy()
     
-    # # Modify the 'spectrogram_path' column to add "preprocessed" as a subfolder
-    # annotations_modded["spectrogram_path"] = annotations["spectrogram_path"].apply(
-    #     lambda path: os.path.join(os.path.dirname(path), 'preprocessed', os.path.basename(path))
-    # )
-    
-    # # Save the modified annotations to a new CSV file
-    # annotations_modded.to_csv(f"{preprocessed_directory}/{unique_name_part}_preprocessed_annotations.csv", index=False)
-
-    
-    # # Initialize the data matrix
-    # data_matrix = []
-    
-    # # Read and process each spectrogram image
-    # for index, row in annotations.iterrows():
-    #     image = Image.open(row['spectrogram_path'])
-    #     print(row['spectrogram_path'])
-    #     pixel_values = np.array(image).flatten()
-    #     data_matrix.append(pixel_values)
-    
-    # # Stack the data matrix
-    # stacked_specs = np.vstack(data_matrix)
-    
-    # # Standardize the data
-    # scaler = StandardScaler(with_std=False)
-    # data_matrix_mod1 = scaler.fit_transform(stacked_specs)
-    # original_data = data_matrix_mod1
-    
-    # # Perform SVD
-    # U, S, T = np.linalg.svd(original_data, full_matrices=False)
-    
-    # # Multiply U and S
-    # US = U @ np.diag(S)
-    
-    # # Check shapes before matrix multiplication
-    # print(f"Shape of US: {US.shape}")
-    # print(f"Shape of T: {T.shape}")
-    
-    # # Truncate T to the desired shape (150 rows)
-    # T = T[:150, :]
-    
-    # # Initialize the signal enhanced features matrix
-    # signal_enhanced_features = np.zeros_like(T)
-    
-    # # Process T to extract features
-    # for i in range(len(T)):
-    #     feature = np.copy(T[i].reshape((141, 601)))
-    #     for j in range(feature.shape[1]):
-    #         column = feature[:, j]
-    #         percentile_value = np.percentile(column, 20)
-    #         feature[:, j] = column - percentile_value
-    #         feature[:, j][feature[:, j] < 0] = 0
-    #     signal_enhanced_features[i] = feature.flatten()
-    
-    # # Check shapes before final matrix multiplication
-    # print(f"Shape of US[:, :150]: {US[:, :150].shape}")
-    # print(f"Shape of signal_enhanced_features: {signal_enhanced_features.shape}")
-    
-    # # Perform matrix multiplication
-    # matrix = US[:, :150] @ signal_enhanced_features
-    
-    # # Scale back the matrix
-    # matrix_scaled = scaler.inverse_transform(matrix)
-    # matrix_scaled = np.where(matrix_scaled < 0, 0, matrix_scaled)
-    
-    # # Initialize the matrix for saving processed images
-    # matr_sub = np.zeros_like(matrix_scaled)
-    
-    # # Process and filter each spectrogram
-    # for i in range(len(matrix_scaled)):
-    #     spec = np.copy(matrix_scaled[i].reshape((141, 601)))
-    #     for j in range(spec.shape[1]):
-    #         column = spec[:, j]
-    #         percentile_value = np.percentile(column, 60)
-    #         spec[:, j] = column - percentile_value
-    #         spec[:, j][spec[:, j] < 0] = 0
-    #     spec = median_filter(spec, size=3)
-    #     matr_sub[i] = spec.flatten()
-    
-    # # Extract filenames for saving processed images
-    # filenames = annotations_modded["spectrogram_path"].apply(lambda x: os.path.basename(x)).reset_index(drop=True)
-    # print(filenames)
-    
-    # # Save each processed image
-    # for i in range(len(matr_sub)):
-    #     processed_image = matr_sub[i].reshape(141, 601)
-    #     image = Image.fromarray(processed_image.astype(np.uint8), 'L')
-    #     image.save(Path(preprocessed_directory) / Path(filenames[i]))

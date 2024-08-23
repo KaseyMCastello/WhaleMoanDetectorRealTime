@@ -75,24 +75,14 @@ harp_combined = pd.concat(harp_dfs, ignore_index=True)
 
 # Filter the test data
 test_calcofi = calcofi_combined[calcofi_combined['spectrogram_path'].str.contains('CC0808')]
-test_harp = harp_combined[harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
+#test_harp = harp_combined[harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
 
 # Remove the test data from the combined datasets to create train/val datasets
 train_val_calcofi = calcofi_combined[~calcofi_combined['spectrogram_path'].str.contains('CC0808')]
-train_val_harp = harp_combined[~harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
+train_val_harp = harp_combined#[~harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
 
 # Combine the train/val datasets
 train_val_dataset = pd.concat([train_val_calcofi, train_val_harp], ignore_index=True)
-
-# Plot histogram for the train/val dataset
-plot_histogram_with_colors(
-    data=train_val_dataset,
-    title='True and NaN Examples in Training/Validation Dataset',
-    xlabel='Labels',
-    ylabel='Count',
-    color_map=color_map,
-    save_path = os.path.join(figure_file_path, 'all_train_val_unbalanced.jpeg')
-)
 
 # Separate positives and negatives
 positive_examples = train_val_dataset.dropna(subset=['xmin'])
@@ -104,13 +94,29 @@ num_positives = len(positive_examples)
 
 # Sample an equal number of negative examples from CalCOFI and HARP
 calcofi_negatives = train_val_calcofi[train_val_calcofi['label'].isna()] #didn't have enhough to balance them so I just grabbed all of them. 
-harp_negatives = train_val_harp[train_val_harp['label'].isna()].sample(n=num_positives // 4, random_state=42)
-harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('DCPP01A')]
+harp_negatives = train_val_harp[train_val_harp['label'].isna()].sample(n=num_positives // 3, random_state=42)
+harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('DCPP01A')] #Don't include theese cause there's so many unlabeled 
 # Combine sampled negatives and all positives to create a balanced dataset
 balanced_train_val_dataset = pd.concat([positive_examples, calcofi_negatives, harp_negatives], ignore_index=True)
 
+# Split the balanced dataset into train and validation sets
+train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_size=0.1, random_state=42)
+
+# Save the split datasets to CSV files in the output directory
+train_dataset.to_csv(os.path.join(output_directory_path, 'train.csv'), index=False)
+val_dataset.to_csv(os.path.join(output_directory_path, 'val.csv'), index=False)
+test_calcofi.to_csv(os.path.join(output_directory_path, 'CC200808_test.csv'), index=False)
 # Print the counts of each label in the balanced dataset
 
+# Plot histogram for the train/val dataset
+plot_histogram_with_colors(
+    data=train_val_dataset,
+    title='True and NaN Examples in Training/Validation Dataset',
+    xlabel='Labels',
+    ylabel='Count',
+    color_map=color_map,
+    save_path = os.path.join(figure_file_path, 'all_train_val_unbalanced.jpeg')
+)
 # Plot histogram for the train/val dataset
 plot_histogram_with_colors(
     data=balanced_train_val_dataset,
@@ -120,16 +126,6 @@ plot_histogram_with_colors(
     color_map=color_map,
     save_path = os.path.join(figure_file_path, 'all_train_val_balanced.jpeg')
 )
-
-
-# Split the balanced dataset into train and validation sets
-train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_size=0.1, random_state=42)
-
-# Save the split datasets to CSV files in the output directory
-train_dataset.to_csv(os.path.join(output_directory_path, 'train.csv'), index=False)
-val_dataset.to_csv(os.path.join(output_directory_path, 'val.csv'), index=False)
-test_calcofi.to_csv(os.path.join(output_directory_path, 'CC200808_test.csv'), index=False)
-test_harp.to_csv(os.path.join(output_directory_path, 'SOCAL34N_test.csv'), index=False)
 
 
 # Plot histogram for the balanced dataset
@@ -162,12 +158,12 @@ plot_histogram_with_colors(
     save_path = os.path.join(figure_file_path, 'all_CalCOFI_200808_test_unbalanced.jpeg')
 )
 
-# Plot histogram for the test CalCOFI dataset
-plot_histogram_with_colors(
-    data=test_harp,
-    title='True and NaN Examples in SOCAL34N Test Dataset',
-    xlabel='Labels',
-    ylabel='Count',
-    color_map=color_map,
-    save_path = os.path.join(figure_file_path, 'all_SOCAL34N_test_unbalanced.jpeg')
-)
+# Plot histogram for the test harp dataset
+# plot_histogram_with_colors(
+#     data=test_harp,
+#     title='True and NaN Examples in SOCAL34N Test Dataset',
+#     xlabel='Labels',
+#     ylabel='Count',
+#     color_map=color_map,
+#     save_path = os.path.join(figure_file_path, 'all_SOCAL34N_test_unbalanced.jpeg')
+# )

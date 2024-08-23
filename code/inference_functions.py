@@ -25,14 +25,21 @@ from PIL import ImageOps
 from datetime import datetime, timedelta
 from IPython.display import display
 import torchaudio
-from AudioStreamDescriptor import WAVhdr
+from AudioStreamDescriptor import WAVhdr, XWAVhdr
 import csv
+from xwav_functions import get_datetime
 
 # hepler function uses WAVhdr to read wav file header info and extract wav file start time as a datetime object
 def extract_wav_start(path):
-    wav_hdr = WAVhdr(path)
-    wav_start_time = wav_hdr.start
-    return wav_start_time
+    
+    if path.endswith('.x.wav'):
+        xwav_hdr= XWAVhdr(path)
+        return xwav_hdr.dtimeStart
+    if path.endswith('.wav'):
+        wav_hdr = WAVhdr(path)
+        return wav_hdr.start
+        
+   
 # Function to load audio file and chunk it into overlapping windows
 
 def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
@@ -170,26 +177,7 @@ def apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, 
         for box, score, label in zip(boxes, scores, labels):
             if score < thresholds[label.item()]:
                 continue # skip this prediction
-            
-           # if label.item() == label_mapping['D']: # convert D calls to 40 Hz if they are less than 1.5 seconds in duration... 
-                # Calculate duration of the D call
-            #    duration_seconds = (box[2] - box[0]).item() * time_per_pixel
-             #   if duration_seconds < 1.5:
-                    # Convert to 40Hz call
-               #     label = torch.tensor(label_mapping['40Hz'])
-                    
-         #   if label.item() == label_mapping['20Hz']: # High scoring 20 Hz that are within the bounds of 40 Hz should be converted to 40 Hz. 
-          #     if  box[1] > 40 and box[3] < 100: 
-               #    label = torch.tensor(label_mapping['40Hz']) # convert to 40 Hz.
-          #     elif box[1] > 40 and box[3] > 100:  
-          #         continue
-                   
-         #   if label.item() == label_mapping['A']:
-          #     if box[1] < 50 : # remove false positive A calls with ymin less than 60 Hz
-          #         continue #skip this prediction. 
-         #   if label.item() == label_mapping['B']:
-          #      if box[3] > 60: # remove false positive B calls with ymax greater than 70 Hz
-           #         continue # skip this prediction
+    
                
             final_boxes.append(box)
             final_scores.append(score)
@@ -202,6 +190,10 @@ def apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, 
         }])
 
     return filtered_predictions
+
+
+
+
 
 
 def save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size):
@@ -256,16 +248,26 @@ def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time
     
     return start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2
 
-def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime, freq_resolution=1, start_freq=10):
+
+def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_start_times, time_per_pixel, wav_start_time, file_path, is_xwav=False, freq_resolution=1, start_freq=10):
     results = []
-    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5} # why did I not call this by the logger conventions? because I wanted to make it even more difficult for myself. sick one. 
+    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
     inverse_label_mapping = {v: k for k, v in label_mapping.items()}
 
     for chunk_index, prediction in enumerate(filtered_predictions):
         for box, label, score in zip(prediction[0]['boxes'], prediction[0]['labels'], prediction[0]['scores']):
-            start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2 = bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq)
-            start_datetime = wav_start_datetime + timedelta(seconds=start_time)
-            end_datetime = wav_start_datetime + timedelta(seconds=end_time)
+            start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2 = bounding_box_to_time_and_frequency(
+                box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq
+            )
+
+            if is_xwav: # distinction between wav and xwav
+                start_datetime = get_datetime(start_time, file_path)
+                end_datetime = get_datetime(end_time, file_path)
+                
+            else:
+                start_datetime = wav_start_time + timedelta(seconds=start_time)
+                end_datetime = wav_start_time + timedelta(seconds=end_time)
+            
             textual_label = inverse_label_mapping[label.item()]
 
             results.append({
@@ -281,8 +283,8 @@ def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_
                 'box_x2': box_x2,
                 'box_y1': box_y1, 
                 'box_y2': box_y2
-            
             })
+    
     return results
 
 

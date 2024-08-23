@@ -1178,6 +1178,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70500_to_70560.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70560_to_70620.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70620_to_70680.png,D,424.0,92.0,451.0,118.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70680_to_70740.png,D,0.0,85.0,25.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70680_to_70740.png,D,225.0,90.0,248.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70680_to_70740.png,D,443.0,99.0,476.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_70740_to_70800.png,D,333.0,73.0,359.0,109.0
@@ -1197,7 +1198,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71280_to_71340.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71340_to_71400.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71400_to_71460.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71460_to_71520.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71520_to_71580.png,D,0.0,89.0,11.0,115.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71520_to_71580.png,D,405.0,85.0,430.0,115.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71580_to_71640.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_71640_to_71700.png,,,,,
@@ -1336,8 +1337,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79320_to_79380.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79380_to_79440.png,D,119.0,74.0,143.0,111.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79380_to_79440.png,D,247.0,90.0,266.0,113.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79440_to_79500.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79500_to_79560.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79440_to_79500.png,D,574.0,88.0,601.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79560_to_79620.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79620_to_79680.png,D,541.0,91.0,571.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_79680_to_79740.png,,,,,
@@ -1582,7 +1582,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93720_to_93780.png,D,80.0,72.0,101.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93720_to_93780.png,D,168.0,86.0,191.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93720_to_93780.png,D,438.0,75.0,464.0,108.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93780_to_93840.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93720_to_93780.png,D,562.0,69.0,601.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93840_to_93900.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93900_to_93960.png,D,72.0,100.0,98.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_93900_to_93960.png,D,193.0,76.0,214.0,117.0
@@ -1828,6 +1828,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106620_to_106680.png,D,75.0,72.0,131.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106620_to_106680.png,D,496.0,71.0,552.0,130.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106620_to_106680.png,D,566.0,79.0,595.0,120.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106620_to_106680.png,D,589.0,90.0,601.0,129.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106680_to_106740.png,D,0.0,90.0,25.0,129.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106680_to_106740.png,D,43.0,78.0,90.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106680_to_106740.png,D,184.0,92.0,219.0,129.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_106680_to_106740.png,D,277.0,72.0,314.0,104.0
@@ -1861,6 +1863,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107580_to_107640.png,D,270.0,86.0,331.0,129.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107580_to_107640.png,D,527.0,83.0,571.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107640_to_107700.png,D,450.0,90.0,495.0,123.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107640_to_107700.png,D,583.0,70.0,601.0,125.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107700_to_107760.png,D,0.0,70.0,41.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107700_to_107760.png,D,128.0,80.0,170.0,111.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107700_to_107760.png,D,304.0,87.0,338.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_107700_to_107760.png,D,336.0,74.0,382.0,123.0
@@ -1879,9 +1883,10 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108240_to_108300.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108300_to_108360.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108360_to_108420.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108420_to_108480.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108480_to_108540.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108420_to_108480.png,D,569.0,95.0,601.0,128.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108540_to_108600.png,D,132.0,81.0,165.0,127.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108540_to_108600.png,D,571.0,56.0,601.0,124.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108600_to_108660.png,D,0.0,56.0,15.0,124.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108600_to_108660.png,D,136.0,51.0,180.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108600_to_108660.png,D,320.0,59.0,362.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108660_to_108720.png,D,29.0,72.0,104.0,128.0
@@ -1894,6 +1899,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108720_to_108780.png,D,374.0,72.0,407.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108720_to_108780.png,D,553.0,74.0,597.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108780_to_108840.png,40Hz,302.0,100.0,329.0,117.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108780_to_108840.png,D,574.0,88.0,601.0,117.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108840_to_108900.png,D,0.0,88.0,16.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108840_to_108900.png,D,109.0,66.0,152.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108840_to_108900.png,D,406.0,67.0,447.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_108900_to_108960.png,D,417.0,73.0,471.0,123.0
@@ -1906,6 +1913,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109080_to_109140.png,D,185.0,61.0,213.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109080_to_109140.png,D,295.0,72.0,338.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109080_to_109140.png,D,504.0,63.0,539.0,110.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109080_to_109140.png,A,545.0,60.0,601.0,81.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109140_to_109200.png,A,0.0,60.0,76.0,81.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109140_to_109200.png,D,191.0,70.0,220.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109140_to_109200.png,B,356.0,72.0,479.0,140.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109200_to_109260.png,,,,,
@@ -1914,6 +1923,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109380_to_109440.png,D,236.0,68.0,293.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109380_to_109440.png,D,315.0,70.0,365.0,132.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109380_to_109440.png,D,432.0,62.0,481.0,128.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109380_to_109440.png,D,566.0,67.0,601.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109440_to_109500.png,D,306.0,62.0,331.0,112.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109500_to_109560.png,D,169.0,68.0,198.0,100.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109500_to_109560.png,D,350.0,67.0,406.0,129.0
@@ -1927,8 +1937,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109800_to_109860.png,D,46.0,81.0,75.0,102.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109860_to_109920.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109920_to_109980.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109980_to_110040.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_110040_to_110100.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_109980_to_110040.png,B,510.0,84.0,601.0,140.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_110040_to_110100.png,B,0.0,84.0,80.0,140.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_110100_to_110160.png,D,47.0,79.0,84.0,130.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_110160_to_110220.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_110220_to_110280.png,D,7.0,71.0,37.0,123.0
@@ -1973,7 +1983,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_111780_to_111840.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_111840_to_111900.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_111900_to_111960.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_111960_to_112020.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_111960_to_112020.png,D,561.0,69.0,601.0,129.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_112020_to_112080.png,D,0.0,69.0,23.0,129.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_112020_to_112080.png,D,33.0,78.0,91.0,129.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_112020_to_112080.png,D,246.0,70.0,279.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_112020_to_112080.png,D,370.0,73.0,416.0,127.0
@@ -2005,14 +2016,16 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113340_to_113400.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113400_to_113460.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113460_to_113520.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113520_to_113580.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113580_to_113640.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113520_to_113580.png,D,590.0,77.0,601.0,113.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113580_to_113640.png,D,0.0,77.0,37.0,113.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113640_to_113700.png,D,535.0,72.0,588.0,117.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113700_to_113760.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113760_to_113820.png,D,0.0,72.0,49.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113760_to_113820.png,D,275.0,71.0,316.0,109.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113760_to_113820.png,D,373.0,85.0,408.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113820_to_113880.png,D,161.0,77.0,208.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113820_to_113880.png,D,398.0,69.0,440.0,113.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113820_to_113880.png,D,576.0,77.0,601.0,115.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113880_to_113940.png,D,0.0,77.0,28.0,115.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113880_to_113940.png,D,163.0,79.0,202.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_113940_to_114000.png,D,270.0,68.0,326.0,112.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114000_to_114060.png,,,,,
@@ -2022,6 +2035,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114240_to_114300.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114300_to_114360.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114360_to_114420.png,D,48.0,77.0,86.0,117.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114420_to_114480.png,D,0.0,83.0,49.0,128.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114420_to_114480.png,D,307.0,85.0,347.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114420_to_114480.png,D,420.0,88.0,457.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114480_to_114540.png,D,63.0,77.0,107.0,117.0
@@ -2030,6 +2044,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114540_to_114600.png,D,299.0,91.0,350.0,131.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114540_to_114600.png,D,450.0,85.0,494.0,109.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114600_to_114660.png,D,317.0,76.0,338.0,114.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114660_to_114720.png,D,0.0,88.0,43.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114660_to_114720.png,D,540.0,88.0,600.0,111.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114720_to_114780.png,D,124.0,77.0,156.0,111.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_114780_to_114840.png,,,,,
@@ -2051,6 +2066,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115500_to_115560.png,D,221.0,86.0,258.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115560_to_115620.png,D,61.0,76.0,112.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115560_to_115620.png,D,370.0,85.0,416.0,119.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115560_to_115620.png,D,583.0,78.0,601.0,103.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115620_to_115680.png,D,0.0,78.0,22.0,103.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115620_to_115680.png,D,75.0,92.0,106.0,130.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115620_to_115680.png,D,231.0,78.0,270.0,107.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115620_to_115680.png,D,429.0,77.0,479.0,119.0
@@ -2061,7 +2078,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115800_to_115860.png,D,216.0,93.0,268.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115800_to_115860.png,D,304.0,84.0,338.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115800_to_115860.png,D,397.0,83.0,437.0,119.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115860_to_115920.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115860_to_115920.png,D,567.0,80.0,601.0,98.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115920_to_115980.png,D,124.0,78.0,171.0,110.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115920_to_115980.png,D,207.0,83.0,245.0,109.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_115920_to_115980.png,D,447.0,79.0,494.0,126.0
@@ -2106,6 +2123,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117540_to_117600.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117600_to_117660.png,D,374.0,95.0,413.0,124.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117660_to_117720.png,D,488.0,68.0,547.0,123.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117660_to_117720.png,D,566.0,76.0,601.0,108.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117720_to_117780.png,D,0.0,76.0,23.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117720_to_117780.png,D,141.0,70.0,170.0,112.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117720_to_117780.png,D,164.0,62.0,210.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_117720_to_117780.png,D,256.0,89.0,286.0,128.0
@@ -2264,7 +2283,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125400_to_125460.png,D,246.0,71.0,280.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125460_to_125520.png,D,224.0,76.0,265.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125520_to_125580.png,40Hz,354.0,89.0,372.0,93.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125580_to_125640.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125580_to_125640.png,40Hz,588.0,77.0,601.0,90.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125640_to_125700.png,D,239.0,77.0,273.0,125.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125640_to_125700.png,D,370.0,73.0,420.0,119.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_125640_to_125700.png,40Hz,440.0,73.0,455.0,91.0
@@ -2329,8 +2348,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_128760_to_128820.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_128820_to_128880.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_128880_to_128940.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_128940_to_129000.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_129000_to_129060.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_129000_to_129060.png,D,0.0,86.0,38.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_129060_to_129120.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_129120_to_129180.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_129180_to_129240.png,,,,,
@@ -2740,7 +2758,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151560_to_151620.png,D,484.0,80.0,525.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151620_to_151680.png,40Hz,12.0,79.0,30.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151620_to_151680.png,D,459.0,80.0,485.0,117.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151680_to_151740.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151620_to_151680.png,D,580.0,73.0,601.0,116.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151680_to_151740.png,D,0.0,73.0,11.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151740_to_151800.png,D,318.0,69.0,357.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151800_to_151860.png,D,241.0,71.0,266.0,105.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_151860_to_151920.png,,,,,
@@ -2750,6 +2769,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152100_to_152160.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152160_to_152220.png,40Hz,64.0,96.0,80.0,115.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152160_to_152220.png,D,318.0,79.0,354.0,122.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152160_to_152220.png,D,585.0,69.0,601.0,113.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152220_to_152280.png,D,0.0,69.0,14.0,113.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152220_to_152280.png,D,122.0,81.0,162.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152280_to_152340.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152340_to_152400.png,D,469.0,76.0,492.0,119.0
@@ -2759,8 +2780,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152580_to_152640.png,D,254.0,84.0,286.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152580_to_152640.png,D,574.0,68.0,594.0,101.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152640_to_152700.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152700_to_152760.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152760_to_152820.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152700_to_152760.png,D,582.0,73.0,601.0,109.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152820_to_152880.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152880_to_152940.png,D,35.0,65.0,66.0,113.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_152940_to_153000.png,,,,,
@@ -2775,8 +2795,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153360_to_153420.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153420_to_153480.png,D,420.0,95.0,455.0,132.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153480_to_153540.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153540_to_153600.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153600_to_153660.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153540_to_153600.png,D,585.0,74.0,601.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153660_to_153720.png,D,529.0,88.0,559.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153720_to_153780.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_153780_to_153840.png,,,,,
@@ -2787,8 +2806,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154080_to_154140.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154140_to_154200.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154200_to_154260.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154260_to_154320.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154320_to_154380.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154260_to_154320.png,D,572.0,72.0,601.0,113.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154320_to_154380.png,D,0.0,72.0,11.0,113.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154380_to_154440.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154440_to_154500.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_154500_to_154560.png,,,,,
@@ -2858,7 +2877,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158220_to_158280.png,D,183.0,88.0,227.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158220_to_158280.png,D,224.0,92.0,263.0,124.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158220_to_158280.png,D,422.0,84.0,458.0,115.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158280_to_158340.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158220_to_158280.png,D,572.0,91.0,601.0,124.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158340_to_158400.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158400_to_158460.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158460_to_158520.png,,,,,
@@ -2869,6 +2888,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158760_to_158820.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158820_to_158880.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158880_to_158940.png,D,316.0,108.0,359.0,131.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158940_to_159000.png,D,0.0,79.0,20.0,110.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_158940_to_159000.png,D,268.0,93.0,322.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_159000_to_159060.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_159060_to_159120.png,,,,,
@@ -2984,9 +3004,11 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165240_to_165300.png,40Hz,585.0,65.0,598.0,87.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165300_to_165360.png,D,336.0,96.0,363.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165360_to_165420.png,D,447.0,70.0,480.0,116.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165420_to_165480.png,D,0.0,65.0,22.0,103.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165420_to_165480.png,D,485.0,95.0,507.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165480_to_165540.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165540_to_165600.png,D,79.0,96.0,106.0,121.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165540_to_165600.png,D,584.0,72.0,601.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165600_to_165660.png,D,60.0,88.0,93.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165600_to_165660.png,D,505.0,71.0,536.0,119.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_165660_to_165720.png,,,,,
@@ -3005,6 +3027,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166020_to_166080.png,D,19.0,78.0,52.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166020_to_166080.png,40Hz,237.0,91.0,258.0,108.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166020_to_166080.png,D,508.0,75.0,561.0,133.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166020_to_166080.png,D,570.0,76.0,601.0,134.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166080_to_166140.png,D,0.0,76.0,14.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166080_to_166140.png,D,243.0,73.0,265.0,114.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166080_to_166140.png,D,253.0,79.0,279.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166080_to_166140.png,D,485.0,85.0,522.0,123.0
@@ -3028,6 +3052,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166740_to_166800.png,D,517.0,83.0,544.0,123.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166800_to_166860.png,D,183.0,74.0,235.0,126.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166800_to_166860.png,D,509.0,77.0,568.0,130.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166800_to_166860.png,D,578.0,82.0,601.0,117.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166860_to_166920.png,D,0.0,82.0,20.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166860_to_166920.png,D,46.0,85.0,72.0,112.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166860_to_166920.png,D,305.0,55.0,339.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_166860_to_166920.png,D,359.0,74.0,392.0,119.0
@@ -3153,7 +3179,6 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173760_to_173820.png,40Hz,463.0,91.0,477.0,112.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173760_to_173820.png,D,571.0,84.0,597.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173820_to_173880.png,40Hz,57.0,87.0,70.0,105.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173820_to_173880.png,40Hz,316.0,90.0,326.0,107.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173820_to_173880.png,40Hz,494.0,89.0,505.0,105.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173880_to_173940.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_173940_to_174000.png,,,,,
@@ -3188,8 +3213,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175260_to_175320.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175320_to_175380.png,D,122.0,75.0,147.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175320_to_175380.png,D,219.0,60.0,241.0,92.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175320_to_175380.png,D,460.0,98.0,483.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175320_to_175380.png,D,459.0,99.0,482.0,117.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175320_to_175380.png,D,460.0,98.0,483.0,118.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175380_to_175440.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175440_to_175500.png,40Hz,20.0,74.0,33.0,113.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_175500_to_175560.png,D,335.0,62.0,358.0,117.0
@@ -3260,7 +3285,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179040_to_179100.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179100_to_179160.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179160_to_179220.png,40Hz,388.0,77.0,408.0,102.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179220_to_179280.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179220_to_179280.png,D,582.0,72.0,601.0,104.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179280_to_179340.png,40Hz,297.0,85.0,313.0,104.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179340_to_179400.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_179400_to_179460.png,D,531.0,84.0,569.0,124.0
@@ -3401,7 +3426,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187020_to_187080.png,D,147.0,78.0,183.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187080_to_187140.png,D,397.0,81.0,436.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187080_to_187140.png,D,467.0,79.0,504.0,114.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187140_to_187200.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187140_to_187200.png,D,0.0,80.0,25.0,122.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187200_to_187260.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187260_to_187320.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_187320_to_187380.png,,,,,
@@ -4488,7 +4513,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251640_to_251700.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251700_to_251760.png,D,514.0,70.0,534.0,116.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251760_to_251820.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251820_to_251880.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251880_to_251940.png,D,0.0,92.0,37.0,120.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251880_to_251940.png,40Hz,470.0,87.0,485.0,107.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_251940_to_252000.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_252000_to_252060.png,,,,,
@@ -4537,8 +4562,8 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_253920_to_253980.png,40Hz,240.0,80.0,251.0,103.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_253980_to_254040.png,40Hz,370.0,67.0,383.0,94.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254040_to_254100.png,40Hz,1.0,67.0,20.0,106.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254040_to_254100.png,40Hz,173.0,67.0,186.0,91.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254040_to_254100.png,D,130.0,72.0,153.0,114.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254040_to_254100.png,40Hz,173.0,67.0,186.0,91.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254100_to_254160.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254160_to_254220.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254220_to_254280.png,,,,,
@@ -4549,7 +4574,6 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254400_to_254460.png,D,561.0,79.0,588.0,110.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254460_to_254520.png,D,474.0,93.0,508.0,121.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254520_to_254580.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254580_to_254640.png,40Hz,192.0,88.0,202.0,103.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254580_to_254640.png,40Hz,352.0,75.0,370.0,111.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254640_to_254700.png,40Hz,339.0,72.0,356.0,110.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_254640_to_254700.png,D,400.0,73.0,425.0,114.0
@@ -6400,8 +6424,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364380_to_364440.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364440_to_364500.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364500_to_364560.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364560_to_364620.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364620_to_364680.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364620_to_364680.png,D,0.0,88.0,29.0,119.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364680_to_364740.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364740_to_364800.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_364800_to_364860.png,,,,,
@@ -6461,8 +6484,7 @@ L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368040_to_368100.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368100_to_368160.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368160_to_368220.png,D,541.0,81.0,568.0,116.0
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368220_to_368280.png,,,,,
-L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368280_to_368340.png,,,,,
+L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368280_to_368340.png,D,0.0,78.0,25.0,117.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368340_to_368400.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368400_to_368460.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\HARP/CINMS18B_d06_120622_055731.d100.x_second_368460_to_368520.png,,,,,

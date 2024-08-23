@@ -31,7 +31,7 @@ import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from AudioDetectionDataset import AudioDetectionData, AudioDetectionData_with_hard_negatives
 from custom_collate import custom_collate
-from validation import validation
+#from validation import validation
 
 
 
@@ -99,7 +99,7 @@ for epochs in range(num_epochs):
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_7_29_24_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_8_23_24_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     

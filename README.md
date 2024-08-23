@@ -59,6 +59,14 @@ WhaleMoanDetector/
 ├── models             <- Trained models (not uploaded to GitHub)
    
 ```
+## For new Python users:
+
+1. Download python
+https://www.python.org/downloads/release/python-390/
+
+2. Download Miniconda
+https://docs.anaconda.com/miniconda/miniconda-install/
+https://docs.anaconda.com/working-with-conda/environments/
 
 ## Setup
 
@@ -85,5 +93,5 @@ WhaleMoanDetector/
 4. Run WhaleMoanDetector on wav files:
 
     ```bash
-    python code/intference_pipeline.py
+    python code/inference_pipeline.py
     ```
