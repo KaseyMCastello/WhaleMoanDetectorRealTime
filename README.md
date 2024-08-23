@@ -92,6 +92,8 @@ https://docs.anaconda.com/working-with-conda/environments/
 
 4. Run WhaleMoanDetector on wav files:
 
+   Modify file paths in WhaleMoanDetector config.yaml 
+
     ```bash
     python code/inference_pipeline.py
     ```
