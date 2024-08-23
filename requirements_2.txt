@@ -1,5 +1,0 @@
-librosa
-numpy
-torch 
-torchvision 
-torchaudio

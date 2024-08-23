@@ -26,20 +26,33 @@ from PIL import ImageOps
 from datetime import datetime, timedelta
 from IPython.display import display
 import csv
-#import sys
-#from AudioStreamDescriptor import WAVhdr, XWAVhdr
+import yaml
+
 from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_plot_on_spectrograms, apply_filters_to_predictions
 from inference_functions import bounding_box_to_time_and_frequency, predictions_to_datetimes_frequencies_and_labels, save_filtered_images
 
+# Load the config file
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
 
+# Access the configuration variables
+wav_directory = config['wav_directory']
+
+csv_file_path = config['csv_file_path']
+
+model_path = config['model_path']
 # import all of the needed functions and process one deployment at a time.
 
-wav_directory = 'L:/CHNMS_audio/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
-csv_file_path = 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.csv'
+#wav_directory = 'L:/CHNMS_audio/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
+
+#csv_file_path = 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.csv'
+
+#model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector.pth'
+
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 
               'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 
               'box_x1', 'box_x2', 'box_y1', 'box_y2']
-model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector_8_23_24_4.pth'
+
 model_name = os.path.basename(model_path)
 visualize_tf = False
 # define variables 
