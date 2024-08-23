@@ -94,7 +94,7 @@ WhaleMoanDetector/
       
 	Example of config.yaml:
 
-	```bash
+	```yaml
 	wav_directory: 'L:/CHNMS_audio/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
 	csv_file_path: 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.csv'
 	model_path: 'L:/WhaleMoanDetector/models/WhaleMoanDetector.pth'
