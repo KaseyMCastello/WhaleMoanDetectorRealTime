@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 from IPython.display import display  # Import the display function
 import os
 
-base_dir = 'L:\\WhaleMoanDetector\\labeled_data\\train_val_test_annotations\\CC200808_test.csv'
+base_dir = 'L:\\WhaleMoanDetector\\labeled_data\\spectrograms\\HARP\\DCPP01A_d01_121106_083945.d100.x_annotations.csv'
 
 # Load annotations
 #annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')

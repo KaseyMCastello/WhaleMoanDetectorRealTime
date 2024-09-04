@@ -51,6 +51,7 @@ def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
 
     # Calculate the number of chunks
     chunks = []
+    
     for start in range(0, waveform.shape[1], samples_per_window - samples_overlap):
         end = start + samples_per_window
         # If the last chunk is smaller than the window size, pad it with zeros
@@ -59,8 +60,10 @@ def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
             chunks.append(y_pad)
         else:
             chunks.append(waveform[:, start:end])
-    
-    return chunks, sr
+   # chunk_start_times = [i * (window_size - overlap_size) for i in range(len(chunks))]
+    chunk_start_times = [start / sr for start in range(0, waveform.shape[1], samples_per_window - samples_overlap)]
+
+    return chunks, sr, chunk_start_times
 
 # Function to convert audio chunks to spectrograms
 def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
@@ -75,217 +78,90 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
         spectrograms.append(S_dB.cpu().numpy())
     return spectrograms
 
-        
-def predict_and_plot_on_spectrograms(spectrograms, model, device, visualize = True):
+      
+                
+def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wav_file_path, wav_start_time, audio_basename, 
+                                  chunk_start_times, window_size, overlap_size, inverse_label_mapping, time_per_pixel, is_xwav,
+                                  freq_resolution=1, start_freq=10, max_freq=150):
     predictions = []
-    font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
+    csv_base_dir = os.path.dirname(csv_file_path)
     
-    for spectrogram_data  in spectrograms:
+    # Zip spectrograms and start times
+    data = list(zip(spectrograms, chunk_start_times))
+    
+    for spectrogram_data, chunk_start_time in data:
         
-        normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data)) # normalize spectrogram 
-        #enhanced_image = np.power(normalized_S_dB,3)
-        S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L') # apply grayscale colormap
-        # Flip the image vertically
+        # Normalize spectrogram and convert to tensor
+        normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data))  
+        S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
         final_image = ImageOps.flip(S_dB_img)
-        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0)  # Add batch dimension
-        S_dB_tensor=S_dB_tensor.to(device)
+        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)
         
         # Run prediction
         model.eval()
         with torch.no_grad():
             prediction = model(S_dB_tensor)
-        predictions.append(prediction)
         
-        
-        if visualize: 
-            draw = ImageDraw.Draw(final_image)
-            
-            # Assuming `prediction` contains `boxes`, `labels`, and `scores`
-            boxes = prediction[0]['boxes']
-            scores = prediction[0]['scores']
-            labels = prediction[0]['labels']
-            
-            # Apply Non-Maximum Suppression (NMS) for cleaner visualization
-            keep_indices = ops.nms(boxes, scores, 0.2)
-            boxes = boxes[keep_indices]
-            scores = scores[keep_indices]
-            labels = labels[keep_indices]
-            
-            # Draw each bounding box and label on the spectrogram image
-            for box, score, label in zip(boxes, scores, labels):
-                score_formatted = round(score.item(), 2)
-                # Convert box coordinates (considering the flip if necessary)
-                box = box.tolist()
-                draw.rectangle(box, outline="white")
-                draw.text((box[0], box[1]-20), f"Label: {label}, Score: {score_formatted}", fill="white", font=font)
-            
-            # Display the spectrogram with drawn predictions
-           #S_dB_img.show()
-            display(final_image)
-        else:
-           
-            pass
-            
-    return predictions
-        
-
-# filter predictions based on defined parameters 
-
-def apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, fortyHz_threshold=0, 
-                                      twentyHz_threshold=0, A_threshold=0, B_threshold=0):
-                                    
-    """
-    Apply NMS on the predictions to filter out overlapping bounding boxes, then filter
-    each category by specific score thresholds. 
-    Args:
-        predictions (list): A list of predictions where each prediction is a dict
-            containing 'boxes', 'labels', and 'scores'.
-        nms_threshold (float): The NMS IoU threshold.
-        [category]_threshold (float): The score threshold for each call category.
-       
-        
-    Returns:
-        list: A list of filtered predictions.
-    """
-    filtered_predictions = []
-    # Time per pixel in the spectrogram
-    time_per_pixel = 0.1 # 100 miliseconds or 1/10 of a second for sr = x and hop_length = x/10
-    
-    # Assuming labels are integers and mapping them accordingly
-    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
-    thresholds = {
-        label_mapping['D']: D_threshold,
-        label_mapping['40Hz']: fortyHz_threshold,
-        label_mapping['20Hz']: twentyHz_threshold,
-        label_mapping['A']: A_threshold,
-        label_mapping['B']: B_threshold
-    }
-
-    for prediction in predictions:
+        # Extract prediction results
         boxes = prediction[0]['boxes']
         scores = prediction[0]['scores']
         labels = prediction[0]['labels']
-
-        # Apply NMS
-        keep_indices = ops.nms(boxes, scores, nms_threshold)
+       
+        # Apply Non-Maximum Suppression (NMS)
+        keep_indices = ops.nms(boxes, scores, 0.05)
         boxes = boxes[keep_indices]
         scores = scores[keep_indices]
         labels = labels[keep_indices]
-
-        final_boxes, final_scores, final_labels = [], [], []
-
-        for box, score, label in zip(boxes, scores, labels):
-            if score < thresholds[label.item()]:
-                continue # skip this prediction
-    
-               
-            final_boxes.append(box)
-            final_scores.append(score)
-            final_labels.append(label)
-
-        filtered_predictions.append([{
-            'boxes': torch.stack(final_boxes) if final_boxes else torch.tensor([]),
-            'labels': torch.stack(final_labels) if final_labels else torch.tensor([]),
-            'scores': torch.stack(final_scores) if final_scores else torch.tensor([]),
-        }])
-
-    return filtered_predictions
-
-
-
-
-
-
-def save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size):
-    # Use the base directory of the CSV file path to place the "images" directory
-    csv_base_dir = os.path.dirname(csv_file_path)
-    
-    saved_image_paths = []
-
-    for index, prediction_list in enumerate(filtered_predictions):
-        prediction = prediction_list[0]
-
-        # Proceed with plotting and saving only if there are detections that passed filtering
-        if len(prediction['boxes']) > 0:
-            S_dB = spectrograms[index]
-                
-            
-            normalized_S_dB = (S_dB - np.min(S_dB)) / (np.max(S_dB) - np.min(S_dB)) # normalize spectrogram 
-           # enhanced_image = np.power(normalized_S_dB,3)
-            S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L') # apply grayscale colormap
-            # Flip the image vertically
-            final_image = ImageOps.flip(S_dB_img)
-            
-            chunk_start_time = chunk_start_times[index]
+        
+        # Check if there are valid predictions (boxes)
+        if len(boxes) > 0:
             chunk_end_time = chunk_start_time + window_size
             
-            # The image filename now includes the audio basename
+            # Save the spectrogram image
             image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_end_time)}.png"
             image_path = os.path.join(csv_base_dir, image_filename)
             final_image.save(image_path)
-            saved_image_paths.append(image_path) #save the image
-                
-    return saved_image_paths
-
-
-# convert bounding box x and y coordinates to timestamp and frequency within the wav file
-def bounding_box_to_time_and_frequency(box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution=1, start_freq=10, max_freq=150):
-    # Calculate start and end times from the x-coordinates of the bounding box
-    box_x1, box_x2 = box[0].item(), box[2].item()
-    start_time = box_x1 * time_per_pixel + chunk_start_times[chunk_index]
-    end_time = box_x2 * time_per_pixel + chunk_start_times[chunk_index]
-    
-    # Calculate the lower and upper frequencies from the y-coordinates
-    # Assuming y-coordinates are not inverted (higher value for higher frequency)
-    box_y1, box_y2 = box[1].item(), box[3].item()
-        
-    # Invert the y-axis to correctly map the frequencies
-    lower_freq = (max_freq - box_y2 * freq_resolution) 
-    upper_freq = (max_freq - box_y1 * freq_resolution)
-  
-    lower_freq = round(lower_freq)
-    upper_freq = round(upper_freq)
-    
-    return start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2
-
-
-def predictions_to_datetimes_frequencies_and_labels(filtered_predictions, chunk_start_times, time_per_pixel, wav_start_time, file_path, is_xwav=False, freq_resolution=1, start_freq=10):
-    results = []
-    label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
-    inverse_label_mapping = {v: k for k, v in label_mapping.items()}
-
-    for chunk_index, prediction in enumerate(filtered_predictions):
-        for box, label, score in zip(prediction[0]['boxes'], prediction[0]['labels'], prediction[0]['scores']):
-            start_time, end_time, lower_freq, upper_freq, box_x1, box_x2, box_y1, box_y2 = bounding_box_to_time_and_frequency(
-                box, chunk_index, chunk_start_times, time_per_pixel, freq_resolution, start_freq
-            )
-
-            if is_xwav: # distinction between wav and xwav
-                start_datetime = get_datetime(start_time, file_path)
-                end_datetime = get_datetime(end_time, file_path)
-                
-            else:
-                start_datetime = wav_start_time + timedelta(seconds=start_time)
-                end_datetime = wav_start_time + timedelta(seconds=end_time)
             
-            textual_label = inverse_label_mapping[label.item()]
-
-            results.append({
-                'label': textual_label,
-                'score': round(score.item(), 2),  # Round the score for readability if desired
-                'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],  # Format as a string
-                'start_time_sec': start_time,
-                'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],
-                'end_time_sec': end_time,
-                'min_frequency': round(lower_freq),  # Round frequency to the nearest integer
-                'max_frequency': round(upper_freq), 
-                'box_x1': box_x1, 
-                'box_x2': box_x2,
-                'box_y1': box_y1, 
-                'box_y2': box_y2
-            })
+            # Iterate through each detection (box)
+            for box, score, label in zip(boxes, scores, labels):
+                # Convert bounding box coordinates to time and frequency
+                # Calculate start and end times from the x-coordinates of the bounding box
+                start_time = box[0].item() * time_per_pixel + chunk_start_time
+                end_time = box[2].item() * time_per_pixel + chunk_start_time
+                # Calculate the lower and upper frequencies from the y-coordinates
+                # Assuming y-coordinates are not inverted (higher value for higher frequency)
+                lower_freq = (max_freq - box[3].item() * freq_resolution)
+                upper_freq = (max_freq - box[1].item() * freq_resolution)
+                lower_freq = round(lower_freq)
+                upper_freq = round(upper_freq)
+                
+                if is_xwav:  # distinction between wav and xwav
+                    start_datetime = get_datetime(start_time, wav_file_path)
+                    end_datetime = get_datetime(end_time, wav_file_path)
+                else:
+                    start_datetime = wav_start_time + timedelta(seconds=start_time)
+                    end_datetime = wav_start_time + timedelta(seconds=end_time)
+                # Get textual label from the inverse label mapping
+                textual_label = inverse_label_mapping.get(label.item(), 'Unknown')
+                
+                # Append each detection as a separate row in the predictions list
+                predictions.append({
+                    'image_file_path': image_path,
+                    'label': textual_label,
+                    'score': round(score.item(), 2),
+                    'start_time_sec': start_time,  # Start time of the detection in the wav file
+                    'end_time_sec': end_time,      # End time of the detection in the wav file
+                    'start_time': start_datetime,
+                    'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],
+                    'min_frequency': round(lower_freq),
+                    'max_frequency': round(upper_freq),
+                    'box_x1': box[0].item(),
+                    'box_x2': box[2].item(),
+                    'box_y1': box[1].item(),
+                    'box_y2': box[3].item()
+                })
     
-    return results
+    return predictions
 
 
 def compute_snr(event):

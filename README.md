@@ -66,7 +66,7 @@ WhaleMoanDetector/
 2. [Download Miniconda](https://docs.anaconda.com/miniconda/miniconda-install/)
 
 3. [Miniconda tutorial](https://docs.anaconda.com/working-with-conda/environments/)
-## Setup
+## WhaleMoanDetector Setup
 
 1. Clone the Repository:
 
@@ -105,3 +105,5 @@ WhaleMoanDetector/
     ```bash
     python code/inference_pipeline.py
     ```
+
+

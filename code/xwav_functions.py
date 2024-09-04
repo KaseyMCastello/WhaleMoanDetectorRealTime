@@ -18,7 +18,9 @@ def get_datetime(xwav_time: float, xwav):
         xwav = XWAVhdr(xwav)
 
     # Most recent block for the starttime
-    block_offset = xwav_time % BLOCK_LEN
+    block_offset = xwav_time % BLOCK_LEN # calculate remainder
     block_idx = int(xwav_time // BLOCK_LEN)
 
     return xwav.raw['dnumStart'][block_idx] + timedelta(seconds = block_offset)
+
+

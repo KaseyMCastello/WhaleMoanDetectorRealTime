@@ -27,52 +27,37 @@ from datetime import datetime, timedelta
 from IPython.display import display
 import csv
 import yaml
-
-from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_plot_on_spectrograms, apply_filters_to_predictions
-from inference_functions import bounding_box_to_time_and_frequency, predictions_to_datetimes_frequencies_and_labels, save_filtered_images
+from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_save_spectrograms
 
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
-
 # Access the configuration variables
 wav_directory = config['wav_directory']
-
 csv_file_path = config['csv_file_path']
-
 model_path = config['model_path']
-# import all of the needed functions and process one deployment at a time.
 
-#wav_directory = 'L:/CHNMS_audio/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
-
-#csv_file_path = 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.csv'
-
-#model_path = 'L:/WhaleMoanDetector/models/WhaleMoanDetector.pth'
-
-fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 
-              'start_time', 'start_time_sec','end_time', 'end_time_sec','min_frequency', 'max_frequency', 
-              'box_x1', 'box_x2', 'box_y1', 'box_y2']
-
+# Define spectrogram and data parameters
+fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
+              'start_time_sec','end_time_sec','start_time','end_time',
+              'min_frequency', 'max_frequency','box_x1', 'box_x2', 
+              'box_y1', 'box_y2' ]
 model_name = os.path.basename(model_path)
 visualize_tf = False
-# define variables 
-
+label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
+inverse_label_mapping = {v: k for k, v in label_mapping.items()}
 window_size = 60
-overlap_size = 5
+overlap_size = 0
 time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 second per pixel
 
-# Load your trained Faster R-CNN model
+# Load trained Faster R-CNN model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # 5 classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(device)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
 model.load_state_dict(torch.load(model_path, map_location=device))
-
 model.to(device)
-
 model.eval()
 
 
@@ -90,7 +75,7 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
           
             if filename.endswith('.wav'):
             # Full path to the WAV file
-                file_path = os.path.join(dirpath, filename)
+                wav_file_path = os.path.join(dirpath, filename)
                 
                 # Extract the subdirectory name if exists
                 subfolder = os.path.relpath(dirpath, wav_directory)
@@ -102,39 +87,29 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
                     print(audio_basename)
                 else:
                     # if no subfolder exists, use wav file name
-                    audio_basename = os.path.splitext(os.path.basename(file_path))[0]
+                    audio_basename = os.path.splitext(os.path.basename(wav_file_path))[0]
                    
                     print(audio_basename)
                 # Extract the start datetime from the WAV file
-                wav_start_datetime = extract_wav_start(file_path)  # Ensure this returns a datetime object
+                wav_start_time = extract_wav_start(wav_file_path)  # Ensure this returns a datetime object
                 #wav_start_time = extract_wav_start(path)
                 is_xwav = filename.endswith('.x.wav') #check if it is an xwav or a wav file 
                 # Process each WAV file as you have in your folder
-                chunks, sr = chunk_audio(file_path, device, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
+                chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
                 
                 spectrograms = audio_to_spectrogram(chunks, sr,device) # make spectrograms
+                #predict on spectrograms and save images and data for positive detections
+                predictions = predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wav_file_path, wav_start_time, audio_basename, 
+                                                          chunk_start_times, window_size, overlap_size, inverse_label_mapping, time_per_pixel, is_xwav,
+                                                          freq_resolution=1, start_freq=10, max_freq=150)
                 
-                predictions = predict_and_plot_on_spectrograms(spectrograms, model, device, visualize=visualize_tf)  # convert spectrograms to grayscale images and turn off visualization for batch processing
-                
-                filtered_predictions = apply_filters_to_predictions(predictions, nms_threshold=0.2, D_threshold=0, fortyHz_threshold=0, 
-                                                  twentyHz_threshold=0, A_threshold=0, B_threshold=0)  # apply filters to predictions. All must have score above X
-
-                chunk_start_times = [i * (window_size - overlap_size) for i in range(len(chunks))] # get start time of each spectrogram
-                
-                image_paths = save_filtered_images(spectrograms, filtered_predictions, csv_file_path, audio_basename, chunk_start_times, window_size, overlap_size)
-                
-                detailed_event_info = predictions_to_datetimes_frequencies_and_labels(
-                    filtered_predictions, chunk_start_times, time_per_pixel, wav_start_datetime,file_path, is_xwav)
-
                 # Write event details and image names to CSV
-                for event, image_path in zip(detailed_event_info, image_paths):
-                    event['wav_file_path'] = file_path
+                # Now write each event detail to the CSV, including the correct image path
+                for event in predictions:
+                    event['wav_file_path'] = wav_file_path
                     event['model_no'] = model_name
-                    event['image_file_path'] = image_path  
-                    
-                    writer.writerow(event)                    
-                    
-
+                    writer.writerow(event)
+      
 print('predictions complete')
 
 

@@ -46,7 +46,7 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # three classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('../models/WhaleMoanDetector_7_29_24_39.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_8_26_24_4.pth'))
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 model.eval()
 model.to(device)
@@ -139,7 +139,7 @@ plt.legend()
 plt.grid(True)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
-plt.savefig('../figures/WhaleMoanDetector_7_29_24_39_CalCOFI_2008_08.jpeg', format='jpeg')  # Save as SVG
+plt.savefig('../figures/WhaleMoanDetector_8_26_24_4_CalCOFI_2008_08.jpeg', format='jpeg')  # Save as SVG
 plt.show()
 
 # calculate AUC-PR (Area Under Precison-Recall Curve )
