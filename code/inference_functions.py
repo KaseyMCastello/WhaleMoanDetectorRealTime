@@ -72,8 +72,8 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
     for chunk in chunks:
         # Use librosa to compute the spectrogram
         S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to(device), return_complex=True)
-        S_dB_all = torchaudio.transforms.AmplitudeToDB()(torch.abs(S))
-        # Convert to dB
+        transform = torchaudio.transforms.AmplitudeToDB(stype='amplitude', top_db=80) #convert to dB and clip at 80dB
+        S_dB_all = transform(torch.abs(S))
         S_dB = S_dB_all[10:151, :]  # 151 is exclusive, so it includes up to 150 Hz
         spectrograms.append(S_dB.cpu().numpy())
     return spectrograms
@@ -94,9 +94,32 @@ def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wa
         # Normalize spectrogram and convert to tensor
         normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data))  
         S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
-        final_image = ImageOps.flip(S_dB_img)
-        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)
+        image = ImageOps.flip(S_dB_img)
+        # Convert the image to a numpy array for processing
+        img_array = np.array(image)
+        threshold_1 = 200  # Threshold for the first 10 pixel block
+        threshold_2 = 180  # Threshold for the second 10 pixel block
+        threshold_3 = 160  # Lower threshold for the third 10 pixel block
+
+        # Gray value to replace the AIS signal
+        gray_value = 128  # Mid-gray
+        # Find the vertical white lines and gray them out
+        # Loop through each column (time slice) in the spectrogram
+        for col in range(img_array.shape[1]):  # Loop through each column
+        # Check first 10 pixel block (corresponding to the lowest frequency band)
+           if np.sum(img_array[-10:, col]) > threshold_1 * 10:
+               # If the first 10 pixel block passes, check the second 10 pixel block
+               if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
+                   # If the second block passes, check the third block with a lower threshold
+                   if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
+                       # If all conditions are met, gray out the entire column
+                       img_array[:, col] = gray_value  # Replace the entire column with gray 
         
+        # Convert back to image
+        final_image = Image.fromarray(img_array)
+    
+        # Convert to tensor
+        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)        
         # Run prediction
         model.eval()
         with torch.no_grad():

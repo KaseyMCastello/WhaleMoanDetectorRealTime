@@ -2,8 +2,11 @@ spectrogram_path,label,xmin,ymin,xmax,ymax
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_0_to_60.png,20Hz,64.0,112.0,117.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_0_to_60.png,20Hz,173.0,110.0,228.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_0_to_60.png,20Hz,452.0,115.0,498.0,134.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_0_to_60.png,20Hz,555.0,112.0,601.0,134.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_60_to_120.png,20Hz,0.0,112.0,19.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_60_to_120.png,20Hz,221.0,113.0,291.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_60_to_120.png,20Hz,407.0,114.0,456.0,132.0
+L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_60_to_120.png,20Hz,559.0,112.0,601.0,134.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_60_to_120.png,B,186.0,97.0,414.0,140.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_120_to_180.png,20Hz,44.0,99.0,231.0,110.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/CC0808SB01_0815172000_second_120_to_180.png,20Hz,259.0,114.0,307.0,131.0

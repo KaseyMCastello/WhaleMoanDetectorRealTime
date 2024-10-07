@@ -1,5 +1,4 @@
 spectrogram_path,label,xmin,ymin,xmax,ymax
-L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/DIFAR20111017_181445_second_0_to_60.png,40Hz,486.0,71.0,495.0,89.0
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/DIFAR20111017_181445_second_60_to_120.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/DIFAR20111017_181445_second_120_to_180.png,,,,,
 L:\WhaleMoanDetector\labeled_data\spectrograms\CalCOFI/DIFAR20111017_181445_second_180_to_240.png,,,,,

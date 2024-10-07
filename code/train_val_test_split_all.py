@@ -75,11 +75,11 @@ harp_combined = pd.concat(harp_dfs, ignore_index=True)
 
 # Filter the test data
 test_calcofi = calcofi_combined[calcofi_combined['spectrogram_path'].str.contains('CC0808')]
-#test_harp = harp_combined[harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
+test_harp = harp_combined[harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
 
 # Remove the test data from the combined datasets to create train/val datasets
 train_val_calcofi = calcofi_combined[~calcofi_combined['spectrogram_path'].str.contains('CC0808')]
-train_val_harp = harp_combined#[~harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
+train_val_harp = harp_combined[~harp_combined['spectrogram_path'].str.contains('SOCAL34N')]
 
 # Combine the train/val datasets
 train_val_dataset = pd.concat([train_val_calcofi, train_val_harp], ignore_index=True)
@@ -106,6 +106,7 @@ train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_s
 train_dataset.to_csv(os.path.join(output_directory_path, 'train.csv'), index=False)
 val_dataset.to_csv(os.path.join(output_directory_path, 'val.csv'), index=False)
 test_calcofi.to_csv(os.path.join(output_directory_path, 'CC200808_test.csv'), index=False)
+test_harp.to_csv(os.path.join(output_directory_path, 'SOCAL34N_test.csv'), index=False)
 # Print the counts of each label in the balanced dataset
 
 # Plot histogram for the train/val dataset
@@ -159,11 +160,11 @@ plot_histogram_with_colors(
 )
 
 # Plot histogram for the test harp dataset
-# plot_histogram_with_colors(
-#     data=test_harp,
-#     title='True and NaN Examples in SOCAL34N Test Dataset',
-#     xlabel='Labels',
-#     ylabel='Count',
-#     color_map=color_map,
-#     save_path = os.path.join(figure_file_path, 'all_SOCAL34N_test_unbalanced.jpeg')
-# )
+plot_histogram_with_colors(
+    data=test_harp,
+    title='True and NaN Examples in SOCAL34N Test Dataset',
+    xlabel='Labels',
+    ylabel='Count',
+    color_map=color_map,
+    save_path = os.path.join(figure_file_path, 'all_SOCAL34N_test_unbalanced.jpeg')
+)

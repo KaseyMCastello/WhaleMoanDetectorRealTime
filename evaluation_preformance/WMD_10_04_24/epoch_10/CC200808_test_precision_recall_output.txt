@@ -1,0 +1,54 @@
+Metrics for score threshold: 0.1
+Category D: Precision = 0.7308, Recall = 0.7755
+Category 40Hz: Precision = 0.3197, Recall = 0.8298
+Category 20Hz: Precision = 0.5924, Recall = 0.9541
+Category A: Precision = 0.8038, Recall = 0.8571
+Category B: Precision = 0.4709, Recall = 0.9050
+Metrics for score threshold: 0.2
+Category D: Precision = 0.7629, Recall = 0.7255
+Category 40Hz: Precision = 0.3529, Recall = 0.7500
+Category 20Hz: Precision = 0.6323, Recall = 0.9356
+Category A: Precision = 0.8413, Recall = 0.8196
+Category B: Precision = 0.5166, Recall = 0.8715
+Metrics for score threshold: 0.3
+Category D: Precision = 0.8214, Recall = 0.6699
+Category 40Hz: Precision = 0.4000, Recall = 0.6939
+Category 20Hz: Precision = 0.6567, Recall = 0.8999
+Category A: Precision = 0.8483, Recall = 0.7824
+Category B: Precision = 0.5535, Recall = 0.8571
+Metrics for score threshold: 0.4
+Category D: Precision = 0.8333, Recall = 0.6250
+Category 40Hz: Precision = 0.4000, Recall = 0.6531
+Category 20Hz: Precision = 0.6755, Recall = 0.8659
+Category A: Precision = 0.8735, Recall = 0.7552
+Category B: Precision = 0.5887, Recall = 0.8488
+Metrics for score threshold: 0.5
+Category D: Precision = 0.8060, Recall = 0.5192
+Category 40Hz: Precision = 0.4225, Recall = 0.6122
+Category 20Hz: Precision = 0.6909, Recall = 0.8037
+Category A: Precision = 0.9145, Recall = 0.7277
+Category B: Precision = 0.6053, Recall = 0.8070
+Metrics for score threshold: 0.6
+Category D: Precision = 0.8500, Recall = 0.4857
+Category 40Hz: Precision = 0.4590, Recall = 0.5714
+Category 20Hz: Precision = 0.7158, Recall = 0.7435
+Category A: Precision = 0.9220, Recall = 0.6806
+Category B: Precision = 0.6341, Recall = 0.7647
+Metrics for score threshold: 0.7
+Category D: Precision = 0.8750, Recall = 0.4623
+Category 40Hz: Precision = 0.4902, Recall = 0.5000
+Category 20Hz: Precision = 0.7421, Recall = 0.6599
+Category A: Precision = 0.9174, Recall = 0.5781
+Category B: Precision = 0.6796, Recall = 0.7193
+Metrics for score threshold: 0.8
+Category D: Precision = 0.8913, Recall = 0.3796
+Category 40Hz: Precision = 0.5526, Recall = 0.4200
+Category 20Hz: Precision = 0.7726, Recall = 0.5436
+Category A: Precision = 0.9341, Recall = 0.4427
+Category B: Precision = 0.7467, Recall = 0.6550
+Metrics for score threshold: 0.9
+Category D: Precision = 0.9000, Recall = 0.2477
+Category 40Hz: Precision = 0.5652, Recall = 0.2549
+Category 20Hz: Precision = 0.8221, Recall = 0.3245
+Category A: Precision = 1.0000, Recall = 0.2615
+Category B: Precision = 0.8404, Recall = 0.4540

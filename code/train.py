@@ -31,8 +31,9 @@ import torch.optim as optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from AudioDetectionDataset import AudioDetectionData, AudioDetectionData_with_hard_negatives
 from custom_collate import custom_collate
-#from validation import validation
-
+from validation import validation
+from torchvision.ops import box_iou
+import os
 
 
 train_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
@@ -51,7 +52,7 @@ val_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_
         
 # load our model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
-num_classes = 6 # two classes plus background
+num_classes = 6 # five classes plus background
 in_features = model.roi_heads.box_predictor.cls_score.in_features # classification score and number of features (1024 in this case)
 
 # I might need to change in features
@@ -61,7 +62,7 @@ model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print(device)
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9, weight_decay= 0.0005) #SDG = stochastic gradient desent with these hyperparameters
-num_epochs = 40
+num_epochs = 30
 
 # model training loop.
 model.to(device)
@@ -87,8 +88,7 @@ for epochs in range(num_epochs):
                     'labels': d[1]['labels'].to(device)
                 }
                 
-            #targ['boxes'] = d[1]['boxes'].to(device)
-            #targ['labels'] = d[1]['labels'].to(device)
+        
             targets.append(targ)
             
         loss_dict = model(imgs,targets)
@@ -99,15 +99,14 @@ for epochs in range(num_epochs):
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_8_28_24_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_10_04_24_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     
-  #  model.eval()
+    model.eval()
     
-  #  with torch.no_grad():
-   #     map_value = validation(val_d1, device, model)
-    #    print(f'Validation epoch {epochs} mAP: {map_value}')
+    with torch.no_grad():
+        validation(val_d1, device, model, epoch_train_loss)
 
  
     

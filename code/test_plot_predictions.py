@@ -36,7 +36,7 @@ from collections import OrderedDict
 def custom_collate(data):# returns the data as is 
     return data 
 
-csv_file_name = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_test.csv'
+csv_file_name = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_augmented_test.csv'
 
 df = pd.read_csv(csv_file_name)
 
@@ -59,7 +59,7 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features # classificati
 
 # I might need to change in features.. tbd..
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
-model.load_state_dict(torch.load('../models/WhaleMoanDetector_7_29_24_6.pth'))
+model.load_state_dict(torch.load('../models/WhaleMoanDetector_9_24_24_12.pth'))
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 print(device)
