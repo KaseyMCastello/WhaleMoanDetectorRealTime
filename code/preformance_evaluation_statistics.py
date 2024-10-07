@@ -27,7 +27,7 @@ from torchvision.ops import box_iou
 from custom_collate import custom_collate
 from AudioDetectionDataset import AudioDetectionData_with_hard_negatives
 
-csv = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_updated_test.csv'
+csv = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_test.csv'
 # Define the subfolder where the figures will be saved
 output_folder = "L:\\WhaleMoanDetector\\evaluation_preformance\\WMD_10_04_24\\epoch_10"
 
@@ -101,7 +101,6 @@ for data in test_d1:
             # If we have a true positive, our prediction (filtered boxes) will have something in it. AND our groundtruth (boxes) will have something in it.
             ious = box_iou(filtered_boxes, boxes) 
             # computes the IoU between every bounding box and groundtruth box in this image.
-            
             # Loop through predictions to find matches with ground truth
             for i, pred_label in enumerate(filtered_labels): 
                 # for this image, we loop through the predictions, where i is the index of the prediction we are looking at. 
@@ -117,11 +116,13 @@ for data in test_d1:
                 
                 if max_iou >= iou_threshold and labels[max_iou_idx] == pred_label:
                     all_metrics[score_threshold][pred_label.item()]['tp'] += 1
+
                 else:
                     all_metrics[score_threshold][pred_label.item()]['fp'] += 1
             
             # Check for ground truth boxes not matched by predictions
             for j, gt_label in enumerate(labels):
+                print(ious[:, j].max(0)[0])
                 if ious[:, j].max(0)[0] < iou_threshold:
                     all_metrics[score_threshold][gt_label.item()]['fn'] += 1
                     
@@ -130,13 +131,12 @@ for data in test_d1:
         # If there are predictions but no ground truth, all predictions are false positives
             for pred_label in filtered_labels:
                 all_metrics[score_threshold][pred_label.item()]['fp'] += 1
-                
         # check for false negatives
         elif len(filtered_boxes) == 0 and len(boxes) > 0:
             # If there are no predictions, all ground truth boxes are false negatives
             for gt_label in labels:
                 all_metrics[score_threshold][gt_label.item()]['fn'] += 1
-                
+      
 # Initialize lists to store precision and recall values for each category
 pr_curves = {cat: {'precision': [], 'recall': []} for cat in categories.values()}
 
