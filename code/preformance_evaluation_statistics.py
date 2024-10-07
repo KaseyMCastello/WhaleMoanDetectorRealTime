@@ -96,7 +96,7 @@ for data in test_d1:
         filtered_boxes = out_bbox[valid_preds]
         filtered_labels = out_labels[valid_preds]
         
-        #check for true positives. 
+        #check for true positives 
         if len(filtered_boxes) > 0 and len(boxes) > 0: 
             # If we have a true positive, our prediction (filtered boxes) will have something in it. AND our groundtruth (boxes) will have something in it.
             ious = box_iou(filtered_boxes, boxes) 
@@ -124,11 +124,19 @@ for data in test_d1:
             for j, gt_label in enumerate(labels):
                 if ious[:, j].max(0)[0] < iou_threshold:
                     all_metrics[score_threshold][gt_label.item()]['fn'] += 1
-        else:
-            # If no predictions, all ground truth boxes are false negatives
+                    
+        # check for false positives            
+        elif len(filtered_boxes) > 0 and len(boxes) == 0:
+        # If there are predictions but no ground truth, all predictions are false positives
+            for pred_label in filtered_labels:
+                all_metrics[score_threshold][pred_label.item()]['fp'] += 1
+                
+        # check for false negatives
+        elif len(filtered_boxes) == 0 and len(boxes) > 0:
+            # If there are no predictions, all ground truth boxes are false negatives
             for gt_label in labels:
                 all_metrics[score_threshold][gt_label.item()]['fn'] += 1
-
+                
 # Initialize lists to store precision and recall values for each category
 pr_curves = {cat: {'precision': [], 'recall': []} for cat in categories.values()}
 
