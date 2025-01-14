@@ -9,10 +9,12 @@ Photo credit: Manuel Mendieta
 
 ## Overview 
 
-The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned faster-rCNN model for blue and fin whale moans. A brief tutorial highlighting the functions needed to deploy the trained model is included in the [workflow](https://github.com/m1alksne/WhaleMoanDetector/tree/main?tab=readme-ov-file#whalemoandetector-workflow). 
+The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned rCNN model for blue and fin whale moans. We fine-tuned the final two layers of faster-rCNN [(Ren et al. 2015)](https://arxiv.org/abs/1506.01497) with a ResNet-50 backbone using the pre-trained model available in [Pytorch](https://pytorch.org/vision/master/models/faster_rcnn.html). 
+
+A brief tutorial highlighting the steps needed to deploy WhaleMoanDetector and visualize results is included in below in the [workflow section](https://github.com/m1alksne/WhaleMoanDetector/tree/main?tab=readme-ov-file#whalemoandetector-workflow). 
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/all_example.JPG)
-WhaleMoanDetector is trained to identify blue whale A, B, and D calls, and fin whale 20 Hz and 40 Hz calls in 60 second spectrograms.
+WhaleMoanDetector is trained to identify north eastern pacific blue whale A, B, and D calls, and fin whale 20 Hz and 40 Hz calls in 60 second spectrograms.
 
 
 ## WhaleMoanDetector Directory Structure: 
