@@ -9,12 +9,22 @@ Photo credit: Manuel Mendieta
 
 ## Overview 
 
-The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned rCNN model for blue and fin whale moans. We fine-tuned the final two layers of faster-rCNN [(Ren et al. 2015)](https://arxiv.org/abs/1506.01497) with a ResNet-50 backbone using the pre-trained weights available in [Pytorch](https://pytorch.org/vision/master/models/faster_rcnn.html). 
+The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned Faster R-CNN model for blue and fin whale moans. We fine-tuned the final two layers of Faster R-CNN [(Ren et al. 2015)](https://arxiv.org/abs/1506.01497) with a ResNet-50 backbone using the pre-trained weights available in [Pytorch](https://pytorch.org/vision/master/models/faster_rcnn.html). 
 
-A brief tutorial highlighting the steps needed to deploy WhaleMoanDetector and visualize results is included in below in the [workflow section](https://github.com/m1alksne/WhaleMoanDetector/tree/main?tab=readme-ov-file#whalemoandetector-workflow). 
+A brief tutorial highlighting the steps needed to deploy WhaleMoanDetector and visualize results is included below in the [workflow section](https://github.com/m1alksne/WhaleMoanDetector/tree/main?tab=readme-ov-file#whalemoandetector-workflow). 
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/all_example.JPG)
-WhaleMoanDetector is trained to identify north eastern pacific blue whale A, B, and D calls, and fin whale 20 Hz and 40 Hz calls in 60 second spectrograms.
+WhaleMoanDetector is trained to identify eastern North Pacific blue whale A, B, and D moans and fin whale 20 Hz and 40 Hz moans in 60 second spectrograms.
+
+Additional information about eastern North Pacific blue whale moans can be found in:
+ 
+Oleson, E., J. Calambokidis, W. Burgess, M. Mcdonald, C. A. Leduc and J. A. Hildebrand. 2007. Behavioral context of Northeast Pacific blue whale call production. Marine Ecology-progress Series - MAR ECOL-PROGR SER 330:269-284.
+[https://www.int-res.com/abstracts/meps/v330/p269-284/](https://www.int-res.com/abstracts/meps/v330/p269-284/)
+
+Additional information about southern california fin whale moans can be found in:
+
+Širović, A., L. N. Williams, S. M. Kerosky, S. M. Wiggins and J. A. Hildebrand. 2013. Temporal separation of two fin whale call types across the eastern North Pacific. Marine Biology 160:47-57.
+[https://link.springer.com/article/10.1007/s00227-012-2061-z](https://link.springer.com/article/10.1007/s00227-012-2061-z)
 
 
 ## WhaleMoanDetector Directory Structure: 
