@@ -9,7 +9,7 @@ Photo credit: Manuel Mendieta
 
 ## Overview 
 
-The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned rCNN model for blue and fin whale moans. We fine-tuned the final two layers of faster-rCNN [(Ren et al. 2015)](https://arxiv.org/abs/1506.01497) with a ResNet-50 backbone using the pre-trained model available in [Pytorch](https://pytorch.org/vision/master/models/faster_rcnn.html). 
+The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned rCNN model for blue and fin whale moans. We fine-tuned the final two layers of faster-rCNN [(Ren et al. 2015)](https://arxiv.org/abs/1506.01497) with a ResNet-50 backbone using the pre-trained weights available in [Pytorch](https://pytorch.org/vision/master/models/faster_rcnn.html). 
 
 A brief tutorial highlighting the steps needed to deploy WhaleMoanDetector and visualize results is included in below in the [workflow section](https://github.com/m1alksne/WhaleMoanDetector/tree/main?tab=readme-ov-file#whalemoandetector-workflow). 
 
@@ -125,3 +125,4 @@ WhaleMoanDetector will make predictions on each spectrogram and predictions are 
 	```
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels.JPG)
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels2.JPG)
+![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels3.JPG)
