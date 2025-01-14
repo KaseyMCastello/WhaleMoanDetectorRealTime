@@ -1,4 +1,4 @@
-# WhaleMoanDetector: A fine-tuned rCNN for detecting and classifying blue and fin whale moans in audio data
+# WhaleMoanDetector: A fine-tuned Faster R-CNN for detecting and classifying blue and fin whale moans in audio data
 
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green)
