@@ -121,7 +121,7 @@ WhaleMoanDetector will make predictions on each spectrogram and predictions are 
 5. Visualize WhaleMoanDetector predictions:
 
 	```bash
-	python code/plot_predictions.py
+	python code/python plot_predictions.py "L:\WhaleMoanDetector_predictions\SOCAL_H_65\SOCAL_H_65_raw_detections.txt"
 	```
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels.JPG)
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels2.JPG)
