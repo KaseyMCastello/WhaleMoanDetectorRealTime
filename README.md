@@ -122,3 +122,4 @@ WhaleMoanDetector will make predictions on each spectrogram and predictions are 
 	python code/plot_predictions.py
 	```
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels.JPG)
+![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels2.JPG)
