@@ -107,23 +107,25 @@ def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wa
         image = ImageOps.flip(S_dB_img)
         # Convert the image to a numpy array for processing
         img_array = np.array(image)
-        threshold_1 = 200  # Threshold for the first 10 pixel block
-        threshold_2 = 180  # Threshold for the second 10 pixel block
-        threshold_3 = 160  # Lower threshold for the third 10 pixel block
+        #uncomment for CalCOFI Sonobuoys 
+        
+        # threshold_1 = 200  # Threshold for the first 10 pixel block
+        # threshold_2 = 180  # Threshold for the second 10 pixel block
+        # threshold_3 = 160  # Lower threshold for the third 10 pixel block
 
-        # Gray value to replace the AIS signal
-        gray_value = 128  # Mid-gray
-        # Find the vertical white lines and gray them out
-        # Loop through each column (time slice) in the spectrogram
-        for col in range(img_array.shape[1]):  # Loop through each column
-        # Check first 10 pixel block (corresponding to the lowest frequency band)
-           if np.sum(img_array[-10:, col]) > threshold_1 * 10:
-               # If the first 10 pixel block passes, check the second 10 pixel block
-               if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
-                   # If the second block passes, check the third block with a lower threshold
-                   if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
-                       # If all conditions are met, gray out the entire column
-                       img_array[:, col] = gray_value  # Replace the entire column with gray 
+        # # Gray value to replace the AIS signal
+        # gray_value = 128  # Mid-gray
+        # # Find the vertical white lines and gray them out
+        # # Loop through each column (time slice) in the spectrogram
+        # for col in range(img_array.shape[1]):  # Loop through each column
+        # # Check first 10 pixel block (corresponding to the lowest frequency band)
+        #    if np.sum(img_array[-10:, col]) > threshold_1 * 10:
+        #        # If the first 10 pixel block passes, check the second 10 pixel block
+        #        if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
+        #            # If the second block passes, check the third block with a lower threshold
+        #            if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
+        #                # If all conditions are met, gray out the entire column
+        #                img_array[:, col] = gray_value  # Replace the entire column with gray 
         
         # Convert back to image
         final_image = Image.fromarray(img_array)
