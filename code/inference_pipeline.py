@@ -116,10 +116,9 @@ with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
 
 print('Predictions complete')
 
+#print('Running call context filter')
 
-print('Running call context filter')
-
-call_context_filter(txt_file_path)
+#call_context_filter(txt_file_path)
 
 
 

@@ -24,6 +24,8 @@ WhaleMoanDetector/
 ├── code               <- All code required to run detector
 │   ├── AudioDetectionDataset.py     <- Dataset class.
 │   ├── AudioStreamDescriptor.py     <- Parses xwav and wav headers.
+│   ├── call_context_filter.py       <- Context filters predictions based on duration and frequency.
+│   ├── config.yaml                  <- User defined variables for running inference.
 │   ├── custom_collate.py            <- Collate function.
 │   ├── extract_wav_header.py	     <- Function to extract xwav and wav headers.
 │   ├── freq_bbox.py		     <- Converts bounding boxes to frequency (Hz).
@@ -37,12 +39,13 @@ WhaleMoanDetector/
 │   │						start and end times as # of seconds into start of wav file.
 │   ├── modify_timestamp_function.py <- Necessary function for modify_timestamp.py.
 │   ├── plot_groundtruth.py          <- Plots groundtruth annotations in Spyder software.
-│   ├── test_compute_metrics.py      <- Generates PR curve for test data.
-│   ├── test_plot_predictions.py     <- Visualize predictions and groundtruth labels in Spyder.
+│   ├── PR_curve.py      	     <- Generates PR curve for test data.
+│   ├── plot_predictions.py          <- Visualize WhaleMoanDetector predictions in Spyder.
 │   ├── time_bbox.py                 <- Converts bounding boxes to time (sec into file).
 │   ├── train.py                     <- Train WhaleMoanDetector.
 │   ├── train_val_test_split_all.py  <- Make train/val/test splits using outputs of make_annotations.py.
-│   
+│   ├── validation.py                <- Run validation script
+│
 ├── figures               <- Graphics and figures to be used in reporting
 ├── labeled_data
 │   │	└── CalCOFI
