@@ -82,9 +82,19 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
                 
 def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wav_file_path, wav_start_time, audio_basename, 
                                   chunk_start_times, window_size, overlap_size, inverse_label_mapping, time_per_pixel, is_xwav,
+                                  A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
                                   freq_resolution=1, start_freq=10, max_freq=150):
     predictions = []
     csv_base_dir = os.path.dirname(csv_file_path)
+    
+    # Threshold dictionary for easy access by label name
+    thresholds = {
+        'A': A_thresh,
+        'B': B_thresh,
+        'D': D_thresh,
+        '20Hz': TwentyHz_thresh,
+        '40Hz': FourtyHz_thresh
+    }
     
     # Zip spectrograms and start times
     data = list(zip(spectrograms, chunk_start_times))
@@ -149,6 +159,11 @@ def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wa
             for box, score, label in zip(boxes, scores, labels):
                 # Convert bounding box coordinates to time and frequency
                 # Calculate start and end times from the x-coordinates of the bounding box
+                textual_label = inverse_label_mapping.get(label.item(), 'Unknown')
+                # Skip detection if the score is below the threshold for this label
+                if score.item() < thresholds.get(textual_label, 0):
+                    continue
+                
                 start_time = box[0].item() * time_per_pixel + chunk_start_time
                 end_time = box[2].item() * time_per_pixel + chunk_start_time
                 # Calculate the lower and upper frequencies from the y-coordinates
@@ -174,8 +189,8 @@ def predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wa
                     'score': round(score.item(), 2),
                     'start_time_sec': start_time,  # Start time of the detection in the wav file
                     'end_time_sec': end_time,      # End time of the detection in the wav file
-                    'start_time': start_datetime,
-                    'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3],
+                    'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+                    'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
                     'min_frequency': round(lower_freq),
                     'max_frequency': round(upper_freq),
                     'box_x1': box[0].item(),

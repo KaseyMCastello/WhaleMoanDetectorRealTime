@@ -1,4 +1,5 @@
 audio_file,annotation,high_f,low_f,start_time,end_time
+./audio/CC0808SB01_0815181000.wav,A,95,77,68.999,87.578
 ./audio/CC0808SB01_0815181000.wav,20Hz,36,19,78.961,82.078
 ./audio/CC0808SB01_0815181000.wav,20Hz,40,19,86.601,91.429
 ./audio/CC0808SB01_0815181000.wav,20Hz,37,15,105.064,111.237
@@ -24,4 +25,3 @@ audio_file,annotation,high_f,low_f,start_time,end_time
 ./audio/CC0808SB01_0815181000.wav,20Hz,36,17,525.294,531.834
 ./audio/CC0808SB01_0815181000.wav,20Hz,28,11,538.495,545.279
 ./audio/CC0808SB01_0815181000.wav,20Hz,41,15,548.152,553.591
-./audio/CC0808SB01_0815181000.wav,A,95,77,68.999,87.578

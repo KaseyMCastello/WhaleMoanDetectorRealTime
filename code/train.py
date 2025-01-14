@@ -64,6 +64,9 @@ print(device)
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.001, momentum = 0.9, weight_decay= 0.0005) #SDG = stochastic gradient desent with these hyperparameters
 num_epochs = 30
 
+precision_recall_output = ""
+
+
 # model training loop.
 model.to(device)
 for epochs in range(num_epochs):
@@ -99,14 +102,20 @@ for epochs in range(num_epochs):
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_10_04_24_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_12_11_24_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     
     model.eval()
     
     with torch.no_grad():
-        validation(val_d1, device, model, epoch_train_loss)
+        precision_recall_output = validation(val_d1, device, model, epoch_train_loss, epochs, precision_recall_output)
+        
+        
+# Save the accumulated metrics
+precision_recall_file_path = "L:/WhaleMoanDetector/figures/test_performance/validation_precision_recall_output.txt"
+with open(precision_recall_file_path, "w") as f:
+    f.write(precision_recall_output)
 
  
     

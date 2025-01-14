@@ -23,10 +23,10 @@ import random
 import pandas as pd
 import numpy as np
 
-directory_path = "L:/WhaleMoanDetector/labeled_data/pseudo_logs" # point to original logger files
-all_files = glob.glob(os.path.join(directory_path,'CalCOFI_2011_11_pseudo_logs.xls')) # path for all files
+directory_path = "L:/WhaleMoanDetector/labeled_data/modified_annotations/backup" # point to original logger files
+all_files = glob.glob(os.path.join(directory_path,'SOCAL_H_65_log.csv')) # path for all files
 
-new_base_path = 'L:/ifrcnn_for_michaela-CalCOFI/audio' # path to change to 
+new_base_path = 'L:/SOCAL_H_65_180709_051300_df100.x' # path to change to 
 
 # make a subfolder for saving modified logs 
 subfolder_name = "modified_annotations"
@@ -37,7 +37,7 @@ os.makedirs(subfolder_path, exist_ok=True)
 # loop through all annotation files and save them in subfolder "modified_annotations"
 
 for file in all_files:
-    data = pd.read_excel(file)
+    data = pd.read_csv(file)
     
     # if any(data['Input file'].str.contains('DCPP01A_d01_121106_083945.d100.x.wav')):
         
@@ -67,8 +67,11 @@ for file in all_files:
     #     subset_df.loc[mask, 'end_time'] -= seconds_difference
     #     subset_df.reset_index(drop=True)
     # else:
-    subset_df = modify_annotations(data, new_base_path)
         
+        
+    subset_df = modify_annotations(data, new_base_path)
+    
+   
     filename = os.path.basename(file)
     new_filename = filename.replace('.xls', '_modification.csv')
      # Construct the path to save the modified DataFrame as a CSV file

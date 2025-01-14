@@ -28,8 +28,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from make_spectrograms import make_spectrograms
 
-directory_path = "L:/WhaleMoanDetector/labeled_data/modified_annotations/CalCOFI" # point to modified annotation files
-all_files = glob.glob(os.path.join(directory_path, "*.csv")) # path for all files
+directory_path = "L:/WhaleMoanDetector/labeled_data/modified_annotations/CalCOFI/from_WMV/" # point to modified annotation files
+all_files = glob.glob(os.path.join(directory_path, "*CC2307SR*.csv")) # path for all files
 output_directory = "L:/WhaleMoanDetector/labeled_data/spectrograms/CalCOFI/"
 
 for file in all_files:

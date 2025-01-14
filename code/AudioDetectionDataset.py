@@ -83,11 +83,12 @@ class AudioDetectionData_with_hard_negatives(Dataset):
         
         # Get image path
         img_path = image_data.iloc[0]['spectrogram_path']
+        #print(img_path)
         img = Image.open(img_path).convert('L')
         
         # Check for NaN labels (indicating hard negative example)
         if pd.isnull(image_data.iloc[0]['label']):
-            return T.ToTensor()(img), None
+            return T.ToTensor()(img), None, img_path  
         
         # Get boxes and labels
         boxes = image_data[['xmin', 'ymin', 'xmax', 'ymax']].values.astype('float')
@@ -95,9 +96,11 @@ class AudioDetectionData_with_hard_negatives(Dataset):
         label_encoded = [self.label_mapping[label] for label in labels]
         label_encoded = torch.tensor(label_encoded, dtype=torch.int64)
         
+        
         # Create target dict
         target = {}
         target['boxes'] = torch.tensor(boxes, dtype=torch.float32)
         target['labels'] = label_encoded
+        #print(img_path)
         
         return T.ToTensor()(img), target, img_path

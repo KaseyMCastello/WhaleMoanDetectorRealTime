@@ -28,14 +28,21 @@ from IPython.display import display
 import csv
 import yaml
 from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_save_spectrograms
+from call_context_filter import call_context_filter
 
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
 # Access the configuration variables
 wav_directory = config['wav_directory']
-csv_file_path = config['csv_file_path']
+txt_file_path = config['txt_file_path']
 model_path = config['model_path']
+
+A_thresh=0
+B_thresh=0
+D_thresh=0
+TwentyHz_thresh=0
+FourtyHz_thresh=0
 
 # Define spectrogram and data parameters
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
@@ -61,62 +68,58 @@ model.to(device)
 model.eval()
 
 
-# Open the CSV file just once, and write headers
-with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
-   
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-   
-    writer.writeheader()
+# Open the TXT file and write headers
+with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
+    # Write headers with tab as a delimiter
+    txtfile.write('\t'.join(fieldnames) + '\n')
 
-# Loop over each file in the directory or subdirectory
+    # Loop over each file in the directory or subdirectory
     for dirpath, dirnames, filenames in os.walk(wav_directory):
-       
         for filename in filenames:
-          
             if filename.endswith('.wav'):
-            # Full path to the WAV file
+                # Full path to the WAV file
                 wav_file_path = os.path.join(dirpath, filename)
-                
-                # Extract the subdirectory name if exists
+
+                # Extract the subdirectory name if it exists
                 subfolder = os.path.relpath(dirpath, wav_directory)
-                
+
                 if subfolder == '.':
-                    # if subfolder exists, use this in audiobasepath name ( for saving images)
                     audio_basename = os.path.splitext(filename)[0]
-                 
                     print(audio_basename)
                 else:
-                    # if no subfolder exists, use wav file name
                     audio_basename = os.path.splitext(os.path.basename(wav_file_path))[0]
-                   
                     print(audio_basename)
+
                 # Extract the start datetime from the WAV file
                 wav_start_time = extract_wav_start(wav_file_path)  # Ensure this returns a datetime object
-                #wav_start_time = extract_wav_start(path)
-                is_xwav = filename.endswith('.x.wav') #check if it is an xwav or a wav file 
+                is_xwav = filename.endswith('.x.wav')  # Check if it's an xwav or a wav file
+               
                 # Process each WAV file as you have in your folder
-                chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size) # make wav chunks of given length and overlap
+                chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size)
+                spectrograms = audio_to_spectrogram(chunks, sr, device)
+
+                # Predict on spectrograms and save images and data for positive detections
+                predictions = predict_and_save_spectrograms(
+                    spectrograms, model, device, txt_file_path, wav_file_path, wav_start_time,
+                    audio_basename, chunk_start_times, window_size, overlap_size,
+                    inverse_label_mapping, time_per_pixel, is_xwav, A_thresh, B_thresh, D_thresh, 
+                    TwentyHz_thresh, FourtyHz_thresh,
+                    freq_resolution=1, start_freq=10, max_freq=150)
                 
-                spectrograms = audio_to_spectrogram(chunks, sr,device) # make spectrograms
-                #predict on spectrograms and save images and data for positive detections
-                predictions = predict_and_save_spectrograms(spectrograms, model, device, csv_file_path, wav_file_path, wav_start_time, audio_basename, 
-                                                          chunk_start_times, window_size, overlap_size, inverse_label_mapping, time_per_pixel, is_xwav,
-                                                          freq_resolution=1, start_freq=10, max_freq=150)
-                
-                # Write event details and image names to CSV
-                # Now write each event detail to the CSV, including the correct image path
+
+                # Write event details to the TXT file
                 for event in predictions:
                     event['wav_file_path'] = wav_file_path
                     event['model_no'] = model_name
-                    writer.writerow(event)
-      
-print('predictions complete')
+                    # Write each event as a line in the txt file, tab-separated
+                    txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
+
+print('Predictions complete')
 
 
+print('Running call context filter')
 
-
-
-
+call_context_filter(txt_file_path)
 
 
 

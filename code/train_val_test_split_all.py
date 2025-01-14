@@ -88,6 +88,7 @@ train_val_dataset = pd.concat([train_val_calcofi, train_val_harp], ignore_index=
 positive_examples = train_val_dataset.dropna(subset=['xmin'])
 negative_examples = train_val_dataset[train_val_dataset['label'].isna()]
 negative_examples = negative_examples[~negative_examples['spectrogram_path'].str.contains('DCPP01A')]
+negative_examples = negative_examples[~negative_examples['spectrogram_path'].str.contains('SOCAL_H_65')]
 
 # Count the number of positive examples
 num_positives = len(positive_examples)
@@ -96,14 +97,29 @@ num_positives = len(positive_examples)
 calcofi_negatives = train_val_calcofi[train_val_calcofi['label'].isna()] #didn't have enhough to balance them so I just grabbed all of them. 
 harp_negatives = train_val_harp[train_val_harp['label'].isna()].sample(n=num_positives // 3, random_state=42)
 harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('DCPP01A')] #Don't include theese cause there's so many unlabeled 
+harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('SOCAL_H_65')] #Don't include theese cause there's so many unlabeled 
+
 # Combine sampled negatives and all positives to create a balanced dataset
 balanced_train_val_dataset = pd.concat([positive_examples, calcofi_negatives, harp_negatives], ignore_index=True)
 
+#Group by spectrogram path before splitting into train and val
+
 # Split the balanced dataset into train and validation sets
-train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_size=0.1, random_state=42)
+grouped = balanced_train_val_dataset.groupby('spectrogram_path')
+
+# Create a list of unique spectrogram paths
+unique_paths = grouped.size().index.tolist()
+
+# Split the unique spectrogram paths into train and validation sets
+train_paths, val_paths = train_test_split(unique_paths, test_size=0.1, random_state=42)
+# Create train and validation datasets by filtering the original DataFrame
+train_dataset = balanced_train_val_dataset[balanced_train_val_dataset['spectrogram_path'].isin(train_paths)]
+val_dataset = balanced_train_val_dataset[balanced_train_val_dataset['spectrogram_path'].isin(val_paths)]
+
+#train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_size=0.1, random_state=42)
 
 # Save the split datasets to CSV files in the output directory
-train_dataset.to_csv(os.path.join(output_directory_path, 'train.csv'), index=False)
+train_dataset.to_csv(os.path.join(output_directory_path, 'train_unmodified.csv'), index=False)
 val_dataset.to_csv(os.path.join(output_directory_path, 'val.csv'), index=False)
 test_calcofi.to_csv(os.path.join(output_directory_path, 'CC200808_test.csv'), index=False)
 test_harp.to_csv(os.path.join(output_directory_path, 'SOCAL34N_test.csv'), index=False)

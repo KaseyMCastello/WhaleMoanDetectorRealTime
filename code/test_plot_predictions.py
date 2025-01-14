@@ -36,7 +36,7 @@ from collections import OrderedDict
 def custom_collate(data):# returns the data as is 
     return data 
 
-csv_file_name = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_augmented_test.csv'
+csv_file_name = 'L:/WhaleMoanDetector/labeled_data/train_val_test_annotations/CC200808_updated_test_test_MNA.csv'
 
 df = pd.read_csv(csv_file_name)
 
