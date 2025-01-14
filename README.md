@@ -68,7 +68,7 @@ WhaleMoanDetector/
 2. [Download Miniconda](https://docs.anaconda.com/miniconda/miniconda-install/)
 
 3. [Miniconda tutorial](https://docs.anaconda.com/working-with-conda/environments/)
-## WhaleMoanDetector Setup
+## WhaleMoanDetector Workflow
 
 1. Clone the Repository:
 
@@ -116,5 +116,9 @@ WhaleMoanDetector will make predictions on each spectrogram and predictions are 
 
 ![example](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/example_directory_structure.JPG)
 
+5. Visualize WhaleMoanDetector predictions:
 
-
+	```bash
+	python code/plot_predictions.py
+	```
+![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram_with_labels.JPG)

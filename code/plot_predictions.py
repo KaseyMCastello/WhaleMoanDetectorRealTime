@@ -17,11 +17,11 @@ from PIL import Image, ImageDraw, ImageFont
 from IPython.display import display  # Import the display function
 import os
 
-base_dir = 'L:\WhaleMoanDetector_predictions\CalCOFI_2017\CalCOFI_2017_01\CalCOFI_2017_01_raw_detections.csv'
+base_dir = 'L:\WhaleMoanDetector_predictions\SOCAL_H_65\SOCAL_H_65_raw_detections.txt'
 
 # Load annotations
 #annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')
-predictions = pd.read_csv(base_dir)
+predictions = pd.read_csv(base_dir, sep = "\t")
 
 
 # Call the function with the predictions dataframe
@@ -60,7 +60,7 @@ def plot_annotated_spectrograms(predictions):
         file_name = os.path.basename(spectrogram_path)
 
         # Display the image with bounding boxes and labels
-        draw.text((0, 10), "File Path: " + file_name, fill='black', font=font)
+       # draw.text((0, 10), "File Path: " + file_name, fill='black', font=font)
         image.show()
         
         # Pause to wait for user input to proceed to the next image
