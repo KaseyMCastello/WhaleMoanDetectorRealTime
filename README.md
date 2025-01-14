@@ -105,7 +105,7 @@ WhaleMoanDetector/
     python code/inference_pipeline.py
     ```
 
-	Executing the inference pipeline will deploy WhaleMoanDetector on the directory of wav files given in ```wav_directory```. The ```inference_pipeline.py``` script preprocesses the audio data by generating 60 second non-overlapping audio segments. For each audio segment, a spectrogram is made using the ```librosa``` package with a hamming window and window length of 1 second with 90% overlap between consecutive frames. Spectrograms are truncated between 10-150 Hz and normalized individually between 0 and 1 for consistent input scaling:
+	Executing the inference pipeline will deploy WhaleMoanDetector on the directory of wav files given in ```wav_directory```. The ```inference_pipeline.py``` script preprocesses the audio data by generating 60 second non-overlapping audio segments. For each audio segment, a spectrogram is made using the [librosa](https://librosa.org/doc/latest/index.html) package with a hamming window and window length of 1 second with 90% overlap between consecutive frames. Spectrograms are truncated between 10-150 Hz and normalized individually between 0 and 1 for consistent input scaling:
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram.JPG)
 
