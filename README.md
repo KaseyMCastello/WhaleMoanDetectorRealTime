@@ -110,13 +110,14 @@ WhaleMoanDetector/
     python code/inference_pipeline.py
     ```
 
-	Executing the inference pipeline will deploy WhaleMoanDetector on the directory of wav files given in ```wav_directory```. The ```inference_pipeline.py``` script preprocesses the audio data by generating 60 second non-overlapping audio segments. For each audio segment, a spectrogram is made using the [librosa](https://librosa.org/doc/latest/index.html) package with a hamming window and window length of 1 second with 90% overlap between consecutive frames. Spectrograms are truncated between 10-150 Hz and normalized individually between 0 and 1 for consistent input scaling:
+	Executing the inference pipeline will deploy WhaleMoanDetector on the directory of wav files listed in ```wav_directory```. The ```inference_pipeline.py``` script preprocesses the audio data by generating 60 second non-overlapping audio segments. For each audio segment, a spectrogram is made using the [librosa](https://librosa.org/doc/latest/index.html) package with a hamming window and window length of 1 second with 90% overlap between consecutive frames. Spectrograms are truncated between 10-150 Hz and normalized individually between 0 and 1 for consistent input scaling:
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram.JPG)
 
-WhaleMoanDetector will make predictions on each spectrogram and predictions are written to a .txt file stored in ```txt_file_path```. PNG images of spectrograms containing predictions will also be saved to the ```txt_file_path``` directory. An example of the ```txt_file_path``` directory is included below: 
+WhaleMoanDetector will generate predictions for each spectrogram. Predictions are written to a .txt file stored in ```txt_file_path```. PNG images of spectrograms containing predictions will also be saved to the ```txt_file_path``` directory. An example of the ```txt_file_path``` directory is included below: 
 
 ![example](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/example_directory_structure.JPG)
+[Download example .txt file](https://github.com/m1alksne/WhaleMoanDetector/blob/main/examples/example_predictions.txt)
 
 5. Visualize WhaleMoanDetector predictions:
 
