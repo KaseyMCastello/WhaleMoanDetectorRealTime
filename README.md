@@ -109,7 +109,7 @@ WhaleMoanDetector/
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/SOCAL_H_65_spectrogram.JPG)
 
-WhaleMoanDetector will make predictions on each spectrogram and predictions are written to a .txt file stored in ```txt_file_path```. PNG images of spectrograms containing predictions will also be saved to the ```txt_file_path``` directory. An example of the ```txt_file_path``` directory is included below: 
+	WhaleMoanDetector will make predictions on each spectrogram and predictions are written to a .txt file stored in ```txt_file_path```. PNG images of spectrograms containing predictions will also be saved to the ```txt_file_path``` directory. An example of the ```txt_file_path``` directory is included below: 
 
 ![example](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/example_directory_structure.JPG)
 
