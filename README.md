@@ -9,7 +9,7 @@ Photo credit: Manuel Mendieta
 
 ## Overview 
 
-The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned faster-rCNN model for blue and fin whale calls, on audio files. A tutorial detailing the functions needed to deploy the trained model is included below.
+The WhaleMoanDetector repository contains Python code required to train, test, and run inference using WhaleMoanDetector, a fine-tuned faster-rCNN model for blue and fin whale calls, on audio files. A brief tutorial highlighting the functions needed to deploy the trained model is included below. The workflow is meant to be straightforward for bioacousticains who are new to Python. 
 
 ![spectrogram](https://github.com/m1alksne/WhaleMoanDetector/blob/main/figures/all_example.JPG)
 WhaleMoanDetector is trained to identify blue whale A, B, and D calls, and fin whale 20 Hz and 40 Hz calls in 60 second windows. 
@@ -105,7 +105,7 @@ WhaleMoanDetector/
     python code/inference_pipeline.py
     ```
 
-	Running the inference pipeline will deploy the model on the directory of wav files given in 
+	Running the inference pipeline will deploy the model on the directory of wav files in ```wav_directory```
 
 
 
