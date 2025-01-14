@@ -95,7 +95,7 @@ WhaleMoanDetector/
 
       ```yaml
       wav_directory: 'L:/CHNMS_audio/CHNMS_NO_01/CHNMS_NO_01_disk01_df100'
-      csv_file_path: 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.csv'
+      txt_file_path: 'M:/Mysticetes/WhaleMoanDetector_outputs/CHNMS_NO_01/CHNMS_NO_01_raw_detections.txt'
       model_path: 'L:/WhaleMoanDetector/models/WhaleMoanDetector.pth'
       ```
 
@@ -105,7 +105,7 @@ WhaleMoanDetector/
     python code/inference_pipeline.py
     ```
 
-	Running the inference pipeline will deploy the model on the directory of wav files in ```wav_directory```
+	Exectuting the inference pipeline will deploy WhaleMoanDetector on the directory of wav files in ```wav_directory```. The 	```inference_pipeline.py``` script will preprocess the audio data by generating 60 second non-overlapping audio segments between 10 and 150 Hz. The model will make predictions on spectrograms generated from each segment and store those predictions in a .txt file that gets written to ```txt_file_path```.
 
 
 
