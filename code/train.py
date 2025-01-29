@@ -37,7 +37,7 @@ import os
 
 
 train_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
-                      batch_size=32,
+                      batch_size=2,
                       shuffle = True,
                       collate_fn = custom_collate, 
                       pin_memory = True if torch.cuda.is_available() else False)
@@ -102,7 +102,7 @@ for epochs in range(num_epochs):
         optimizer.step()
     print(f'training loss: {epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_12_11_24_{epochs}.pth'
+    model_save_path = f'../models/WhaleMoanDetector_01_23_24_{epochs}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     

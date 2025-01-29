@@ -20,7 +20,8 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from scipy.ndimage import median_filter
-
+import librosa
+import librosa.display
 
 def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=60, overlap_size=30):
     output_dir = Path(output_dir)
@@ -84,15 +85,15 @@ def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=6
             gray_value = 128  # Mid-gray
             # Find the vertical white lines and gray them out
             # Loop through each column (time slice) in the spectrogram
-            # for col in range(img_array.shape[1]):
+            for col in range(img_array.shape[1]):
             # # Check first 10 pixel block (corresponding to the lowest frequency band)
-            #    if np.sum(img_array[-10:, col]) > threshold_1 * 10:
-            #        # If the first 10 pixel block passes, check the second 10 pixel block
-            #        if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
-            #            # If the second block passes, check the third block with a lower threshold
-            #            if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
-            #                # If all conditions are met, gray out the entire column
-            #                img_array[:, col] = gray_value  # Replace the entire column with gray 
+                if np.sum(img_array[-10:, col]) > threshold_1 * 10:
+                    # If the first 10 pixel block passes, check the second 10 pixel block
+                    if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
+                        # If the second block passes, check the third block with a lower threshold
+                        if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
+                            # If all conditions are met, gray out the entire column
+                            img_array[:, col] = gray_value  # Replace the entire column with gray 
             
             # Convert back to image
             final_image = Image.fromarray(img_array)
@@ -145,5 +146,5 @@ def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=6
     # Convert annotations list to DataFrame and save as CSV
     df_annotations = pd.DataFrame(annotations_list)
     df_annotations.to_csv(f"{output_dir}/{unique_name_part}_annotations.csv", index=False)
-
     
+
