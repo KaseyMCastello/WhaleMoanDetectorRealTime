@@ -19,6 +19,8 @@ harp_directory_path = "L:/WhaleMoanDetector/labeled_data/spectrograms/HARP"
 output_directory_path = "L:/WhaleMoanDetector/labeled_data/train_val_test_annotations"
 figure_file_path = "L:/WhaleMoanDetector/figures"
 
+calcofi_hard_examples = pd.read_csv("L:/WhaleMoanDetector_extra/CalCOFI_hard_examples.csv")
+
 # Get all CSV files from both directories
 calcofi_files = glob.glob(os.path.join(calcofi_directory_path, '*.csv'))
 harp_files = glob.glob(os.path.join(harp_directory_path, '*.csv'))
@@ -98,6 +100,7 @@ calcofi_negatives = train_val_calcofi[train_val_calcofi['label'].isna()] #didn't
 harp_negatives = train_val_harp[train_val_harp['label'].isna()].sample(n=num_positives // 3, random_state=42)
 harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('DCPP01A')] #Don't include theese cause there's so many unlabeled 
 harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('SOCAL_H_65')] #Don't include theese cause there's so many unlabeled 
+harp_negatives = harp_negatives[~harp_negatives['spectrogram_path'].str.contains('CINMS')] #Don't include theese cause there's so many unlabeled 
 
 # Combine sampled negatives and all positives to create a balanced dataset
 balanced_train_val_dataset = pd.concat([positive_examples, calcofi_negatives, harp_negatives], ignore_index=True)
@@ -116,10 +119,15 @@ train_paths, val_paths = train_test_split(unique_paths, test_size=0.1, random_st
 train_dataset = balanced_train_val_dataset[balanced_train_val_dataset['spectrogram_path'].isin(train_paths)]
 val_dataset = balanced_train_val_dataset[balanced_train_val_dataset['spectrogram_path'].isin(val_paths)]
 
-#train_dataset, val_dataset = train_test_split(balanced_train_val_dataset, test_size=0.1, random_state=42)
+#REMOVE CalCOFI from validation data because I am overlapping the number of samples
+
+val_dataset = val_dataset[~val_dataset['spectrogram_path'].str.contains('CalCOFI')]
+
+train_dataset = pd.concat([train_dataset, calcofi_hard_examples])
+
 
 # Save the split datasets to CSV files in the output directory
-train_dataset.to_csv(os.path.join(output_directory_path, 'train_unmodified.csv'), index=False)
+train_dataset.to_csv(os.path.join(output_directory_path, 'train.csv'), index=False)
 val_dataset.to_csv(os.path.join(output_directory_path, 'val.csv'), index=False)
 test_calcofi.to_csv(os.path.join(output_directory_path, 'CC200808_test.csv'), index=False)
 test_harp.to_csv(os.path.join(output_directory_path, 'SOCAL34N_test.csv'), index=False)
@@ -143,7 +151,6 @@ plot_histogram_with_colors(
     color_map=color_map,
     save_path = os.path.join(figure_file_path, 'all_train_val_balanced.jpeg')
 )
-
 
 # Plot histogram for the balanced dataset
 plot_histogram_with_colors(
@@ -184,3 +191,14 @@ plot_histogram_with_colors(
     color_map=color_map,
     save_path = os.path.join(figure_file_path, 'all_SOCAL34N_test_unbalanced.jpeg')
 )
+
+# Plot histogram for the test harp dataset
+plot_histogram_with_colors(
+    data=train_val_calcofi,
+    title='True and NaN Examples in CalCOFI Training Dataset',
+    xlabel='Labels',
+    ylabel='Count',
+    color_map=color_map,
+    save_path = os.path.join(figure_file_path, 'all_CalCOFI_unbalanced.jpeg')
+)
+

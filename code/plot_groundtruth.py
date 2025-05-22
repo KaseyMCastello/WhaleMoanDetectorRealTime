@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 from IPython.display import display  # Import the display function
 import os
 
-base_dir = 'L:\\WhaleMoanDetector\\labeled_data\\train_val_test_annotations\\val.csv'
+base_dir = 'L:\\WhaleMoanDetector\\labeled_data\\train_val_test_annotations\\train.csv'
 
 # Load annotations
 #annotations_path = os.path.join(base_dir, 'labeled_data', 'spectrograms', 'HARP', 'SOCAL26H_annotations.csv')
@@ -24,6 +24,10 @@ annotations = pd.read_csv(base_dir)
 
 # Function to plot bounding boxes and labels on the spectrograms
 def plot_annotated_spectrograms(annotations,base_dir):
+    
+    # Filter to only include spectrograms containing 'DCPP01A'
+    #annotations = annotations[annotations['spectrogram_path'].str.contains('SOCAL_H_65')]
+    
     grouped_annotations = annotations.groupby('spectrogram_path')
     
     for spectrogram_path, group in grouped_annotations:

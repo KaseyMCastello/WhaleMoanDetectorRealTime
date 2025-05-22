@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # File path
-path = r"L:\WhaleMoanDetector_predictions\CalCOFI_2008\CalCOFI_2008_08_B_call_model\CalCOFI_2008_08_verified_detections.txt"
+path = r"L:\WhaleMoanDetector_predictions\CalCOFI_PR\CalCOFI_2013_04_verified_detections.txt"
 
 # Load the dataset
 data = pd.read_csv(path, sep="\t")

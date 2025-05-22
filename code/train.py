@@ -37,7 +37,7 @@ import os
 
 
 train_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_data/train_val_test_annotations/train.csv'),
-                      batch_size=2,
+                      batch_size=16,
                       shuffle = True,
                       collate_fn = custom_collate, 
                       pin_memory = True if torch.cuda.is_available() else False)
@@ -50,6 +50,8 @@ val_d1 = DataLoader(AudioDetectionData_with_hard_negatives(csv_file='../labeled_
                       pin_memory = True if torch.cuda.is_available() else False)
         
         
+model_name = "WhaleMoanDetector_04_04_25_"
+
 # load our model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
 num_classes = 6 # five classes plus background
@@ -100,9 +102,12 @@ for epochs in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-    print(f'training loss: {epoch_train_loss}')
+    print(f'training loss for epoch {epochs}:{epoch_train_loss}')
     
-    model_save_path = f'../models/WhaleMoanDetector_01_23_24_{epochs}.pth'
+    # Build model name with epoch
+    model_epoch_name = f"{model_name}_epoch{epochs}"
+    
+    model_save_path = f'../models/{model_epoch_name}.pth'
     torch.save(model.state_dict(), model_save_path)
     #validation
     
@@ -112,10 +117,10 @@ for epochs in range(num_epochs):
         precision_recall_output = validation(val_d1, device, model, epoch_train_loss, epochs, precision_recall_output)
         
         
-# Save the accumulated metrics
-precision_recall_file_path = "L:/WhaleMoanDetector/figures/test_performance/validation_precision_recall_output.txt"
-with open(precision_recall_file_path, "w") as f:
-    f.write(precision_recall_output)
+        # Save the accumulated metrics
+        precision_recall_file_path = f"L:/WhaleMoanDetector/evaluation/validation_{model_epoch_name}.txt"
+        with open(precision_recall_file_path, "w") as f:
+            f.write(precision_recall_output)
 
  
     

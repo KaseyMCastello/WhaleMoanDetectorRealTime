@@ -202,10 +202,11 @@ class XWAVhdr:
 class WAVhdr:
     # Default timestamp parser
     default_re = re.compile(""".*
-        (?P<year>\d\d(\d\d)?)[-_]?(?P<month>\d\d)[-_]?(?P<day>\d\d)
-        .(?P<hour>\d\d)[:]?(?P<min>\d\d)[:]?(?P<sec>\d\d)
-        \..*
-        """, re.RegexFlag.VERBOSE)
+    (?P<year>\d\d(\d\d)?)[-_]?(?P<month>\d\d)[-_]?(?P<day>\d\d)
+    .(?P<hour>\d\d)[:]?(?P<min>\d\d)[:]?(?P<sec>\d\d)
+    (?:_(?P<msec>\d{3}))?  # Optional milliseconds
+    \..*
+    """, re.RegexFlag.VERBOSE)
 
     def __init__(self, filename, timestamp=None, tstamp_re=None):
         """
@@ -249,7 +250,7 @@ class WAVhdr:
                 self.start = datetime(
                     year, int(m.group("month")), int(m.group("day")),
                     int(m.group("hour")), int(m.group("min")),
-                    int(m.group("sec")), 0
+                    int(m.group("sec")), 0 # ignore miliseconds
                 )
 
     def get_stream_descriptor(self):

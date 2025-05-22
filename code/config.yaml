@@ -1,7 +1,7 @@
 # Configuration file to run WhaleMoanDetector and modify file paths
 #Michaela Alksne
 # define file paths:
-wav_directory: 'M:\CC2407SR\CC2407SR_Sonobuoy_recordings\OMNI'
-txt_file_path: 'L:/WhaleMoanDetector_predictions/CalCOFI_2024/CalCOFI_2024_07/CalCOFI_2024_07_raw_detections.txt'
-model_path: 'L:/WhaleMoanDetector/models/WhaleMoanDetector_12_11_24_12.pth'
-
+wav_directory: 'Q:/CalCOFI 2005/CalCOFI 2005-11/CC0511_Sonobuoys'
+txt_file_path: 'L:/WhaleMoanDetector_predictions/CalCOFI_2005/CalCOFI_2005_11/CalCOFI_2005_11_raw_detections.txt'
+model_path: 'L:/WhaleMoanDetector/models/WhaleMoanDetector_12_11_24_12_best.pth'
+CalCOFI_flag: True # True or False

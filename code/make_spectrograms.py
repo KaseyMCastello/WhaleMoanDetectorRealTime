@@ -52,6 +52,8 @@ def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=6
             else:
                 chunk = waveform[:, start_idx:end_idx]
             # Compute STFT on GPU
+            #S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr), return_complex=True)
+
             S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to('cuda'), return_complex=True)
             transform = torchaudio.transforms.AmplitudeToDB(stype='amplitude', top_db=80) #convert to dB and clip at 80dB
             S_dB_all = transform(torch.abs(S))
@@ -85,15 +87,15 @@ def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=6
             gray_value = 128  # Mid-gray
             # Find the vertical white lines and gray them out
             # Loop through each column (time slice) in the spectrogram
-            for col in range(img_array.shape[1]):
+          #  for col in range(img_array.shape[1]):
             # # Check first 10 pixel block (corresponding to the lowest frequency band)
-                if np.sum(img_array[-10:, col]) > threshold_1 * 10:
+           #     if np.sum(img_array[-10:, col]) > threshold_1 * 10:
                     # If the first 10 pixel block passes, check the second 10 pixel block
-                    if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
+            #       if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
                         # If the second block passes, check the third block with a lower threshold
-                        if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
+             #           if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
                             # If all conditions are met, gray out the entire column
-                            img_array[:, col] = gray_value  # Replace the entire column with gray 
+              #              img_array[:, col] = gray_value  # Replace the entire column with gray 
             
             # Convert back to image
             final_image = Image.fromarray(img_array)
@@ -117,12 +119,11 @@ def make_spectrograms(unique_name_part,annotations_df, output_dir, window_size=6
                 # Calculate the duration of the annotation
                 duration = adjusted_end_time - adjusted_start_time
                 
-                # Check if the annotation is at least 5 sec for A and B, 2 sec for D and 1 sec for 2 Hz and 40hz. 
-                if (row['annotation'] in ['A', 'B'] and duration >= 5) or (row['annotation'] in ['D'] and duration >= 2) or (duration >= 1):
+                # Check if the annotation is at least 10 sec for A and B, 2 sec for D and 0.5 sec for 2 Hz and 40hz. 
+                if (row['annotation'] in ['A', 'B'] and duration >= 10) or (row['annotation'] in ['D'] and duration >= 2) or (row['annotation'] in ['20Hz', '40Hz'] and duration >= 0.5):
                 
                 #adjusted_start_time = row['start_time'] - chunk_start_time
                 #adjusted_end_time = row['end_time'] - chunk_start_time
-                
 
                     xmin, xmax = time_to_pixels(adjusted_start_time, adjusted_end_time, S_dB.shape[1], window_size)
                     ymin, ymax = freq_to_pixels(row['low_f'], row['high_f'], S_dB.shape[0], sr, sr)

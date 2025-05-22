@@ -117,6 +117,7 @@ WhaleMoanDetector/
     b. Exectute inference_pipeline.py
 
     ```bash
+    cd code
     python code/inference_pipeline.py
     ```
 

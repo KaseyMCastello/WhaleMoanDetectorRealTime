@@ -164,7 +164,12 @@ def validation(vald1, device, model, epoch_train_loss, epochs, precision_recall_
             
     # Append new metrics to the output string
     for score_threshold in score_thresholds:
-        precision_recall_output += f"Training epoch {epochs} validation metrics for score threshold: {score_threshold}\n"
+        precision_recall_output += (
+            f"\n========== Epoch {epochs} ==========\n"
+            f"Training Loss: {epoch_train_loss:.4f}\n"
+            f"Validation Metrics @ Score Threshold = {score_threshold}\n"
+            f"--------------------------------------\n")
+
         for category_name, category_id in categories.items():
             tp = all_metrics[score_threshold][category_id]['tp']
             fp = all_metrics[score_threshold][category_id]['fp']
@@ -173,8 +178,9 @@ def validation(vald1, device, model, epoch_train_loss, epochs, precision_recall_
             precision = tp / (tp + fp) if (tp + fp) > 0 else 0
             recall = tp / (tp + fn) if (tp + fn) > 0 else 0
         
-            precision_recall_output += f"Category {category_name}: Precision = {precision:.4f}, Recall = {recall:.4f}\n"
-            print(f"Category {category_name}: Precision = {precision:.4f}, Recall = {recall:.4f}")
+            line = f"{category_name:<12} | Precision: {precision:.4f}  | Recall: {recall:.4f}\n"
+            precision_recall_output += line
+            print(line.strip())
 
     return precision_recall_output
        

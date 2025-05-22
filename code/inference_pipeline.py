@@ -12,6 +12,8 @@ import numpy as np
 import torch
 import os
 import torchvision
+import torchaudio
+from AudioStreamDescriptor import WAVhdr, XWAVhdr
 from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms import functional as F
 from torchvision.models.detection import FasterRCNN
@@ -27,7 +29,7 @@ from datetime import datetime, timedelta
 from IPython.display import display
 import csv
 import yaml
-from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_save_spectrograms
+from inference_functions import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_save_spectrograms, get_datetime, chunk_audio_from_xwav_raw_headers
 from call_context_filter import call_context_filter
 
 # Load the config file
@@ -37,6 +39,7 @@ with open('config.yaml', 'r') as file:
 wav_directory = config['wav_directory']
 txt_file_path = config['txt_file_path']
 model_path = config['model_path']
+CalCOFI_flag = config['CalCOFI_flag']
 
 A_thresh=0
 B_thresh=0
@@ -92,15 +95,28 @@ with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
 
                 # Extract the start datetime from the WAV file
                 wav_start_time = extract_wav_start(wav_file_path)  # Ensure this returns a datetime object
-                is_xwav = filename.endswith('.x.wav')  # Check if it's an xwav or a wav file
+                
+                if filename.endswith('.x.wav'):
+                    xwav = XWAVhdr(wav_file_path)
+                    #print(xwav)
+                    waveform, sr = torchaudio.load(wav_file_path)
+                    waveform = waveform.to(device)
+                    chunks, sr, chunk_start_times = chunk_audio_from_xwav_raw_headers(wav_file_path, waveform, device)
+                    #print(chunk_start_times)
+                    is_xwav = True
+                else:
+                    chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=60, overlap_size=0)
+                    is_xwav = False
+                
+               # is_xwav = filename.endswith('.x.wav')  # Check if it's an xwav or a wav file
                
                 # Process each WAV file as you have in your folder
-                chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size)
+                #chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size)
                 spectrograms = audio_to_spectrogram(chunks, sr, device)
 
                 # Predict on spectrograms and save images and data for positive detections
                 predictions = predict_and_save_spectrograms(
-                    spectrograms, model, device, txt_file_path, wav_file_path, wav_start_time,
+                    spectrograms, model, CalCOFI_flag, device, txt_file_path, wav_file_path, wav_start_time,
                     audio_basename, chunk_start_times, window_size, overlap_size,
                     inverse_label_mapping, time_per_pixel, is_xwav, A_thresh, B_thresh, D_thresh, 
                     TwentyHz_thresh, FourtyHz_thresh,
@@ -116,9 +132,9 @@ with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
 
 print('Predictions complete')
 
-#print('Running call context filter')
+print('Running call context filter')
 
-#call_context_filter(txt_file_path)
+call_context_filter(txt_file_path)
 
 
 
