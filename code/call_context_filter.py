@@ -37,7 +37,7 @@ def call_context_filter(txt_file_path):
 
     # Filter by score threshold
     df = df[df['score'] >= 0.2]
-
+        # Check if it's also a column
     # Extract sonobuoy deployment ID from wav_file_path (e.g., "SB01", "SB38")
     df['sonobuoy_id'] = df['wav_file_path'].apply(lambda x: re.search(r"(SB\d+)", x).group(1) if re.search(r"(SB\d+)", x) else "Unknown")
 
@@ -79,9 +79,11 @@ def call_context_filter(txt_file_path):
         return group.loc[valid_indices].drop_duplicates()  # Remove duplicates in case indices were added multiple times
 
         
-    # Apply rolling window filtering per deployment
-    df_filtered = df.groupby('sonobuoy_id', group_keys=False).apply(rolling_filter)
+   
 
+    df_filtered = df.groupby('sonobuoy_id', group_keys=False).apply(rolling_filter)
+      
+    
     # Define helper functions for further filtering
     def join_close_calls(group, join_within_sec):
         """Merge close calls within a time threshold."""
@@ -159,7 +161,9 @@ def call_context_filter(txt_file_path):
         for label, params in filters.items():
             filtered_groups.append(filter_call_type(group, label, **params))
         return pd.concat(filtered_groups)
-
+    
+    # Apply rolling window filtering per deployment
+    df_filtered = df_filtered.reset_index(drop=True)
     df_filtered = df_filtered.groupby('sonobuoy_id', group_keys=False).apply(process_deployment_group)
 
     # Save the filtered predictions to a new file

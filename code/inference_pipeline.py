@@ -98,22 +98,17 @@ with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
                 
                 if filename.endswith('.x.wav'):
                     xwav = XWAVhdr(wav_file_path)
-                    #print(xwav)
                     waveform, sr = torchaudio.load(wav_file_path)
                     waveform = waveform.to(device)
                     chunks, sr, chunk_start_times = chunk_audio_from_xwav_raw_headers(wav_file_path, waveform, device)
-                    #print(chunk_start_times)
                     is_xwav = True
                 else:
                     chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=60, overlap_size=0)
                     is_xwav = False
                 
-               # is_xwav = filename.endswith('.x.wav')  # Check if it's an xwav or a wav file
                
                 # Process each WAV file as you have in your folder
-                #chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=window_size, overlap_size=overlap_size)
                 spectrograms = audio_to_spectrogram(chunks, sr, device)
-
                 # Predict on spectrograms and save images and data for positive detections
                 predictions = predict_and_save_spectrograms(
                     spectrograms, model, CalCOFI_flag, device, txt_file_path, wav_file_path, wav_start_time,

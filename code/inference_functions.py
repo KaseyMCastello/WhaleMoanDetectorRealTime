@@ -197,7 +197,6 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
             threshold_1 = 200  # Threshold for the first 10 pixel block
             threshold_2 = 180  # Threshold for the second 10 pixel block
             threshold_3 = 160  # Lower threshold for the third 10 pixel block
-
             # Gray value to replace the AIS signal
             gray_value = 128  # Mid-gray
             # Find the vertical white lines and gray them out
@@ -233,7 +232,6 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
         boxes = boxes[keep_indices]
         scores = scores[keep_indices]
         labels = labels[keep_indices]
-        
         # Check if there are valid predictions (boxes)
         if len(boxes) > 0:
             if is_xwav:
@@ -245,17 +243,17 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
 
             chunk_end_datetime = chunk_start_datetime + timedelta(seconds=window_size)
             
-        # Save the spectrogram image
-        if is_xwav:
-            timestamp_str = chunk_start_datetime.strftime('%Y%m%dT%H%M%S')
-            image_filename = f"{audio_basename}_{timestamp_str}.png"
-        else:
-            image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
+            # Save the spectrogram image
+            if is_xwav:
+                timestamp_str = chunk_start_datetime.strftime('%Y%m%dT%H%M%S')
+                image_filename = f"{audio_basename}_{timestamp_str}.png"
+            else:
+                image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
     
-        image_path = os.path.join(csv_base_dir, image_filename)
-        final_image.save(image_path)
+            image_path = os.path.join(csv_base_dir, image_filename)
+            final_image.save(image_path)
 
-    # Iterate through detections
+            # Iterate through detections
         for box, score, label in zip(boxes, scores, labels):
             textual_label = inverse_label_mapping.get(label.item(), 'Unknown')
             if score.item() < thresholds.get(textual_label, 0):
@@ -295,37 +293,6 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
     return predictions
 
 
-def compute_snr(event):
-
-    # Read in the spectrogram image
-    image = Image.open(event['image_file_path']).convert('L')
-    
-    # Extract bounding box coordinates
-    box_x1 = int(event['box_x1'])
-    box_x2 = int(event['box_x2'])
-    box_y1 = int(event['box_y1'])
-    box_y2 = int(event['box_y2'])
-    
-    # Crop the image to the bounding box
-    cropped_image = image.crop((box_x1, box_y1, box_x2, box_y2))
-    
-    # Convert the cropped image to a numpy array
-    cropped_array = np.array(cropped_image)
-    
-    # Calculate the 75th percentile for the signal values (upper 25th %)
-    signal_75th_percentile = np.percentile(cropped_array, 75)
-    # Calculate the 25th percentile for the noise values (lower 25th %)
-    noise_25th_percentile = np.percentile(cropped_image, 25)
-    
-    # Check if the noise percentile is zero, and set it to 1
-    # doing this because when we divide by 1, it doesnt change affect the snr value and we just get back the relationship bt difference in signal and noise... i suppose
-    if noise_25th_percentile == 0:
-        noise_25th_percentile = 1
-
-    # Compute SNR
-    snr = signal_75th_percentile / noise_25th_percentile
-
-    return snr
 
 
 
