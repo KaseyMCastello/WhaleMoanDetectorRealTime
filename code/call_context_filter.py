@@ -10,7 +10,7 @@ import os
 import pandas as pd
 import re
 
-#txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2010/CalCOFI_2010_01/CalCOFI_2010_01_raw_detections.txt"
+txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2008/CalCOFI_2008_08/CalCOFI_2008_08_raw_detections.txt"
 
 def call_context_filter(txt_file_path):
     """
@@ -117,7 +117,7 @@ def call_context_filter(txt_file_path):
         for _, row in group.iterrows():
             if prev_end_time is None or (row['start_time'] - prev_end_time).total_seconds() > within_sec:
                 kept_calls.append(row)
-                prev_end_time = row['start_time']
+                prev_end_time = row['end_time']
 
         return pd.DataFrame(kept_calls)
 
@@ -144,11 +144,11 @@ def call_context_filter(txt_file_path):
 
     # Define filter parameters
     filters = {
-        'A': {'freq_range': (60, 100), 'duration_range': (1, 25), 'join_within_sec': 2},
-        'B': {'freq_range': (10, 70), 'duration_range': (1, 25), 'join_within_sec': 2},
+        'A': {'freq_range': (60, 100), 'duration_range': (5, 25), 'join_within_sec': 3, 'keep_highest_within_sec': None},
+        'B': {'freq_range': (10, 70), 'duration_range': (5, 25), 'join_within_sec': 3,'keep_highest_within_sec': None},
         'D': {'freq_range': (20, 120), 'duration_range': (2, 10)},
         '40Hz': {'freq_range': (35, 100), 'duration_range': (0, 4)},
-        '20Hz': {'freq_range': (9, 35), 'duration_range': None, 'join_within_sec': 1, 'keep_highest_within_sec': 1},
+        '20Hz': {'freq_range': (9, 40), 'duration_range': None, 'join_within_sec': None, 'keep_highest_within_sec': 1},
     }
 
     # Apply frequency, duration, and merging filters per deployment
@@ -174,4 +174,4 @@ def call_context_filter(txt_file_path):
 
 
 #txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2009/CalCOFI_2009_11/CalCOFI_2009_11_raw_detections.txt"
-#df_filtered = call_context_filter(txt_file_path)
+df_filtered = call_context_filter(txt_file_path)
