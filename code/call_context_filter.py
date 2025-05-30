@@ -10,7 +10,7 @@ import os
 import pandas as pd
 import re
 
-txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2008/CalCOFI_2008_08/CalCOFI_2008_08_raw_detections.txt"
+#txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2008/CalCOFI_2008_08/CalCOFI_2008_08_raw_detections.txt"
 
 def call_context_filter(txt_file_path):
     """
@@ -174,4 +174,4 @@ def call_context_filter(txt_file_path):
 
 
 #txt_file_path = "L:/WhaleMoanDetector_predictions/CalCOFI_2009/CalCOFI_2009_11/CalCOFI_2009_11_raw_detections.txt"
-df_filtered = call_context_filter(txt_file_path)
+#df_filtered = call_context_filter(txt_file_path)
