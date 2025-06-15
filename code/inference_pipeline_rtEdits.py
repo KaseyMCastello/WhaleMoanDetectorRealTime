@@ -121,13 +121,15 @@ def inferencer():
         audio_tensor = torch.tensor(audio_np).to(device).unsqueeze(0)  # [1, N]
 
         spectrograms = audio_to_spectrogram(audio_tensor.unsqueeze(0), sample_rate, device)
+        spectrogram_data = spectrograms[0]  # now a single spectrogram per call
+        window_start_datetime = datetime.utcnow() - timedelta(seconds=window_size)
+
         predictions = predict_and_save_spectrograms(
-            spectrograms, model, CalCOFI_flag, device, txt_file_path, "udp_stream",
-            datetime.utcnow(), "udp_stream", [0], window_size, 0,
-            inverse_label_mapping, time_per_pixel, False,
+            spectrogram_data, model, CalCOFI_flag, device, txt_file_path,
+            window_start_datetime, "udp_stream", window_size,
+            inverse_label_mapping, time_per_pixel,
             A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
-            freq_resolution=1, start_freq=10, max_freq=150
-        )
+            freq_resolution=1, start_freq=10, max_freq=150)
 
         with open(txt_file_path, mode='a', encoding='utf-8') as txtfile:
             fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
