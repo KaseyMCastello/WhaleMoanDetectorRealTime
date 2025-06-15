@@ -88,17 +88,20 @@ def udp_listener():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((listen_port, 1045))
     print(f"Listening for UDP packets from {listen_port} on port 1045...")
-
+    eventNumber = 0
     while not stop_event.is_set():
         try:
             data, _ = sock.recvfrom(packet_size)
             if len(data) != packet_size:
                 continue
             audio_data = data[12:]
+            if(eventNumber % 1000 == 1):
+                print(f"Received packet {eventNumber} at {datetime.utcnow()}")
             with buffer_lock:
                 audio_buffer.append(audio_data)
-                if len(audio_buffer) >= packets_needed:
+                if len(audio_buffer) >= packets_needed and not inference_trigger.is_set():
                     inference_trigger.set()
+                eventNumber += 1
         except socket.error:
             break  # allows clean exit if socket is closed
     sock.close()
@@ -112,6 +115,9 @@ def inferencer():
             continue  # timeout passed, no trigger
 
         with buffer_lock:
+            if len(audio_buffer) < packets_needed:
+                inference_trigger.clear()
+                continue  # Not enough data yet
             #Save the bytes I need from the buffer then clear/exit to allow more gathering
             print(f"Received {len(audio_buffer)} packets. Starting inference.")
             full_audio_bytes = b''.join(audio_buffer[:packets_needed])
