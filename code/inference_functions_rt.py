@@ -171,7 +171,7 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
 
       
                 
-def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv_file_path, wav_file_path, wav_start_time, audio_basename, 
+def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv_file_path, wav_start_time, audio_basename, 
                                   chunk_start_times, window_size, overlap_size, inverse_label_mapping, time_per_pixel, is_xwav,
                                   A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
                                   freq_resolution=1, start_freq=10, max_freq=150):

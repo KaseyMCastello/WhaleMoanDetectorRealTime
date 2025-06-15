@@ -7,50 +7,40 @@ Created on Thu Mar 28 16:41:34 2024
 script to run the required functions in the correct order to make predictions using trained model
 """
 
-import librosa
-import numpy as np
+import socket
+import struct
 import torch
+import yaml
 import os
+import time
+import numpy as np
+import threading
+from datetime import datetime
+from inference_functions_rt import audio_to_spectrogram, predict_and_save_spectrograms
+from call_context_filter import call_context_filter
 import torchvision
-import torchaudio
-from AudioStreamDescriptor import WAVhdr, XWAVhdr
-from PIL import Image, ImageDraw, ImageFont
-from torchvision.transforms import functional as F
 from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-import matplotlib.pyplot as plt
-import librosa.display
-from matplotlib.colors import Normalize
-import torch
-import pandas as pd
-import torchvision.ops as ops
-from PIL import ImageOps
-from datetime import datetime, timedelta
-from IPython.display import display
-import csv
-import yaml
-from inference_functions_rt import extract_wav_start, chunk_audio, audio_to_spectrogram, predict_and_save_spectrograms, get_datetime, chunk_audio_from_xwav_raw_headers
-from call_context_filter import call_context_filter
-import psutil
-import time
 
-start_time = time.perf_counter()
+start_time = time.time()
 
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
+
 # Access the configuration variables
-wav_directory = config['wav_directory']
+wav_file_path = ''
 txt_file_path = config['txt_file_path']
 model_path = config['model_path']
 CalCOFI_flag = config['CalCOFI_flag']
+listen_port = config['listen_port']
 
+#Variables for later use in spectrogram generation and filtering
 A_thresh=0
 B_thresh=0
 D_thresh=0
 TwentyHz_thresh=0
 FourtyHz_thresh=0
-batch_size = 1
 
 # Define spectrogram and data parameters
 fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
@@ -65,6 +55,16 @@ window_size = 60
 overlap_size = 0
 time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 second per pixel
 
+# Audio params (matched to my simulator (adapted from FreeWilli))
+sample_rate = 200000  # e.g. 200 kHz – adjust as needed
+bytes_per_sample = 2
+channels = 1
+samples_per_packet = 200
+packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
+packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
+packets_needed = (sample_rate * window_size) // samples_per_packet
+
+timea = time.time()
 # Load trained Faster R-CNN model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
 num_classes = 6 # 5 classes plus background
@@ -74,92 +74,99 @@ model.roi_heads.box_predictor = FastRCNNPredictor(in_features,num_classes)
 model.load_state_dict(torch.load(model_path, map_location=device))
 model.to(device)
 model.eval()
+print(f"Model load time: {time.time() - timea:.2f} seconds.")
 
+# --- SHARED RESOURCES ---
+audio_buffer = []
+#Issues with socket saving to my buffer while inference trying to read from it, prevent that.
+stop_event = threading.Event()
+buffer_lock = threading.Lock() 
+inference_trigger = threading.Event()
 
-# Open the TXT file and write headers
-with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
-    # Write headers with tab as a delimiter
-    txtfile.write('\t'.join(fieldnames) + '\n')
+# Make a UDP listener to get the packets and save them to the buffer
+def udp_listener():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((listen_port, 1045))
+    print(f"Listening for UDP packets from {listen_port} on port 1045...")
 
-    # Loop over each file in the directory or subdirectory
-    for dirpath, dirnames, filenames in os.walk(wav_directory):
-        for filename in filenames:
-            if filename.endswith('.wav'):
-                # Full path to the WAV file
-                wav_file_path = os.path.join(dirpath, filename)
+    while not stop_event.is_set():
+        try:
+            data, _ = sock.recvfrom(packet_size)
+            if len(data) != packet_size:
+                continue
+            audio_data = data[12:]
+            with buffer_lock:
+                audio_buffer.append(audio_data)
+                if len(audio_buffer) >= packets_needed:
+                    inference_trigger.set()
+        except socket.error:
+            break  # allows clean exit if socket is closed
+    sock.close()
+    print("No longer listening. Have a whale of a day!")
 
-                # Extract the subdirectory name if it exists
-                subfolder = os.path.relpath(dirpath, wav_directory)
+def inferencer():
+    while not stop_event.is_set():
+        #Wait for the listener to say there's 60s of data in the buffer
+        inference_trigger.wait(timeout=1.0)
+        if not inference_trigger.is_set():
+            continue  # timeout passed, no trigger
 
-                if subfolder == '.':
-                    audio_basename = os.path.splitext(filename)[0]
-                    print(audio_basename)
-                else:
-                    audio_basename = os.path.splitext(os.path.basename(wav_file_path))[0]
-                    print(audio_basename)
+        with buffer_lock:
+            #Save the bytes I need from the buffer then clear/exit to allow more gathering
+            print(f"Received {len(audio_buffer)} packets. Starting inference.")
+            full_audio_bytes = b''.join(audio_buffer[:packets_needed])
+            del audio_buffer[:packets_needed]
+        
+        audio_np = np.frombuffer(full_audio_bytes, dtype=np.int16).astype(np.float32)
+        audio_tensor = torch.tensor(audio_np).to(device).unsqueeze(0)  # [1, N]
 
-                # Extract the start datetime from the WAV file
-                wav_start_time = extract_wav_start(wav_file_path)  # Ensure this returns a datetime object
-                
-                if filename.endswith('.x.wav'):
-                    xwav = XWAVhdr(wav_file_path)
-                    waveform, sr = torchaudio.load(wav_file_path)
-                    waveform = waveform.to(device)
-                    chunks, sr, chunk_start_times = chunk_audio_from_xwav_raw_headers(wav_file_path, batch_size, waveform, device)
-                    is_xwav = True
-                else:
-                    chunks, sr, chunk_start_times = chunk_audio(wav_file_path, device, window_size=60, overlap_size=0)
-                    is_xwav = False
-                
-                num_chunks = len(chunks)
-                print(num_chunks)
-                #Test: do this in batches to prevent RAM overload
-                for i in range(0, num_chunks, batch_size):
-                    if(i>1):
-                        break
-                    batch_chunks = chunks[i:i+batch_size]  # List of tensors with shape [1, N]
+        spectrograms = audio_to_spectrogram(audio_tensor.unsqueeze(0), sample_rate, device)
+        predictions = predict_and_save_spectrograms(
+            spectrograms, model, CalCOFI_flag, device, txt_file_path, "udp_stream",
+            datetime.utcnow(), "udp_stream", [0], window_size, 0,
+            inverse_label_mapping, time_per_pixel, False,
+            A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
+            freq_resolution=1, start_freq=10, max_freq=150
+        )
 
-                    # Stack to shape [B, 1, N]
-                    batch_tensor = torch.stack(batch_chunks).to(device)
+        with open(txt_file_path, mode='a', encoding='utf-8') as txtfile:
+            fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
+                          'start_time_sec', 'end_time_sec', 'start_time', 'end_time',
+                          'min_frequency', 'max_frequency', 'box_x1', 'box_x2',
+                          'box_y1', 'box_y2']
+            for event in predictions:
+                event['wav_file_path'] = 'udp_stream'
+                event['model_no'] = model_name
+                txtfile.write('\t'.join(str(event[f]) for f in fieldnames) + '\n')
 
-                    # Generate spectrograms (must support batched input)
-                    spectrograms = audio_to_spectrogram(batch_tensor, sr, device)
-                
-                    batch_start_times = chunk_start_times[i:i+len(batch_chunks)]
-                    
-                    predictions = predict_and_save_spectrograms(
-                        spectrograms, model, CalCOFI_flag, device, txt_file_path, wav_file_path, wav_start_time,
-                        audio_basename, batch_start_times, window_size, overlap_size,
-                        inverse_label_mapping, time_per_pixel, is_xwav, A_thresh, B_thresh, D_thresh,
-                        TwentyHz_thresh, FourtyHz_thresh,
-                        freq_resolution=1, start_freq=10, max_freq=150)
+        print(f"Inference complete. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
-                    for event in predictions:
-                        event['wav_file_path'] = wav_file_path
-                        event['model_no'] = model_name
-                        txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
+        
 
-print('Predictions complete')
+if __name__ == "__main__":
+    os.makedirs(os.path.dirname(txt_file_path), exist_ok=True)
 
-print('Running call context filter')
+    with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
+        txtfile.write('\t'.join([
+            'wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
+            'start_time_sec', 'end_time_sec', 'start_time', 'end_time',
+            'min_frequency', 'max_frequency', 'box_x1', 'box_x2', 'box_y1', 'box_y2'
+        ]) + '\n')
 
-call_context_filter(txt_file_path)
+    print("Beginning UDP Listener and Inferencer")
+    listener_thread = threading.Thread(target=udp_listener, daemon=True)
+    inference_thread = threading.Thread(target=inferencer, daemon=True)
+    listener_thread.start()
+    inference_thread.start()
 
-end_time = time.perf_counter()
-elapsed_time = end_time - start_time
-print(f"Batch Size: {batch_size}, Elapsed time: {elapsed_time:.4f} seconds")
-
-
-
-
-
-
-
-
-
-
-
-
-
+    try:
+        listener_thread.join()
+        inference_thread.join()
+    except KeyboardInterrupt:
+        print("Kill switch activated. Shutting down...")
+        stop_event.set()
+        listener_thread.join()
+        inference_thread.join()
+        print("Shutdown complete.")
 
 
