@@ -16,7 +16,7 @@ import time
 import numpy as np
 import threading
 from datetime import datetime, timedelta
-from inference_functions_rt import audio_to_spectrogram, predict_and_save_spectrograms
+from inference_functions_rt import audio_to_spectrogram, predict_and_save_spectrograms, convertBackToInt16
 from call_context_filter import call_context_filter
 import torchvision
 from torchvision.models.detection import FasterRCNN
@@ -146,7 +146,7 @@ def inferencer():
             full_audio_bytes = b''.join(audio_buffer[:packets_needed])
             del audio_buffer[:packets_needed]
         
-        audio_np = np.frombuffer(full_audio_bytes, dtype=np.int16).astype(np.float32)
+        audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         audio_tensor = torch.tensor(audio_np).to(device).unsqueeze(0)  # [1, N]
 
         spectrograms = audio_to_spectrogram(audio_tensor.unsqueeze(0), sample_rate, device)
@@ -155,7 +155,7 @@ def inferencer():
         window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
         chunk_start_timesArray = [window_start_datetime]
         
-        predict_and_save_spectrograms(spectrogram_data, model, CalCOFI_flag, device, txt_file_path, 
+        predictions =predict_and_save_spectrograms(spectrogram_data, model, CalCOFI_flag, device, txt_file_path, 
                                       window_start_datetime, "udp_stream", chunk_start_timesArray, window_size, inverse_label_mapping,
                                       time_per_pixel, False, A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
                                       freq_resolution=1, start_freq=10, max_freq=150)
