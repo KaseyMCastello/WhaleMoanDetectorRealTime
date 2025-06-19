@@ -93,6 +93,7 @@ def udp_listener():
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((listen_port, 1045))
+    sock.settimeout(1.0)
     print(f"Listening for UDP packets from {listen_port} on port 1045...")
 
     while not stop_event.is_set():
@@ -125,7 +126,8 @@ def udp_listener():
                 if len(audio_buffer) >= packets_needed and not inference_trigger.is_set():
                     inference_trigger.set()
                 eventNumber += 1
-
+        except socket.timeout:
+            continue
         except socket.error:
             break  # allows clean exit if socket is closed
 
@@ -178,7 +180,7 @@ def inferencer():
 
 def timeout_monitor(timeout_seconds=60*udp_timeout):
     while not stop_event.is_set():
-        time.sleep(30)  # Check every 10 seconds
+        time.sleep(10)  # Check every 10 seconds
         time_since_last_packet = time.time() - last_packet_time
         if time_since_last_packet > timeout_seconds:
             print(f"No packets received in {timeout_seconds / 60:.0f} minutes. Shutting down...")
@@ -192,8 +194,8 @@ if __name__ == "__main__":
         txtfile.write('\t'.join(fieldnames) + '\n')
 
     print("Beginning UDP Listener and Inferencer")
-    listener_thread = threading.Thread(target=udp_listener, daemon=True)
-    inference_thread = threading.Thread(target=inferencer, daemon=True) #Daemon allows the thread to run in the background.
+    listener_thread = threading.Thread(target=udp_listener, daemon=False)
+    inference_thread = threading.Thread(target=inferencer, daemon=False) #Daemon allows the thread to run in the background.
     timeout_thread = threading.Thread(target=timeout_monitor, daemon=True)
     listener_thread.start()
     inference_thread.start()
@@ -202,13 +204,11 @@ if __name__ == "__main__":
     try:
         listener_thread.join()
         inference_thread.join()
-        timeout_thread.join()
     except KeyboardInterrupt:
         print("Kill switch activated. Shutting down...")
         stop_event.set()
         listener_thread.join()
         inference_thread.join()
-        timeout_thread.join()
         print("Shutdown complete.")
 
 
