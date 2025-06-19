@@ -62,7 +62,7 @@ channels = 1
 samples_per_packet = 248
 packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
-packets_needed = (sample_rate * window_size) // samples_per_packet
+packets_needed = (sample_rate * window_size) // samples_per_packet 
 
 timea = time.time()
 # Load trained Faster R-CNN model
@@ -147,13 +147,14 @@ def inferencer():
             del audio_buffer[:packets_needed]
         
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
+        
         audio_tensor = torch.tensor(audio_np.squeeze(), dtype=torch.float32).unsqueeze(0).to(device)  # [1, N]
         chunks = []
-
+        chunks.append(audio_tensor)
+        
         spectrograms = audio_to_spectrogram(chunks, sample_rate, device)
-        print(len(spectrograms))
-        print(spectrograms[0].shape)
-        spectrogram_data = spectrograms[0]  # now a single spectrogram per call
+        
+        #spectrogram_data = spectrograms[0]  # now a single spectrogram per call
 
         window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
         chunk_start_timesArray = [window_start_datetime]

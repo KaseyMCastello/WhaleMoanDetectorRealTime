@@ -177,8 +177,9 @@ def convertBackToInt16(audio_bytes, num_channels=1):
 # Function to convert audio chunks to spectrograms
 def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
     spectrograms = []
-   
+    
     for chunk in chunks:
+        print(chunk.shape)
         # Use librosa to compute the spectrogram
         S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to(device), return_complex=True)
         transform = torchaudio.transforms.AmplitudeToDB(stype='amplitude', top_db=80) #convert to dB and clip at 80dB
