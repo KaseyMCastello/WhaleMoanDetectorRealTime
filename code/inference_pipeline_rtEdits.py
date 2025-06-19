@@ -59,7 +59,7 @@ time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 seco
 sample_rate = 200000  # e.g. 200 kHz – adjust as needed
 bytes_per_sample = 2
 channels = 1
-samples_per_packet = 200
+samples_per_packet = 248
 packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
 packets_needed = (sample_rate * window_size) // samples_per_packet
@@ -78,6 +78,8 @@ print(f"Model load time: {time.time() - timea:.2f} seconds.")
 
 # --- SHARED RESOURCES ---
 audio_buffer = []
+first_packet_time = None  # To track the first packet time for timestamping
+eventNumber = 0  # To track the number of packets received
 #Issues with socket saving to my buffer while inference trying to read from it, prevent that.
 stop_event = threading.Event()
 buffer_lock = threading.Lock() 
@@ -85,25 +87,46 @@ inference_trigger = threading.Event()
 
 # Make a UDP listener to get the packets and save them to the buffer
 def udp_listener():
+    global first_packet_time  # So we can assign to the shared resource
+    global eventNumber
+
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((listen_port, 1045))
     print(f"Listening for UDP packets from {listen_port} on port 1045...")
-    eventNumber = 0
+
     while not stop_event.is_set():
         try:
             data, _ = sock.recvfrom(packet_size)
+
             if len(data) != packet_size:
                 continue
-            audio_data = data[12:]
-            if(eventNumber % 1000 == 1):
-                print(f"Received packet {eventNumber} at {datetime.utcnow()}")
+
+            # Extract timestamp from first packet
+            if first_packet_time is None:
+                try:
+                    year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
+                    microseconds = int.from_bytes(data[6:10], byteorder='big')
+                    year += 2000  # Adjust for two-digit format
+                    first_packet_time = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
+                    print(f"First packet timestamp set to: {first_packet_time}")
+                except Exception as e:
+                    print(f"Failed to parse first packet timestamp: {e}")
+                    continue  # Skip if timestamp parsing fails
+
+            audio_data = data[12:]  # 12-byte header; rest is audio
+
+            if eventNumber % 5000 == 1:
+                print(f"Received packet {eventNumber}")
+
             with buffer_lock:
                 audio_buffer.append(audio_data)
                 if len(audio_buffer) >= packets_needed and not inference_trigger.is_set():
                     inference_trigger.set()
                 eventNumber += 1
+
         except socket.error:
             break  # allows clean exit if socket is closed
+
     sock.close()
     print("No longer listening. Have a whale of a day!")
 
@@ -128,24 +151,21 @@ def inferencer():
 
         spectrograms = audio_to_spectrogram(audio_tensor.unsqueeze(0), sample_rate, device)
         spectrogram_data = spectrograms[0]  # now a single spectrogram per call
-        window_start_datetime = datetime.utcnow() - timedelta(seconds=window_size)
 
-        predictions = predict_and_save_spectrograms(
-            spectrogram_data, model, CalCOFI_flag, device, txt_file_path,
-            window_start_datetime, "udp_stream", window_size,
-            inverse_label_mapping, time_per_pixel,
-            A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
-            freq_resolution=1, start_freq=10, max_freq=150)
-
+        window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
+        chunk_start_timesArray = [window_start_datetime]
+        
+        predict_and_save_spectrograms(spectrogram_data, model, CalCOFI_flag, device, txt_file_path, 
+                                      window_start_datetime, "udp_stream", chunk_start_timesArray, window_size, inverse_label_mapping,
+                                      time_per_pixel, False, A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
+                                      freq_resolution=1, start_freq=10, max_freq=150)
+        
         with open(txt_file_path, mode='a', encoding='utf-8') as txtfile:
-            fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
-                          'start_time_sec', 'end_time_sec', 'start_time', 'end_time',
-                          'min_frequency', 'max_frequency', 'box_x1', 'box_x2',
-                          'box_y1', 'box_y2']
             for event in predictions:
-                event['wav_file_path'] = 'udp_stream'
+                event['wav_file_path'] = wav_file_path
                 event['model_no'] = model_name
-                txtfile.write('\t'.join(str(event[f]) for f in fieldnames) + '\n')
+                # Write each event as a line in the txt file, tab-separated
+                txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
 
         print(f"Inference complete. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
@@ -155,11 +175,7 @@ if __name__ == "__main__":
     os.makedirs(os.path.dirname(txt_file_path), exist_ok=True)
 
     with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
-        txtfile.write('\t'.join([
-            'wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
-            'start_time_sec', 'end_time_sec', 'start_time', 'end_time',
-            'min_frequency', 'max_frequency', 'box_x1', 'box_x2', 'box_y1', 'box_y2'
-        ]) + '\n')
+        txtfile.write('\t'.join(fieldnames) + '\n')
 
     print("Beginning UDP Listener and Inferencer")
     listener_thread = threading.Thread(target=udp_listener, daemon=True)

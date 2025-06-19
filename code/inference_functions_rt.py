@@ -28,6 +28,7 @@ from IPython.display import display
 from AudioStreamDescriptor import WAVhdr, XWAVhdr
 #from xwav_functions import get_datetime
 from datetime import timedelta
+import struct
 
 # hepler function uses WAVhdr to read wav file header info and extract wav file start time as a datetime object
 def extract_wav_start(path):
@@ -133,7 +134,7 @@ def chunk_audio_from_xwav_raw_headers(xwav_path, batch_size, waveform, device):
    
 # Function to load wav file audio file and chunk it into overlapping windows
 
-def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
+def chunk_audio(audio_bytes, device, window_size=60, overlap_size=5):
     # Load audio file
     waveform, sr = torchaudio.load(audio_file_path)
     waveform = waveform.to(device)  # Move waveform to GPU for efficient processing
@@ -156,6 +157,23 @@ def chunk_audio(audio_file_path, device, window_size=60, overlap_size=5):
 
     return chunks, sr, chunk_start_times
 
+def convertBackToInt16(audioBytes, num_channels=1):
+    
+    # Unpack bytes to uint16
+    num_samples = len(audio_bytes) // 2  # 2 bytes per uint16
+    audio_uint16 = struct.unpack(f'>{num_samples}H', audio_bytes)
+    audio_uint16 = np.array(audio_uint16, dtype=np.uint16)
+
+    # Convert to int16 by reversing +32768 offset
+    audio_int16 = (audio_uint16.astype(np.int32) - 32768).astype(np.int16)
+
+    # Reshape into (samples, channels)
+    if num_samples % num_channels != 0:
+        raise ValueError(f"Data length {num_samples} is not divisible by {num_channels} channels.")
+
+    audio_int16 = audio_int16.reshape(-1, num_channels)
+    return audio_int16
+
 # Function to convert audio chunks to spectrograms
 def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_length, this is dyamically adjusted depending on the sr. 
     spectrograms = []
@@ -170,15 +188,14 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
     return spectrograms
 
       
-                
-def predict_and_save_spectrograms( spectrogram_data, model, CalCOFI_flag, device, csv_file_path, 
-    window_start_datetime, audio_basename, window_size,  inverse_label_mapping, time_per_pixel,  
-    A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
-    freq_resolution=1, start_freq=10, max_freq=150 ):
-    
+def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv_file_path, wav_start_time, audio_basename, 
+                                  chunk_start_times, window_size, inverse_label_mapping, time_per_pixel, is_xwav,
+                                  A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
+                                  freq_resolution=1, start_freq=10, max_freq=150):
     predictions = []
     csv_base_dir = os.path.dirname(csv_file_path)
-
+    
+    # Threshold dictionary for easy access by label name
     thresholds = {
         'A': A_thresh,
         'B': B_thresh,
@@ -186,75 +203,114 @@ def predict_and_save_spectrograms( spectrogram_data, model, CalCOFI_flag, device
         '20Hz': TwentyHz_thresh,
         '40Hz': FourtyHz_thresh
     }
+    
+    # Zip spectrograms and start times
+    data = list(zip(spectrograms, chunk_start_times))
+    for spectrogram_data, chunk_start_time in data:
+        # Normalize spectrogram and convert to tensor
+        normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data))  
+        S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
+        image = ImageOps.flip(S_dB_img)
+        # Convert the image to a numpy array for processing
+        img_array = np.array(image)
+        
+        if CalCOFI_flag:
+        # CalCOFI Sonobuoy cleanup for AIS
 
-    # Normalize and convert spectrogram to image
-    normalized_S_dB = (spectrogram_data - np.min(spectrogram_data)) / (np.max(spectrogram_data) - np.min(spectrogram_data))
-    S_dB_img = Image.fromarray((normalized_S_dB * 255).astype(np.uint8), 'L')
-    image = ImageOps.flip(S_dB_img)
-    img_array = np.array(image)
+            threshold_1 = 200  # Threshold for the first 10 pixel block
+            threshold_2 = 180  # Threshold for the second 10 pixel block
+            threshold_3 = 160  # Lower threshold for the third 10 pixel block
+            # Gray value to replace the AIS signal
+            gray_value = 128  # Mid-gray
+            # Find the vertical white lines and gray them out
+            # Loop through each column (time slice) in the spectrogram
+            for col in range(img_array.shape[1]):  # Loop through each column
+            # Check first 10 pixel block (corresponding to the lowest frequency band)
+                if np.sum(img_array[-10:, col]) > threshold_1 * 10:
+                    # If the first 10 pixel block passes, check the second 10 pixel block
+                    if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
+                        # If the second block passes, check the third block with a lower threshold
+                        if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
+                            # If all conditions are met, gray out the entire column
+                            img_array[:, col] = gray_value  # Replace the entire column with gray 
+        
+        
+        # Convert back to image
+        final_image = Image.fromarray(img_array)
+    
+        # Convert to tensor
+        S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)        
+        # Run prediction
+        model.eval()
+        with torch.no_grad():
+            prediction = model(S_dB_tensor)
+        
+        # Extract prediction results
+        boxes = prediction[0]['boxes']
+        scores = prediction[0]['scores']
+        labels = prediction[0]['labels']
+       
+        # Apply Non-Maximum Suppression (NMS)
+        keep_indices = ops.nms(boxes, scores, 0.05)
+        boxes = boxes[keep_indices]
+        scores = scores[keep_indices]
+        labels = labels[keep_indices]
+        # Check if there are valid predictions (boxes)
+        if len(boxes) > 0:
+            if is_xwav:
+                chunk_start_datetime = chunk_start_time  # already datetime
+                chunk_start_offset_sec = None  # we don't track this in xwavs now
+            else:
+                chunk_start_offset_sec = chunk_start_time  # float
+                chunk_start_datetime = wav_start_time + timedelta(seconds=chunk_start_time)
 
-    # CalCOFI AIS cleanup
-    if CalCOFI_flag:
-        threshold_1, threshold_2, threshold_3 = 200, 180, 160
-        gray_value = 128
-        for col in range(img_array.shape[1]):
-            if np.sum(img_array[-10:, col]) > threshold_1 * 10:
-                if np.sum(img_array[-20:-10, col]) > threshold_2 * 10:
-                    if np.sum(img_array[-30:-20, col]) > threshold_3 * 10:
-                        img_array[:, col] = gray_value
+            chunk_end_datetime = chunk_start_datetime + timedelta(seconds=window_size)
+            
+            # Save the spectrogram image
+            if is_xwav:
+                timestamp_str = chunk_start_datetime.strftime('%Y%m%dT%H%M%S')
+                image_filename = f"{audio_basename}_{timestamp_str}.png"
+            else:
+                image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
+    
+            image_path = os.path.join(csv_base_dir, image_filename)
+            final_image.save(image_path)
 
-    # Convert cleaned array back to image and tensor
-    final_image = Image.fromarray(img_array)
-    S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)
+            # Iterate through detections
+        for box, score, label in zip(boxes, scores, labels):
+            textual_label = inverse_label_mapping.get(label.item(), 'Unknown')
+            if score.item() < thresholds.get(textual_label, 0):
+                continue
 
-    # Run prediction
-    model.eval()
-    with torch.no_grad():
-        prediction = model(S_dB_tensor)
+            # Get box time offsets
+            start_offset_sec = box[0].item() * time_per_pixel
+            end_offset_sec = box[2].item() * time_per_pixel
 
-    boxes = prediction[0]['boxes']
-    scores = prediction[0]['scores']
-    labels = prediction[0]['labels']
+            if is_xwav:
+                start_datetime = chunk_start_datetime + timedelta(seconds=start_offset_sec)
+                end_datetime = chunk_start_datetime + timedelta(seconds=end_offset_sec)
+                start_time_sec = None
+                end_time_sec = None
+            else:
+                start_time_sec = start_offset_sec + chunk_start_offset_sec
+                end_time_sec = end_offset_sec + chunk_start_offset_sec
+                start_datetime = wav_start_time + timedelta(seconds=start_time_sec)
+                end_datetime = wav_start_time + timedelta(seconds=end_time_sec)
 
-    keep_indices = ops.nms(boxes, scores, 0.05)
-    boxes = boxes[keep_indices]
-    scores = scores[keep_indices]
-    labels = labels[keep_indices]
-
-    # Save spectrogram image
-    timestamp_str = window_start_datetime.strftime('%Y%m%dT%H%M%S')
-    image_filename = f"{audio_basename}_{timestamp_str}.png"
-    image_path = os.path.join(csv_base_dir, image_filename)
-    final_image.save(image_path)
-
-    window_end_datetime = window_start_datetime + timedelta(seconds=window_size)
-
-    # Process predictions
-    for box, score, label in zip(boxes, scores, labels):
-        textual_label = inverse_label_mapping.get(label.item(), 'Unknown')
-        if score.item() < thresholds.get(textual_label, 0):
-            continue
-
-        # Time bounds for detection box
-        start_offset_sec = box[0].item() * time_per_pixel
-        end_offset_sec = box[2].item() * time_per_pixel
-        start_datetime = window_start_datetime + timedelta(seconds=start_offset_sec)
-        end_datetime = window_start_datetime + timedelta(seconds=end_offset_sec)
-
-        predictions.append({
-            'image_file_path': image_path,
-            'label': textual_label,
-            'score': round(score.item(), 2),
-            'start_time_sec': round(start_offset_sec, 2),
-            'end_time_sec': round(end_offset_sec, 2),
-            'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-            'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-            'min_frequency': round(max_freq - box[3].item() * freq_resolution),
-            'max_frequency': round(max_freq - box[1].item() * freq_resolution),
-            'box_x1': box[0].item(),
-            'box_x2': box[2].item(),
-            'box_y1': box[1].item(),
-            'box_y2': box[3].item()
-        })
-
+            predictions.append({
+                'image_file_path': image_path,
+                'label': textual_label,
+                'score': round(score.item(), 2),
+                'start_time_sec': start_time_sec,
+                'end_time_sec': end_time_sec,
+                'start_time': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+                'end_time': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+                'min_frequency': round(max_freq - box[3].item() * freq_resolution),
+                'max_frequency': round(max_freq - box[1].item() * freq_resolution),
+                'box_x1': box[0].item(),
+                'box_x2': box[2].item(),
+                'box_y1': box[1].item(),
+                'box_y2': box[3].item()
+                })
+    
     return predictions
