@@ -1,8 +1,8 @@
 # Configuration file to run WhaleMoanDetector and modify file paths
 #Michaela Alksne
 # define file paths:
-wav_directory: 'C:\Users\Kasey\Desktop\TestMichaelaProgram\Original'
-txt_file_path: 'C:\Users\Kasey\Desktop\TestMichaelaProgram\Output_Original2\output.txt'
-model_path: 'C:\Users\Kasey\Desktop\WhaleMoanDetector_12_11_24_12_best.pth'
+wav_directory: ''
+txt_file_path: '/home/kasey/Desktop/WhaleDet_Test_6_19\output.txt'
+model_path: '/home/kasey/Desktop/WhaleMoanDetector_12_11_24_12_best.pth'
 CalCOFI_flag: False # True or False
-listen_port: '0.0.0.0'
+listen_port: '192.168.1.235'
