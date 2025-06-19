@@ -148,7 +148,7 @@ def inferencer():
         
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         audio_tensor = torch.tensor(audio_np).to(device).unsqueeze(0)  # [1, N]
-
+        chunks = [audio_tensor]
         spectrograms = audio_to_spectrogram(audio_tensor.unsqueeze(0), sample_rate, device)
         spectrogram_data = spectrograms[0]  # now a single spectrogram per call
 
