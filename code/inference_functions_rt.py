@@ -157,7 +157,7 @@ def chunk_audio(audio_bytes, device, window_size=60, overlap_size=5):
 
     return chunks, sr, chunk_start_times
 
-def convertBackToInt16(audioBytes, num_channels=1):
+def convertBackToInt16(audio_bytes, num_channels=1):
     
     # Unpack bytes to uint16
     num_samples = len(audio_bytes) // 2  # 2 bytes per uint16
