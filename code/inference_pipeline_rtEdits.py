@@ -23,7 +23,7 @@ from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 start_time = time.time()
-timeout = 1 #minutes to wait for a UDP packet before exiting
+udp_timeout = 0.5 #minutes to wait for a UDP packet before exiting
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
@@ -176,7 +176,7 @@ def inferencer():
         print(f"Inference complete. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
 
-def timeout_monitor(timeout_seconds=60*timeout):
+def timeout_monitor(timeout_seconds=60*udp_timeout):
     while not stop_event.is_set():
         time.sleep(30)  # Check every 10 seconds
         time_since_last_packet = time.time() - last_packet_time
