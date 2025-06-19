@@ -159,7 +159,7 @@ def inferencer():
         window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
         chunk_start_timesArray = [window_start_datetime]
         
-        predictions =predict_and_save_spectrograms(spectrogram_data, model, CalCOFI_flag, device, txt_file_path, 
+        predictions =predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, txt_file_path, 
                                       window_start_datetime, "udp_stream", chunk_start_timesArray, window_size, inverse_label_mapping,
                                       time_per_pixel, False, A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
                                       freq_resolution=1, start_freq=10, max_freq=150)
