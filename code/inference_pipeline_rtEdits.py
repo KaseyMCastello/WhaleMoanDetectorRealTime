@@ -23,7 +23,7 @@ from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 start_time = time.time()
-
+timeout = 1 #minutes to wait for a UDP packet before exiting
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
@@ -80,6 +80,7 @@ print(f"Model load time: {time.time() - timea:.2f} seconds.")
 audio_buffer = []
 first_packet_time = None  # To track the first packet time for timestamping
 eventNumber = 0  # To track the number of packets received
+last_packet_time = time.time()  # To track the last packet time for timestamping
 #Issues with socket saving to my buffer while inference trying to read from it, prevent that.
 stop_event = threading.Event()
 buffer_lock = threading.Lock() 
@@ -120,6 +121,7 @@ def udp_listener():
 
             with buffer_lock:
                 audio_buffer.append(audio_data)
+                last_packet_time = time.time()  # Update last packet time
                 if len(audio_buffer) >= packets_needed and not inference_trigger.is_set():
                     inference_trigger.set()
                 eventNumber += 1
@@ -173,7 +175,15 @@ def inferencer():
 
         print(f"Inference complete. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
-        
+
+def timeout_monitor(timeout_seconds=60*timeout):
+    while not stop_event.is_set():
+        time.sleep(30)  # Check every 10 seconds
+        time_since_last_packet = time.time() - last_packet_time
+        if time_since_last_packet > timeout_seconds:
+            print(f"No packets received in {timeout_seconds / 60:.0f} minutes. Shutting down...")
+            stop_event.set()
+            break 
 
 if __name__ == "__main__":
     os.makedirs(os.path.dirname(txt_file_path), exist_ok=True)
@@ -183,18 +193,22 @@ if __name__ == "__main__":
 
     print("Beginning UDP Listener and Inferencer")
     listener_thread = threading.Thread(target=udp_listener, daemon=True)
-    inference_thread = threading.Thread(target=inferencer, daemon=True)
+    inference_thread = threading.Thread(target=inferencer, daemon=True) #Daemon allows the thread to run in the background.
+    timeout_thread = threading.Thread(target=timeout_monitor, daemon=True)
     listener_thread.start()
     inference_thread.start()
+    timeout_thread.start()
 
     try:
         listener_thread.join()
         inference_thread.join()
+        timeout_thread.join()
     except KeyboardInterrupt:
         print("Kill switch activated. Shutting down...")
         stop_event.set()
         listener_thread.join()
         inference_thread.join()
+        timeout_thread.join()
         print("Shutdown complete.")
 
 
