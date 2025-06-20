@@ -23,7 +23,7 @@ from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 start_time = time.time()
-udp_timeout = 0.5 #minutes to wait for a UDP packet before exiting
+udp_timeout = 20 #minutes to wait for a UDP packet before exiting
 # Load the config file
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
