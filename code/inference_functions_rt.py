@@ -30,6 +30,8 @@ from AudioStreamDescriptor import WAVhdr, XWAVhdr
 from datetime import timedelta
 import struct
 
+from plot_predictions_realtimeFunctions import plot_one_annotated_spectrogram
+
 # hepler function uses WAVhdr to read wav file header info and extract wav file start time as a datetime object
 def extract_wav_start(path):
     
@@ -273,8 +275,7 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
             else:
                 image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
     
-            image_path = os.path.join(csv_base_dir, image_filename)
-            final_image.save(image_path)
+            #Moved image saving to the end so that I can save the image with the boxes.
 
             # Iterate through detections
         for box, score, label in zip(boxes, scores, labels):
@@ -312,5 +313,10 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
                 'box_y1': box[1].item(),
                 'box_y2': box[3].item()
                 })
+            
+            image_path = os.path.join(csv_base_dir, image_filename)
+
+            final_image = plot_one_annotated_spectrogram(final_image, predictions)
+            final_image.save(image_path)
     
     return predictions

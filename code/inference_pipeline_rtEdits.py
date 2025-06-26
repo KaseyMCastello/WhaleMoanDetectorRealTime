@@ -90,6 +90,7 @@ inference_trigger = threading.Event()
 def udp_listener():
     global first_packet_time  # So we can assign to the shared resource
     global eventNumber
+    global last_packet_time
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((listen_port, 1045))
