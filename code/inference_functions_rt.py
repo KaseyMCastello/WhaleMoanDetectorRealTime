@@ -238,7 +238,8 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
         
         
         # Convert back to image
-        final_image = Image.fromarray(img_array)
+        #final_image = Image.fromarray(img_array)
+        final_image = Image.fromarray(img_array).convert('RGB')
     
         # Convert to tensor
         S_dB_tensor = F.to_tensor(final_image).unsqueeze(0).to(device)        
@@ -276,6 +277,7 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
                 image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
     
             #Moved image saving to the end so that I can save the image with the boxes.
+            image_path = os.path.join(csv_base_dir, image_filename)
 
             # Iterate through detections
         for box, score, label in zip(boxes, scores, labels):
@@ -314,9 +316,9 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
                 'box_y2': box[3].item()
                 })
             
-            image_path = os.path.join(csv_base_dir, image_filename)
-
-            final_image = plot_one_annotated_spectrogram(final_image, predictions)
-            final_image.save(image_path)
+            
+        final_image = plot_one_annotated_spectrogram(final_image, predictions)
+        final_image.show()
+        final_image.save(image_path)
     
     return predictions

@@ -26,10 +26,10 @@ def plot_one_annotated_spectrogram(image, predictions):
     # Load the spectrogram image
     #image = Image.open(spectrogram_path)
     draw = ImageDraw.Draw(image)  # Create a drawing context
-    font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
+    font = ImageFont.truetype("arial.ttf", 8)  # Adjust the font and size as needed
 
     # Plot each bounding box and label for this spectrogram
-    for _, row in predictions.iterrows():
+    for row in predictions:
         xmin, ymin, xmax, ymax = row['box_x1'], row['box_y1'], row['box_x2'], row['box_y2']
         label = row['label']
         score = row['score']
@@ -49,8 +49,7 @@ def plot_one_annotated_spectrogram(image, predictions):
             print(f"Unknown label: {label}. Skipping drawing for this label.")
             continue
 
-        image.show()
-        return image
+    return image    
 
     
 
