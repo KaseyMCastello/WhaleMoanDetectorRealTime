@@ -6,7 +6,6 @@ Created on Thu Mar 28 16:41:34 2024
 
 edits to Michaela Alksne's code to make inference real time.
 """
-
 import socket
 import struct
 import torch
@@ -56,13 +55,11 @@ overlap_size = 0
 time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 second per pixel
 
 # Audio params (matched to my simulator (adapted from FreeWilli))
-sample_rate = 2000  # e.g. 200 kHz – adjust as needed
-bytes_per_sample = 2
-channels = 1
-samples_per_packet = 2
 packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
-packets_needed = (sample_rate * window_size) // samples_per_packet 
+bytes_needed = sample_rate * window_size * bytes_per_sample
+
+rebaseTime = 2903226
 
 timea = time.time()
 # Load trained Faster R-CNN model
@@ -77,10 +74,12 @@ model.eval()
 print(f"Model load time: {time.time() - timea:.2f} seconds.")
 
 # --- SHARED RESOURCES ---
-audio_buffer = []
+audio_buffer = bytearray()
 first_packet_time = None  # To track the first packet time for timestamping
 eventNumber = 0  # To track the number of packets received
-last_packet_time = time.time()  # To track the last packet time for timestamping
+last_packet_time = time.time()  #To track the last packet time for timestamping
+last_window_stamp = None #To track the time at which the inference was triggered to be the start of the 60s window
+
 #Issues with socket saving to my buffer while inference trying to read from it, prevent that.
 stop_event = threading.Event()
 buffer_lock = threading.Lock() 
@@ -91,6 +90,7 @@ def udp_listener():
     global first_packet_time  # So we can assign to the shared resource
     global eventNumber
     global last_packet_time
+    global last_window_stamp
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((listen_port, 1045))
@@ -111,6 +111,7 @@ def udp_listener():
                     microseconds = int.from_bytes(data[6:10], byteorder='big')
                     year += 2000  # Adjust for two-digit format
                     first_packet_time = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
+                    last_window_stamp = first_packet_time
                     print(f"First packet timestamp set to: {first_packet_time}")
                 except Exception as e:
                     print(f"Failed to parse first packet timestamp: {e}")
@@ -122,9 +123,15 @@ def udp_listener():
                 print(f"Received packet {eventNumber}")
 
             with buffer_lock:
-                audio_buffer.append(audio_data)
+                audio_buffer.extend(audio_data)
                 last_packet_time = time.time()  # Update last packet time
-                if len(audio_buffer) >= packets_needed and not inference_trigger.is_set():
+                if len(audio_buffer) >= bytes_needed and not inference_trigger.is_set():
+                    #Have recieved enough data to trigger inference. Of note, I want to check the packet times every so often. How often makes sense?
+                    if(eventNumber > rebaseTime): #How often to check the packet times?
+                        year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
+                        microseconds = int.from_bytes(data[6:10], byteorder='big')
+                        year += 2000  # Adjust for two-digit format
+                        last_window_stamp = datetime(year, month, day, hour, minute, second, microsecond=microseconds) - timedelta(seconds=window_size)
                     inference_trigger.set()
                 eventNumber += 1
         except socket.timeout:
@@ -143,14 +150,14 @@ def inferencer():
             continue  # timeout passed, no trigger
 
         with buffer_lock:
-            if len(audio_buffer) < packets_needed:
+            if len(audio_buffer) < bytes_needed:
                 inference_trigger.clear()
                 continue  # Not enough data yet
             #Save the bytes I need from the buffer then clear/exit to allow more gathering
-            print(f"Received {len(audio_buffer)} packets. Starting inference.")
+            print(f"Received {len(audio_buffer)} bytes. Starting inference.")
             inference_start_time = time.time()
-            full_audio_bytes = b''.join(audio_buffer[:packets_needed])
-            del audio_buffer[:packets_needed]
+            full_audio_bytes = b''.join(audio_buffer[:bytes_needed])
+            del audio_buffer[:bytes_needed]
         
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         
@@ -162,7 +169,7 @@ def inferencer():
         
         #spectrogram_data = spectrograms[0]  # now a single spectrogram per call
 
-        window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
+        window_start_datetime = last_window_stamp
         print(f"Window start time: {window_start_datetime}")
         chunk_start_timesArray = [window_start_datetime]
         
@@ -177,7 +184,7 @@ def inferencer():
                 event['model_no'] = model_name
                 # Write each event as a line in the txt file, tab-separated
                 txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
-
+        last_window_stamp = window_start_datetime + timedelta(seconds=window_size)
         print(f"Inference complete. (Took {time.time() - inference_start_time} seconds. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
 

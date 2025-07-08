@@ -5,4 +5,9 @@ wav_directory: ''
 txt_file_path: '/home/kasey/Desktop/WhaleDet_Test_6_19/output.txt'
 model_path: '/home/kasey/Desktop/WhaleMoanDetector_12_11_24_12_best.pth'
 CalCOFI_flag: False # True or False
-listen_port: '192.168.1.235'
+listen_port: '192.168.137.2'
+#Datastream Firmware parameters
+sample_rate = 200000  # e.g. 200 kHz – adjust as needed
+bytes_per_sample = 2 #bytes in one acoustic sample
+channels = 1 #number of channels in the audio stream
+samples_per_packet = 248 #number of samples in one packet
