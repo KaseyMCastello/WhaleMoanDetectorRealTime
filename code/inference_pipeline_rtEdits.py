@@ -123,8 +123,8 @@ def udp_listener():
 
             audio_data = data[12:]  # 12-byte header; rest is audio
 
-            if eventNumber % 20000 == 1:
-                print(f"Received packet {eventNumber}. Waiting on 60s of data to trigger inference. Current buffer size: {len(audio_buffer)} bytes.")
+            if eventNumber % 24194 == 1:
+                print(f"Recieved 30s of data. Waiting on 60s of data to trigger inference. Current buffer size: {len(audio_buffer)} bytes.")
 
             with buffer_lock:
                 audio_buffer.extend(audio_data)
@@ -147,6 +147,7 @@ def udp_listener():
     print("No longer listening. Have a whale of a day!")
 
 def inferencer():
+    global last_window_stamp
     while not stop_event.is_set():
         #Wait for the listener to say there's 60s of data in the buffer
         inference_trigger.wait(timeout=1.0)
@@ -158,7 +159,7 @@ def inferencer():
                 inference_trigger.clear()
                 continue  # Not enough data yet
             #Save the bytes I need from the buffer then clear/exit to allow more gathering
-            print(f"Received {len(audio_buffer)} bytes. Starting inference.")
+            print(f"Received {bytes_needed} bytes. Starting inference.")
             inference_start_time = time.time()
             full_audio_bytes = audio_buffer[:bytes_needed]
             del audio_buffer[:bytes_needed]
