@@ -163,6 +163,7 @@ def inferencer():
         #spectrogram_data = spectrograms[0]  # now a single spectrogram per call
 
         window_start_datetime = first_packet_time + timedelta(milliseconds= eventNumber*1.240)
+        print(f"Window start time: {window_start_datetime}")
         chunk_start_timesArray = [window_start_datetime]
         
         predictions =predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, txt_file_path, 
