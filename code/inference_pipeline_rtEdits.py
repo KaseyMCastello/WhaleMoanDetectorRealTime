@@ -38,7 +38,6 @@ samples_per_packet = config['samples_per_packet']
 bytes_per_sample = config['bytes_per_sample']
 channels = config['channels']
 
-
 #Variables for later use in spectrogram generation and filtering
 A_thresh=0
 B_thresh=0
@@ -161,8 +160,8 @@ def inferencer():
             #Save the bytes I need from the buffer then clear/exit to allow more gathering
             print(f"Received {len(audio_buffer)} bytes. Starting inference.")
             inference_start_time = time.time()
-            full_audio_bytes = b''.join(audio_buffer[:bytes_needed])
-            del audio_buffer[:bytes_needed]
+            full_audio_bytes = audio_buffer[:total_bytes_needed]
+            del audio_buffer[:total_bytes_needed]
         
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         
