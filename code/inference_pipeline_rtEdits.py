@@ -2,9 +2,9 @@
 """
 Created on Thu Mar 28 16:41:34 2024
 
-@author: Michaela Alksne
+@author: Kasey Castello
 
-script to run the required functions in the correct order to make predictions using trained model
+edits to Michaela Alksne's code to make inference real time.
 """
 
 import socket
@@ -56,10 +56,10 @@ overlap_size = 0
 time_per_pixel = 0.1  # Since hop_length = sr / 10, this simplifies to 1/10 second per pixel
 
 # Audio params (matched to my simulator (adapted from FreeWilli))
-sample_rate = 200000  # e.g. 200 kHz – adjust as needed
+sample_rate = 2000  # e.g. 200 kHz – adjust as needed
 bytes_per_sample = 2
 channels = 1
-samples_per_packet = 248
+samples_per_packet = 2
 packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
 packets_needed = (sample_rate * window_size) // samples_per_packet 
@@ -148,6 +148,7 @@ def inferencer():
                 continue  # Not enough data yet
             #Save the bytes I need from the buffer then clear/exit to allow more gathering
             print(f"Received {len(audio_buffer)} packets. Starting inference.")
+            inference_start_time = time.time()
             full_audio_bytes = b''.join(audio_buffer[:packets_needed])
             del audio_buffer[:packets_needed]
         
@@ -176,7 +177,7 @@ def inferencer():
                 # Write each event as a line in the txt file, tab-separated
                 txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
 
-        print(f"Inference complete. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
+        print(f"Inference complete. (Took {time.time() - inference_start_time} seconds. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
 
 
 def timeout_monitor(timeout_seconds=60*udp_timeout):
