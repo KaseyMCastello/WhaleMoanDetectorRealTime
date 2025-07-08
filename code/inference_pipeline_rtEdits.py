@@ -33,6 +33,11 @@ txt_file_path = config['txt_file_path']
 model_path = config['model_path']
 CalCOFI_flag = config['CalCOFI_flag']
 listen_port = config['listen_port']
+sample_rate = config['sample_rate']
+samples_per_packet = config['samples_per_packet']
+bytes_per_sample = config['bytes_per_sample']
+channels = config['channels']
+
 
 #Variables for later use in spectrogram generation and filtering
 A_thresh=0
