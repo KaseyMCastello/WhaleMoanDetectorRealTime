@@ -259,25 +259,24 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
         scores = scores[keep_indices]
         labels = labels[keep_indices]
         # Check if there are valid predictions (boxes)
-        if len(boxes) > 0:
-            if is_xwav:
-                chunk_start_datetime = chunk_start_time  # already datetime
-                chunk_start_offset_sec = None  # we don't track this in xwavs now
-            else:
-                chunk_start_offset_sec = chunk_start_time  # float
-                chunk_start_datetime = wav_start_time + timedelta(seconds=chunk_start_time)
+        if is_xwav:
+            chunk_start_datetime = chunk_start_time  # already datetime
+            chunk_start_offset_sec = None  # we don't track this in xwavs now
+        else:
+            chunk_start_offset_sec = chunk_start_time  # float
+            chunk_start_datetime = wav_start_time + timedelta(seconds=chunk_start_time)
 
-            chunk_end_datetime = chunk_start_datetime + timedelta(seconds=window_size)
+        chunk_end_datetime = chunk_start_datetime + timedelta(seconds=window_size)
             
-            # Save the spectrogram image
-            if is_xwav:
-                timestamp_str = chunk_start_datetime.strftime('%Y%m%dT%H%M%S')
-                image_filename = f"{audio_basename}_{timestamp_str}.png"
-            else:
-                image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
+        # Save the spectrogram image
+        if is_xwav:
+            timestamp_str = chunk_start_datetime.strftime('%Y%m%dT%H%M%S')
+            image_filename = f"{audio_basename}_{timestamp_str}.png"
+        else:
+            image_filename = f"{audio_basename}_second_{int(chunk_start_time)}_to_{int(chunk_start_time + window_size)}.png"
     
-            #Moved image saving to the end so that I can save the image with the boxes.
-            image_path = os.path.join(csv_base_dir, image_filename)
+        #Moved image saving to the end so that I can save the image with the boxes.
+        image_path = os.path.join(csv_base_dir, image_filename)
 
             # Iterate through detections
         for box, score, label in zip(boxes, scores, labels):
@@ -317,8 +316,8 @@ def predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, csv
                 })
             
             
-        final_image = plot_one_annotated_spectrogram(final_image, predictions)
-        final_image.show()
+        #final_image = plot_one_annotated_spectrogram(final_image, predictions)
+        #final_image.show()
         final_image.save(image_path)
     
     return predictions

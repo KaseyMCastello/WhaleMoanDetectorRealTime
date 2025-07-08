@@ -26,7 +26,9 @@ def plot_one_annotated_spectrogram(image, predictions):
     # Load the spectrogram image
     #image = Image.open(spectrogram_path)
     draw = ImageDraw.Draw(image)  # Create a drawing context
-    font = ImageFont.truetype("arial.ttf", 8)  # Adjust the font and size as needed
+    #font = ImageFont.truetype("arial.ttf", 8)  # Adjust the font and size as needed
+    font = ImageFont.load_default()
+
 
     # Plot each bounding box and label for this spectrogram
     for row in predictions:
@@ -65,7 +67,8 @@ def plot_annotated_spectrograms(predictions):
         # Load the spectrogram image
         image = Image.open(spectrogram_path)
         draw = ImageDraw.Draw(image)  # Create a drawing context
-        font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
+        #font = ImageFont.truetype("arial.ttf", 16)  # Adjust the font and size as needed
+        font = ImageFont.load_default()
 
         # Plot each bounding box and label for this spectrogram
         for _, row in group.iterrows():
