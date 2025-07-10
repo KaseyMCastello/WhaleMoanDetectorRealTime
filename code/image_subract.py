@@ -3,9 +3,9 @@ from PIL import Image
 import numpy as np
 
 # Define folders
-rpi_folder = r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\PowerTest_200kHz"
-sgs_folder = r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\Output_Original"
-output_folder = r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\Subtracted_Output_200kHz"
+rpi_folder = r"C:\Users\Kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\TimingTest2"
+sgs_folder = r"C:\Users\Kasey\Desktop\TestMichaelaProgram\GroundTruthTests\SGs_NoLabels"
+output_folder = r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\Subtracted_Output_2kHz_fixed"
 
 # Create output directory
 os.makedirs(output_folder, exist_ok=True)

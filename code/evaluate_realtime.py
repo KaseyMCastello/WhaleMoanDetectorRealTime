@@ -6,7 +6,7 @@ from collections import defaultdict
 
 def compute_iou(box1, box2):
     """
-    Compute Intersection over Union (IoU) for 2D time-frequency boxes.
+    Compute Intersection over Union (IoU) for 2D time-frequency boxes.P
     Each box = [start_time, end_time, low_freq, high_freq]
     """
     t1_start, t1_end, f1_low, f1_high = box1
@@ -26,15 +26,13 @@ def match_predictions_to_gt(pred_df, gt_df, iou_threshold=0.5):
     Match predictions to ground truth using IoU.
     Returns TP, FP, FN per label.
     """
-    
     labels = sorted(set(gt_df['label']) | set(pred_df['label']))
     stats = defaultdict(lambda: {'TP': 0, 'FP': 0, 'FN': 0})
-
+    #I want a specific value for each label, and one for overall
     for label in labels:
-        
+        #Get all the instances of the label in both the ground truth and in the predictions
         gt_label = gt_df[gt_df['label'] == label].copy()
         pred_label = pred_df[pred_df['label'] == label].copy()
-        
 
         gt_label['matched'] = False
         pred_label['matched'] = False
@@ -43,26 +41,16 @@ def match_predictions_to_gt(pred_df, gt_df, iou_threshold=0.5):
             best_iou = 0
             best_gt_idx = None
 
-            pred_box = [
-                pd.Timestamp(pred_row['start_time']),
-                pd.Timestamp(pred_row['end_time']),
-                pred_row['low_f'],
-                pred_row['high_f']
-            ]
-
+            pred_box = [ pred_row['start_time'], pred_row['end_time'], pred_row["min_frequency"], pred_row["max_frequency"]]
             
             for gt_idx, gt_row in gt_label.iterrows():
                 if gt_label.at[gt_idx, 'matched']:
                     continue
 
-                gt_box = [gt_row['abs_start_time'], gt_row['abs_end_time'], gt_row['low_f'], gt_row['high_f']]
-
-                if(label == "d"):
-                    print("Label d:")
-                    print("Ground Truth: ", gt_box)
-                    print("Prediction: ", pred_box)
-
+                gt_box = [gt_row['start_time_abs'], gt_row['end_time_abs'], gt_row['low_f'], gt_row['high_f']]
+                
                 iou = compute_iou(pred_box, gt_box)
+                
                 if iou > best_iou:
                     best_iou = iou
                     best_gt_idx = gt_idx
@@ -73,7 +61,8 @@ def match_predictions_to_gt(pred_df, gt_df, iou_threshold=0.5):
                 pred_label.at[pred_idx, 'matched'] = True
             else:
                 stats[label]['FP'] += 1
-
+        tp_pred = pred_label[pred_label['matched']]
+        print("Maximum time for true positive prediction of type", label, "is", tp_pred['end_time'].max())
         stats[label]['FN'] += (~gt_label['matched']).sum()
 
     return stats
@@ -117,29 +106,13 @@ def compute_metrics(stats):
 
 if __name__ == "__main__":
     # Load CSVs
-    predictions = pd.read_csv(r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Spectrograms_for_Compare\RPI_DecimetedTest\output.txt", sep='\t')
-    ground_truth = pd.read_csv(r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Ground_Truth_SOCAL34N_sitN_090722_200000.x.csv")
-
-    # Optional renaming for clarity
-    predictions.rename(columns={'box_y1': 'low_f', 'box_y2': 'high_f'}, inplace=True)
-
-    # Reference datetime = 2009-07-22 20:00:00
-    ref_time = datetime.strptime("2009-07-22 20:00:00", "%Y-%m-%d %H:%M:%S")
-
-    # Compute absolute timestamps
-    ground_truth['abs_start_time'] = ground_truth['start_time'].apply(lambda s: ref_time + timedelta(seconds=s))
-    ground_truth['abs_end_time'] = ground_truth['end_time'].apply(lambda s: ref_time + timedelta(seconds=s))
-    
-    predictions['label'] = predictions['label'].str.strip().str.lower()
-    ground_truth['label'] = ground_truth['label'].str.strip().str.lower()
+    ground_truth = pd.read_excel(r"C:\Users\Kasey\Desktop\TestMichaelaProgram\GroundTruthTests\Ground_Truth_SOCAL34N_sitN_090722_200000_editedTimeFormat.xlsx")
+    predictions = pd.read_excel(r"C:\Users\Kasey\Desktop\TestMichaelaProgram\GroundTruthTests\ModelRunNoUDP\output_context_filtered.xlsx")
 
     # Limit ground truth to events that start before end of predictions
     max_pred_time = predictions['end_time'].max()
-    
-    ground_truth = ground_truth[ground_truth['abs_start_time'] <= max_pred_time]
-    
-    # Compute statistics
-    stats = match_predictions_to_gt(predictions, ground_truth, iou_threshold=0.5)
+    ground_truth = ground_truth[ground_truth['start_time_abs'] <= max_pred_time]
+    stats = match_predictions_to_gt(predictions, ground_truth, iou_threshold=0.0001)
     metrics = compute_metrics(stats)
 
     # Print results
@@ -147,3 +120,10 @@ if __name__ == "__main__":
         print(f"\nLabel: {label}")
         for k, v in result.items():
             print(f"  {k}: {v:.3f}" if isinstance(v, float) else f"  {k}: {v}")
+
+    
+    
+    
+    
+
+

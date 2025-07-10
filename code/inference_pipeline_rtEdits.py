@@ -37,6 +37,7 @@ sample_rate = config['sample_rate']
 samples_per_packet = config['samples_per_packet']
 bytes_per_sample = config['bytes_per_sample']
 channels = config['channels']
+packet_rate = config['packet_rate']
 
 #Variables for later use in spectrogram generation and filtering
 A_thresh=0
@@ -46,10 +47,9 @@ TwentyHz_thresh=0
 FourtyHz_thresh=0
 
 # Define spectrogram and data parameters
-fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score',
-              'start_time_sec','end_time_sec','start_time','end_time',
-              'min_frequency', 'max_frequency','box_x1', 'box_x2', 
-              'box_y1', 'box_y2' ]
+fieldnames = ['wav_file_path', 'model_no', 'image_file_path', 'label', 'score', 'start_time_sec','end_time_sec','start_time','end_time',
+              'min_frequency', 'max_frequency','box_x1', 'box_x2', 'box_y1', 'box_y2' ]
+# Load the model name from the model path
 model_name = os.path.basename(model_path)
 visualize_tf = False
 label_mapping = {'D': 1, '40Hz': 2, '20Hz': 3, 'A': 4, 'B': 5}
@@ -63,7 +63,7 @@ packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
 bytes_needed = sample_rate * window_size * bytes_per_sample
 
-rebaseTime = 2903226
+rebaseTime = 75 * 1000  / packet_rate * samples_per_packet # Rebase time in packets, 75 seconds of data at 1.240 ms per packet
 
 timea = time.time()
 # Load trained Faster R-CNN model
