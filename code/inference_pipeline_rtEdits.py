@@ -63,8 +63,6 @@ packet_audio_bytes = samples_per_packet * bytes_per_sample * channels
 packet_size = 12 + packet_audio_bytes  # 12 bytes header + audio data
 bytes_needed = sample_rate * window_size * bytes_per_sample
 
-rebaseTime = 75 * 1000  / packet_rate * samples_per_packet # Rebase time in packets, 75 seconds of data at 1.240 ms per packet
-
 timea = time.time()
 # Load trained Faster R-CNN model
 model = torchvision.models.detection.fasterrcnn_resnet50_fpn()
@@ -101,50 +99,42 @@ def udp_listener():
     global next_window_stamp
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((listen_port, 1045))
+    sock.bind((listen_port, 5005))
     sock.settimeout(1.0)
-    print(f"Listening for UDP packets on port 1045...")
-
+    print(f"Listening for UDP packets on port 5005...")
+    windowStampSet = False
     while not stop_event.is_set():
         try:
             data, _ = sock.recvfrom(packet_size)
 
             if len(data) != packet_size:
-                print(f"Received packet of unexpected size: {len(data)} bytes. Expected: {packet_size} bytes.")
+                print(f"Received packet of unexpected size: {len(data)} bytes. Expected: {packet_size} bytes. Event number: {eventNumber}")
                 continue
             last_packet_time = time.time()
+            year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
+            microseconds = int.from_bytes(data[6:10], byteorder='big')
+            year += 2000  # Adjust for two-digit format
+            last_packet_timestamp = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
+
             # Extract timestamp from first packet
             if first_packet_time is None:
-                try:
-                    year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
-                    microseconds = int.from_bytes(data[6:10], byteorder='big')
-                    year += 2000  # Adjust for two-digit format
-                    first_packet_time = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
-                    last_window_stamp = first_packet_time
-                    last_packet_timestamp = first_packet_time
-                    print(f"First packet timestamp set to: {first_packet_time}")
-                except Exception as e:
-                    print(f"Failed to parse first packet timestamp: {e}")
-                    continue  # Skip if timestamp parsing fails
+                first_packet_time = last_packet_timestamp
+                last_window_stamp = first_packet_time
+                print(f"First packet timestamp set to: {first_packet_time}")
             else:
-                year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
-                microseconds = int.from_bytes(data[6:10], byteorder='big')
-                year += 2000  # Adjust for two-digit format
-                last_packet_timestamp = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
-
+                if (len(audio_buffer) == 0 ):
+                    next_window_stamp = last_packet_timestamp
+                    windowStampSet = True
+                    
             audio_data = data[12:]  # 12-byte header; rest is audio
-
-            if eventNumber % (15 * 1000  / packet_rate * samples_per_packet) == 1:
-                print(f"Recieved 15s of data. Current buffer size: {len(audio_buffer)} bytes.")
 
             with buffer_lock:
                 audio_buffer.extend(audio_data)
                 if len(audio_buffer) >= bytes_needed and not inference_trigger.is_set():
-                    if(len(audio_buffer) == bytes_needed):
-                        next_window_stamp = last_packet_timestamp #Rebase every time our packet length exactly aligns with filling the window.
-                    else:
+                    if (windowStampSet == False ):
                         next_window_stamp = last_window_stamp + timedelta(seconds=window_size)
                     inference_trigger.set()
+                    windowStampSet = False
                 eventNumber += 1
         except socket.timeout:
             continue
@@ -188,7 +178,7 @@ def inferencer():
         chunk_start_timesArray = [last_window_stamp]
         
         predictions =predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, txt_file_path, 
-                                      window_start_datetime, "udp_stream", chunk_start_timesArray, window_size, inverse_label_mapping,
+                                      last_window_stamp, "udp_stream", chunk_start_timesArray, window_size, inverse_label_mapping,
                                       time_per_pixel, True, A_thresh, B_thresh, D_thresh, TwentyHz_thresh, FourtyHz_thresh,
                                       freq_resolution=1, start_freq=10, max_freq=150)
         
