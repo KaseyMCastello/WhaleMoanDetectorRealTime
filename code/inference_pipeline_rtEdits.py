@@ -108,9 +108,10 @@ def udp_listener():
             data, _ = sock.recvfrom(packet_size)
 
             if len(data) != packet_size:
-                print(f"Received packet of unexpected size: {len(data)} bytes. Expected: {packet_size} bytes. Event number: {eventNumber}")
+                print(f"Received packet of unexpected size: {len(data)} bytes. Expect: {packet_size} bytes. Event number: {eventNumber}")
                 continue
             last_packet_time = time.time()
+            #Infer the timestamp of the packet
             year, month, day, hour, minute, second = struct.unpack("BBBBBB", data[0:6])
             microseconds = int.from_bytes(data[6:10], byteorder='big')
             year += 2000  # Adjust for two-digit format
@@ -121,16 +122,17 @@ def udp_listener():
                 first_packet_time = last_packet_timestamp
                 last_window_stamp = first_packet_time
                 print(f"First packet timestamp set to: {first_packet_time}")
-            else:
-                if (len(audio_buffer) == 0 ):
-                    next_window_stamp = last_packet_timestamp
-                    windowStampSet = True
+            
                     
             audio_data = data[12:]  # 12-byte header; rest is audio
+            if(len(audio_data) + len(audio_buffer) == bytes_needed):
+                next_window_stamp = last_packet_timestamp
+                windowStampSet = True
 
             with buffer_lock:
                 audio_buffer.extend(audio_data)
                 if len(audio_buffer) >= bytes_needed and not inference_trigger.is_set():
+                    print("Buffer has enough data for inference. Triggering inference. Buffer size: ", len(audio_buffer), "Last packet timestamp: ", last_packet_timestamp)
                     if (windowStampSet == False ):
                         next_window_stamp = last_window_stamp + timedelta(seconds=window_size)
                     inference_trigger.set()
@@ -162,7 +164,9 @@ def inferencer():
             print(f"Received {bytes_needed} bytes. Starting inference.")
             inference_start_time = time.time()
             full_audio_bytes = audio_buffer[:bytes_needed]
+            print(len(audio_buffer))
             del audio_buffer[:bytes_needed]
+            print(len(audio_buffer), "bytes left in buffer after inference trigger.", "Last packet timestamp: ", last_packet_timestamp)
         
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         
