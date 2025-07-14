@@ -106,8 +106,8 @@ def compute_metrics(stats):
 
 if __name__ == "__main__":
     # Load CSVs
-    ground_truth = pd.read_excel(r"C:\Users\Kasey\Desktop\TestMichaelaProgram\GroundTruthTests\Ground_Truth_SOCAL34N_sitN_090722_200000_editedTimeFormat.xlsx")
-    predictions = pd.read_excel(r"C:\Users\Kasey\Desktop\TestMichaelaProgram\GroundTruthTests\ModelRunNoUDP\output_context_filtered.xlsx")
+    ground_truth = pd.read_excel(r"C:\Users\kasey\OneDrive - UC San Diego\Lab Work\RealTimeBaleen\Ground_Truth_SOCAL34N_sitN_090722_200000.xlsx")
+    predictions = pd.read_excel(r"C:\Users\kasey\Desktop\TimingTestSimUDP2\output.xlsx")
 
     # Limit ground truth to events that start before end of predictions
     max_pred_time = predictions['end_time'].max()

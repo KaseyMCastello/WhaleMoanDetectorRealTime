@@ -46,7 +46,7 @@ window_size_sec = 60
 # === Make output dir ===
 os.makedirs(os.path.dirname(txt_file_path), exist_ok=True)
 with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
-    txtfile.write('\t'.join([ 'image_path', 'label', 'score','start_time','end_time', 'min_frequency',
+    txtfile.write('\t'.join([ 'source', 'model', 'image_path', 'label', 'score','start_time','end_time', 'min_frequency',
                              'max_frequency', 'box_x1','box_x2','box_y1','box_y2']) + '\n')
     
 
