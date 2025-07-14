@@ -29,7 +29,6 @@ def plot_one_annotated_spectrogram(image, predictions):
     #font = ImageFont.truetype("arial.ttf", 8)  # Adjust the font and size as needed
     font = ImageFont.load_default()
 
-
     # Plot each bounding box and label for this spectrogram
     for row in predictions:
         xmin, ymin, xmax, ymax = row['box_x1'], row['box_y1'], row['box_x2'], row['box_y2']
@@ -52,8 +51,6 @@ def plot_one_annotated_spectrogram(image, predictions):
             continue
 
     return image    
-
-    
 
 # Function to plot bounding boxes and labels on the spectrograms
 def plot_annotated_spectrograms(predictions):

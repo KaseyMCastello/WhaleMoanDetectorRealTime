@@ -20,6 +20,7 @@ from call_context_filter import call_context_filter
 import torchvision
 from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
+import sys
 
 start_time = time.time()
 udp_timeout = 20 #minutes to wait for a UDP packet before exiting
@@ -78,7 +79,6 @@ print(f"Model load time: {time.time() - timea:.2f} seconds.")
 # --- SHARED RESOURCES ---
 audio_buffer = bytearray()
 first_packet_time = None  # To track the first packet time for timestamping
-eventNumber = 0  # To track the number of packets received
 last_packet_time = time.time()  #To track the last packet time for timestamping
 last_window_stamp = None #To track the time at which the inference was triggered to be the start of the 60s window
 next_window_stamp = None  # To track the next window stamp for inference
@@ -92,7 +92,6 @@ inference_trigger = threading.Event()
 # Make a UDP listener to get the packets and save them to the buffer
 def udp_listener():
     global first_packet_time  # So we can assign to the shared resource
-    global eventNumber
     global last_packet_time
     global last_window_stamp
     global last_packet_timestamp
@@ -103,12 +102,13 @@ def udp_listener():
     sock.settimeout(1.0)
     print(f"Listening for UDP packets on port 5005...")
     windowStampSet = False
+    EventNumber = 0
     while not stop_event.is_set():
         try:
             data, _ = sock.recvfrom(packet_size)
 
             if len(data) != packet_size:
-                print(f"Received packet of unexpected size: {len(data)} bytes. Expect: {packet_size} bytes. Event number: {eventNumber}")
+                print(f"Received packet of unexpected size: {len(data)} bytes. Expect: {packet_size} bytes.")
                 continue
             last_packet_time = time.time()
             #Infer the timestamp of the packet
@@ -117,6 +117,7 @@ def udp_listener():
             year += 2000  # Adjust for two-digit format
             last_packet_timestamp = datetime(year, month, day, hour, minute, second, microsecond=microseconds)
 
+            
             # Extract timestamp from first packet
             if first_packet_time is None:
                 first_packet_time = last_packet_timestamp
@@ -131,13 +132,17 @@ def udp_listener():
 
             with buffer_lock:
                 audio_buffer.extend(audio_data)
-                if len(audio_buffer) >= bytes_needed and not inference_trigger.is_set():
-                    print("Buffer has enough data for inference. Triggering inference. Buffer size: ", len(audio_buffer), "Last packet timestamp: ", last_packet_timestamp)
-                    if (windowStampSet == False ):
-                        next_window_stamp = last_window_stamp + timedelta(seconds=window_size)
-                    inference_trigger.set()
-                    windowStampSet = False
-                eventNumber += 1
+            if len(audio_buffer) >= bytes_needed and not inference_trigger.is_set():
+                print("Buffer has enough data for inference. Triggering inference. Buffer size: ", len(audio_buffer), "Last packet timestamp: ", last_packet_timestamp)
+                if (windowStampSet == False ):
+                    next_window_stamp = last_window_stamp + timedelta(seconds=window_size)
+                inference_trigger.set()
+                windowStampSet = False
+
+            if(EventNumber %15000 == 0):
+                print(f"Received {len(audio_data)} bytes from packet {EventNumber} at {last_packet_timestamp}. {len(audio_buffer)} bytes in the buffer.")
+            EventNumber += 1
+
         except socket.timeout:
             continue
         except socket.error:
@@ -156,18 +161,19 @@ def inferencer():
         if not inference_trigger.is_set():
             continue  # timeout passed, no trigger
 
-        with buffer_lock:
+        
+        
+        with buffer_lock: 
             if len(audio_buffer) < bytes_needed:
                 inference_trigger.clear()
-                continue  # Not enough data yet
-            #Save the bytes I need from the buffer then clear/exit to allow more gathering
-            print(f"Received {bytes_needed} bytes. Starting inference.")
-            inference_start_time = time.time()
-            full_audio_bytes = audio_buffer[:bytes_needed]
-            print(len(audio_buffer))
-            del audio_buffer[:bytes_needed]
-            print(len(audio_buffer), "bytes left in buffer after inference trigger.", "Last packet timestamp: ", last_packet_timestamp)
-        
+            else:
+                #Save the bytes I need from the buffer then clear/exit to allow more gathering
+                full_audio_bytes = audio_buffer[:bytes_needed]
+                del audio_buffer[:bytes_needed]
+
+        print(f"Received {bytes_needed} bytes. Starting inference. Window Start Time: {last_window_stamp}, Last Packet Timestamp: {last_packet_timestamp}")
+        inference_start_time = time.time()
+            
         audio_np = convertBackToInt16(full_audio_bytes, num_channels=1).astype(np.float32)
         
         audio_tensor = torch.tensor(audio_np.squeeze(), dtype=torch.float32).unsqueeze(0).to(device)  # [1, N]
@@ -177,8 +183,6 @@ def inferencer():
         spectrograms = audio_to_spectrogram(chunks, sample_rate, device)
         
         #spectrogram_data = spectrograms[0]  # now a single spectrogram per call
-
-        print(f"Window start time: {last_window_stamp}")
         chunk_start_timesArray = [last_window_stamp]
         
         predictions =predict_and_save_spectrograms(spectrograms, model, CalCOFI_flag, device, txt_file_path, 
@@ -193,7 +197,7 @@ def inferencer():
                 # Write each event as a line in the txt file, tab-separated
                 txtfile.write('\t'.join(str(event[field]) for field in fieldnames) + '\n')
         last_window_stamp = next_window_stamp
-        print(f"Inference complete. (Took {time.time() - inference_start_time} seconds. Processed {len(predictions)} predictions for the last 60 seconds of audio. Output saved to {txt_file_path} and spectrograms saved to folder.")
+        print(f"Inference complete. (Took {time.time() - inference_start_time} seconds. Processed {len(predictions)} predictions for the last 60 seconds of audio.")
 
 
 def timeout_monitor(timeout_seconds=60*udp_timeout):

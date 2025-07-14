@@ -185,7 +185,7 @@ def audio_to_spectrogram(chunks, sr, device): # these are default fft and hop_le
         S = torch.stft(chunk[0], n_fft=sr, hop_length=int(sr/10), window=torch.hamming_window(sr).to(device), return_complex=True)
         transform = torchaudio.transforms.AmplitudeToDB(stype='amplitude', top_db=80) #convert to dB and clip at 80dB
         S_dB_all = transform(torch.abs(S))
-        S_dB = S_dB_all[10:151, :]  # 151 is exclusive, so it includes up to 150 Hz
+        S_dB = S_dB_all[:, min_hz:max_hz, :]  # 151 is exclusive, so it includes up to 150 Hz
         spectrograms.append(S_dB.cpu().numpy())
     return spectrograms
 

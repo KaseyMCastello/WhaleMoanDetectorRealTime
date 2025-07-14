@@ -5,7 +5,8 @@ wav_directory: ''
 txt_file_path: 'C:\Users\kasey\Desktop\TimingTestSimUDP\output.txt'
 model_path: 'C:\Users\kasey\Desktop\WhaleMoanDetector_12_11_24_12_best.pth'
 CalCOFI_flag: False # True or False
-listen_port: '127.0.0.1'
+listen_address: '127.0.0.1'
+listen_port: 5005
 #Datastream Firmware parameters
 sample_rate: 200000  # e.g. 200 kHz – adjust as needed
 bytes_per_sample: 2 #bytes in one acoustic sample
