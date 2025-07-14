@@ -26,10 +26,12 @@ from utils import convert_back_to_int16, audio_to_spectrogram
 
 class BFWInferencer(InferencerShell):
     """Class to detect/classify specifically blue and fin whale calls."""
-    def __init__(self, name, buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1, 
+    def __init__(self, buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1, 
                  CalCOFI_flag=False, output_file_path = "", file_output_bool = True, stream_name = "BFW_UDP_Stream_"):
-        super().__init__(name, buffer_master, duration_ms, model_path, sample_rate, bytes_per_sample, channels)
+        super().__init__( buffer_master, duration_ms, model_path, sample_rate, bytes_per_sample, channels)
         self.output_file_path = output_file_path
+
+        self.name = "Blue-Fin Whale Inferencer",
 
         #Variables for later use in spectrogram generation and filtering
         self.A_thresh=0

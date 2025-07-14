@@ -12,11 +12,10 @@ from BufferMaster import BufferMaster
 from datetime import datetime, timedelta
 
 class InferencerShell:
-    def __init__(self, name, buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1):
+    def __init__(self, buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1):
         """
         Initializes the inferencer with the given parameters.
         """
-        self.name = name
         self.buffer_master = buffer_master
         self.model_path = model_path
         #For Sample Processing

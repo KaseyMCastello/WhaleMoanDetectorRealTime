@@ -60,7 +60,6 @@ buffer_master = BufferMaster(
 
 # === Make Inferencer ===
 bfw = BFWInferencer(
-    name = "Blue-Fin Whale Inferencer",
     buffer_master = buffer_master,
     duration_ms = window_size_sec * 1000,
     model_path = model_path,
