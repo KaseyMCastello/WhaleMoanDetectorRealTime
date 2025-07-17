@@ -8,9 +8,10 @@ CalCOFI_flag: False # True or False
 listen_address: '127.0.0.1'
 listen_port: 5005
 #Datastream Firmware parameters
-sample_rate: 2000  # e.g. 200 kHz – adjust as needed
+sample_rate: 200000  # e.g. 200 kHz – adjust as needed
 bytes_per_sample: 2 #bytes in one acoustic sample
 channels: 1 #number of channels in the audio stream
-samples_per_packet: 2 #number of samples in one packet
-packet_rate: 1.000 #number of ms per packet
+samples_per_packet: 248 #number of samples in one packet
+packet_rate: 1.240 #number of ms per packet
 header_size: 12
+

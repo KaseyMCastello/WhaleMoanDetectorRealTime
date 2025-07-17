@@ -19,6 +19,7 @@ from datetime import datetime, timedelta
 
 from BufferMaster import BufferMaster
 from BFWInferencer import BFWInferencer
+from TJMInferencer import TestJoeModelInferencer
 from Listener import Listener
 
 # === Load config ===
@@ -46,51 +47,38 @@ window_size_sec = 60
 # === Make output dir ===
 os.makedirs(os.path.dirname(txt_file_path), exist_ok=True)
 with open(txt_file_path, mode='w', encoding='utf-8') as txtfile:
-    txtfile.write('\t'.join([ 'source', 'model', 'image_path', 'label', 'score','start_time','end_time', 'min_frequency',
-                             'max_frequency', 'box_x1','box_x2','box_y1','box_y2']) + '\n')
+    txtfile.write('\t'.join([ 'source', 'model', 'image_path', 'label', 'score','start_time','end_time', 'min_frequency', 'max_frequency', 'box_x1','box_x2','box_y1','box_y2']) + '\n')
+
+#Global stopping event so that once one process triggers stop they all end
+global_stop_event = threading.Event()
     
-
 # === Make BufferMaster ===
-buffer_master = BufferMaster(
-    max_duration_sec = 2 * window_size_sec,
-    sample_rate = sample_rate,
-    bytes_per_sample = bytes_per_sample,
-    channels = channels
-)
-
-# === Make Inferencer ===
-bfw = BFWInferencer(
-    buffer_master = buffer_master,
-    duration_ms = window_size_sec * 1000,
-    model_path = model_path,
-    sample_rate = sample_rate,
-    bytes_per_sample = bytes_per_sample,
-    channels = channels,
-    CalCOFI_flag = CalCOFI_flag,
-    output_file_path = txt_file_path,
-    file_output_bool = True
-)
+buffer_master = BufferMaster( global_stop_event,max_duration_sec = (2 * window_size_sec), packet_audio_bytes= packet_audio_bytes, sample_rate = sample_rate, 
+                             bytes_per_sample = bytes_per_sample, channels = channels, samples_per_packet=samples_per_packet)
 
 # === Make Listener ===
-listener = Listener(
-    listen_address = listen_address,
-    listen_port = listen_port,
-    packet_size = packet_size,
-    buffer_master = buffer_master,
-    timeout_duration = udp_timeout
-)
+listener = Listener( global_stop_event, listen_address = listen_address, listen_port = listen_port, packet_size = packet_size, buffer_master = buffer_master, timeout_duration = udp_timeout)
+
+# === Make Inferencer ===
+#bfw = BFWInferencer( buffer_master = buffer_master, duration_ms = window_size_sec * 1000, model_path = model_path, stop_event= global_stop_event,
+    #sample_rate = sample_rate, bytes_per_sample = bytes_per_sample, channels = channels, CalCOFI_flag = CalCOFI_flag, output_file_path = txt_file_path,
+    #file_output_bool = True )
+
+tjm = TestJoeModelInferencer( buffer_master = buffer_master, duration_ms=1000, model_path= "", stop_event= global_stop_event)
 
 # === Start ===
 print("---------------------------------------------------------------")
 listener.start()
-bfw.start()
+#bfw.start()
+tjm.start()
 
 try:
     listener.stop_event.wait()
 except KeyboardInterrupt:
     print("KeyboardInterrupt detected. Shutting down...")
     listener.stop()
-    bfw.stop()
+    #bfw.stop()
+    tjm.stop()
 
 print("Shutdown complete.")
 

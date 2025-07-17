@@ -10,9 +10,10 @@ It provides a basic structure for inferencers to process audio data from a Buffe
 import threading
 from BufferMaster import BufferMaster
 from datetime import datetime, timedelta
+import time
 
 class InferencerShell:
-    def __init__(self, buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1):
+    def __init__(self, buffer_master, duration_ms, model_path, stop_event, sample_rate=200000, bytes_per_sample=2, channels=1):
         """
         Initializes the inferencer with the given parameters.
         """
@@ -26,10 +27,11 @@ class InferencerShell:
         self.duration_ms = duration_ms
         self.last_inference_time = 0
         self.next_start_time = None
+        self.next_end_time = None
         
         #For executing the inferencer
         self.trigger_event = threading.Event()
-        self.stop_event = threading.Event()
+        self.stop_event = stop_event or threading.Event()
         self.buffer_master.register_inferencer(self)
 
     def print(self):
@@ -58,6 +60,7 @@ class InferencerShell:
     
     def trigger(self):
         "Condition for running inference met. Trigger code to run"
+        self.use_time = self.next_start_time
         self.trigger_event.set()
     
     def process_audio(self, audio_bytes, start_time):
@@ -65,29 +68,30 @@ class InferencerShell:
         Processes a window of audio data. This method should be overridden by subclasses.
         """
         raise NotImplementedError("Subclasses must implement this method.")
+    
+    def update_window_start(self, newTime):
+        self.next_start_time = newTime
+        self.next_end_time = self.next_start_time + timedelta(milliseconds=self.duration_ms)
 
     def run(self):
         """
         Runs the inferencer, processing audio data at specified intervals.
         """
         while not self.stop_event.is_set():
-            self.trigger_event.wait()
+            self.trigger_event.wait(timeout=1)  # Wait max 1s to check stop_event
+            if self.stop_event.is_set():
+                break
+            if not self.trigger_event.is_set():
+                continue  # Timeout occurred, check loop condition again
             self.trigger_event.clear()
             try: 
-                if self.next_start_time is None:
-                    if not self.buffer_master.buffer:
-                        print(f"[{self.name}] Buffer empty when triggered.")
-                        continue
-                    next_start_time = self.buffer_master.buffer[0][0]
-
-                audio_bytes = self.buffer_master.consume_audio_window( next_start_time, self.duration_ms )
-
-                print(f"[{self.name}] Running inference for window starting {next_start_time}")
-                self.process_audio(audio_bytes, next_start_time)
-
-                next_start_time = next_start_time + timedelta(seconds=self.duration_ms / 1000)
-
+                start_idx, end_idx, gen, actual_start, audio_view = self.buffer_master.get_audio_window(self.use_time, self.duration_ms)
+                if audio_view is None:
+                    raise ValueError("Not enough data in buffer")
+                audio_bytes = audio_view.flatten().tobytes()
+                self.process_audio(audio_bytes, self.use_time)
+                self.buffer_master.release_audio_window(start_idx, end_idx, gen)
             except ValueError as e:
-                print(f"[{self.name}] Not enough data: {e}")
-        print(f'Inference trigger recieved for {self.name}, killing pipeline')
+                print(f"{self.name} Not enough data: {e}")
+        print(f'Inference killer recieved for {self.name}, killing pipeline')
         

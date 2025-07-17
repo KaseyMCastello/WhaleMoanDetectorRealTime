@@ -15,20 +15,17 @@ from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 
 def convert_back_to_int16(audio_bytes, num_channels=1):
-    # Unpack bytes to uint16
-    num_samples = len(audio_bytes) // 2  # 2 bytes per uint16
-    audio_uint16 = struct.unpack(f'>{num_samples}H', audio_bytes)
-    audio_uint16 = np.array(audio_uint16, dtype=np.uint16)
+    # Interpret bytes as big-endian unsigned 16-bit integers
+    audio_uint16 = np.frombuffer(audio_bytes, dtype='>u2')  # big-endian uint16 view
 
-    # Convert to int16 by reversing +32768 offset
+    # Convert to int16 without copying: subtract 32768 using int32 view, then cast
     audio_int16 = (audio_uint16.astype(np.int32) - 32768).astype(np.int16)
 
-    # Reshape into (samples, channels)
-    if num_samples % num_channels != 0:
-        raise ValueError(f"Data length {num_samples} is not divisible by {num_channels} channels.")
+    # Check for channel alignment
+    if audio_uint16.size % num_channels != 0:
+        raise ValueError(f"Data length {audio_uint16.size} is not divisible by {num_channels} channels.")
 
-    audio_int16 = audio_int16.reshape(-1, num_channels)
-    return audio_int16
+    return audio_int16.reshape(-1, num_channels)
 
 # Function to convert single audio chunk to spectrogram
 def audio_to_spectrogram(chunk, sr, device, min_hz, max_hz):

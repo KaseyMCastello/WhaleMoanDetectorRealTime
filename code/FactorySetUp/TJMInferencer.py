@@ -14,13 +14,21 @@ from InferencerShell import InferencerShell
 
 class TestJoeModelInferencer(InferencerShell):
     """Class to detect/classify odontocete clicks."""
-    def __init__( buffer_master, duration_ms, model_path, sample_rate=200000, bytes_per_sample=2, channels=1):
-        self.name = "Joe's Click-Classifier (TEST)"
-        self.cuda = not args.no_cuda and torch.cuda.is_available()
-        self.device = torch.device("cuda" if cuda else "cpu")
+    def __init__(self, buffer_master, duration_ms, model_path, stop_event, sample_rate=200000, bytes_per_sample=2, channels=1):
+        super().__init__( buffer_master, duration_ms, model_path, stop_event, sample_rate, bytes_per_sample, channels )
+        self.name = "JOE MODEL (TEST ONLY)"
+        self.packetCount = 0
+        self.load_model()
+        self.print()
     
     def load_model(self):
+        self.model_name = "joe_model_onnx_test"
+        self.model_load_time = -1
         return
     
     def process_audio(self, audio_bytes, start_time):
-        return
+            self.packetCount +=1
+            if(self.packetCount % 1000 == 0):
+                 print(f"{self.name} Recieving Packets Appropriately, Current packet count: {self.packetCount}. Window_Time: {self.next_start_time}. Time of Last Packet:  {start_time}., Buffer End: {self.buffer_master.current_buffer_end}")
+                 self.stop_event.set()
+        
