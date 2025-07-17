@@ -41,7 +41,6 @@ class Listener:
         print(f"\t LISTENING ON : {self.listen_address} PORT {self.listen_port}")
         print(f"\t EXPECTED PACKET SIZE: {self.packet_size} bytes")
         print(f"\t PACKET TIMEOUT: {self.timeout_duration/60} minutes.")
-        print()
 
     def start(self):
         """

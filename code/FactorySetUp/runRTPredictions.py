@@ -64,23 +64,44 @@ listener = Listener( global_stop_event, listen_address = listen_address, listen_
     #sample_rate = sample_rate, bytes_per_sample = bytes_per_sample, channels = channels, CalCOFI_flag = CalCOFI_flag, output_file_path = txt_file_path,
     #file_output_bool = True )
 
-tjm = TestJoeModelInferencer( buffer_master = buffer_master, duration_ms=1000, model_path= "", stop_event= global_stop_event)
-
+tjm = TestJoeModelInferencer( buffer_master = buffer_master, duration_ms=0.5, model_path= "", stop_event= global_stop_event)
 # === Start ===
 print("---------------------------------------------------------------")
-listener.start()
-#bfw.start()
-tjm.start()
 
-try:
-    listener.stop_event.wait()
-except KeyboardInterrupt:
-    print("KeyboardInterrupt detected. Shutting down...")
-    listener.stop()
-    #bfw.stop()
-    tjm.stop()
+import cProfile
+import pstats
 
-print("Shutdown complete.")
+def main():
+    listener.start()
+    tjm.start()
+    try:
+        listener.stop_event.wait()
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt detected. Shutting down...")
+        listener.stop()
+        tjm.stop()
+
+    print("Shutdown complete.")
+
+def print_profile_in_ms(profiler, top_n=85):
+    stats = pstats.Stats(profiler)
+    stats.sort_stats('cumtime')
+    print(f"{'ncalls':>10} {'tottime':>15} {'percall':>10} {'cumtime':>15} {'percall':>10} function")
+    for func, (cc, nc, tt, ct, callers) in stats.stats.items():
+        print(f"{nc:10} {tt*1000:15.3f} {tt*1000/nc if nc else 0:10.3f} {ct*1000:15.3f} {ct*1000/nc if nc else 0:10.3f} {func[2]}")
+
+if __name__ == "__main__":
+    profiler = cProfile.Profile()
+    profiler.enable()
+    
+    main()
+    time.sleep(3)
+    profiler.disable()
+    #stats = pstats.Stats(profiler).sort_stats('cumtime')
+    print_profile_in_ms(profiler)
+
+
+
 
 
 

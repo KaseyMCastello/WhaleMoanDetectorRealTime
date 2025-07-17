@@ -86,10 +86,10 @@ class InferencerShell:
             self.trigger_event.clear()
             try: 
                 start_idx, end_idx, gen, actual_start, audio_view = self.buffer_master.get_audio_window(self.use_time, self.duration_ms)
+                print(f"GOT WINDOW {self.use_time} requested timestamp AT START{start_idx}, END: {end_idx},")
                 if audio_view is None:
                     raise ValueError("Not enough data in buffer")
-                audio_bytes = audio_view.flatten().tobytes()
-                self.process_audio(audio_bytes, self.use_time)
+                self.process_audio(audio_view, self.use_time)
                 self.buffer_master.release_audio_window(start_idx, end_idx, gen)
             except ValueError as e:
                 print(f"{self.name} Not enough data: {e}")

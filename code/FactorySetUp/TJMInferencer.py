@@ -28,7 +28,7 @@ class TestJoeModelInferencer(InferencerShell):
     
     def process_audio(self, audio_bytes, start_time):
             self.packetCount +=1
-            if(self.packetCount % 1000 == 0):
-                 print(f"{self.name} Recieving Packets Appropriately, Current packet count: {self.packetCount}. Window_Time: {self.next_start_time}. Time of Last Packet:  {start_time}., Buffer End: {self.buffer_master.current_buffer_end}")
+            if(self.packetCount % 10 == 0):
+                 print(f"{self.name} Recieving Packets Appropriately, Current packet count: {self.packetCount}. Window_Time: {self.next_start_time}. Time of Last Packet:  {start_time}.")
                  self.stop_event.set()
         
